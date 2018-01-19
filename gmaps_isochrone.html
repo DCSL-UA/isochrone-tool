@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+ 
+<html lang="en">
+
+
+    <style>
+ 
+   html{background: #61210B }
+.wrap {
+width: 100&#37;;
+height: 600px; /* optional */
+background: #FFFFFF; /* optional */
+font-family: 'times new roman', arial, sans-serif;
+font-size: 1em;
+color: #FFFFFF;
+}
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+.header h1 {
+  position: relative;
+  top: 18px;
+  right: 40px;
+}
+.header1 img {
+  position: absolute;
+  top:60px;
+    right: 30px;
+  width: 100px;
+  height: 100px;
+}
+.header1 h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+    .nav2 {clear: both; margin: 0px; background-color: #FFFFFF;padding: 0px; font-family: verdana, arial, sans serif; font-size: 1.0em;}
+.nav2 ul {float: left; width: 770px; margin: 0px; padding: 0px; border-top: solid 1px rgb(54,83,151); border-bottom: solid 1px rgb(54,83,151); background-color: rgb(127,162,202); font-weight: bold;}  
+.nav2 li {display: inline; list-style: none; margin: 0px; padding: 0px;}
+.nav2 li a {display: block; float: left; margin: 0px 0px 0px 0px; padding: 5px 10px 5px 10px; border-right: solid 1px rgb(54,83,151); color: rgb(255,255,255); text-transform: uppercase; text-decoration: none; font-size: 100%;}
+.nav2 a:hover, .nav2 a.selected {color: rgb(50,50,50); text-decoration: none;}
+.buffer {clear: both; width: 730px; height: 0px; margin: 20px; padding: 20px; background-color: rgb(255,255,255);}
+.content1-pagetitle {overflow: hidden; width: 750px; margin: 0px 0px 0px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168);); background-color: #FFFFFF;font-weight: bold; font-size: 180%;}
+.page-container-3 {width: 770px;margin: 0px auto; padding: 0px; background-color: url('crimson-background.gif'); border: solid 1px rgb(0,0,250);}
+  .style16 {
+    margin-left: 40px;
+    font-size: medium;
+}
+body {font-size: 90%; width: 1100px;margin: 0px auto; padding: 20px; background-color: rgb(255,255,255); font-family: arial, sans-serif;min-height: 500px;}
+.content3 {float: left; width: 1100px; min-height: 500px; background-color: #FFFFFF; margin: 0px; padding: 0px 0px 2px 0px; color: rgb(0,0,0); font-size: 1.0em;}
+.site-name {
+    width: 300px;
+    height: 45px;
+    top: 12px;
+    position: absolute;
+    z-index: 4;
+    overflow: hidden;
+    margin: 0px;
+    padding-left: 0px;
+   background-image: url('crimson-background.gif');
+}
+figure { 
+    display: inline-block;
+}
+a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:visited {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+</style>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script> window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
+</script>
+    <title>Google Traffic Information Compilation</title>
+
+<div class="style16">
+        <meta name="keywords" content="Miclain,Amino,Acid,Database,Search,Keffeler, Atkison, Biology, Alabama, The, University" />
+
+
+    
+    </head>
+    
+
+    <body>
+  
+
+               
+
+ <div style="width: 900px; height: 90px;">
+     <img src="bama.jpg" width="150" height="150">
+  <img src="DCSL.png" alt="logo" align="right" width="150" height="150"/>
+    </div>
+ <div style="width: 900px; height: 105px; padding-left: 155px;">
+                 <h1 align="center">Google Traffic Information Compilation</h1>
+
+      </div>
+
+
+<form enctype="multipart/form-data" action="check_isochrone_input.php" method="POST">
+<br>
+  Please provide your Google API Key: <input type="text" name = "API_KEY1"  id="API_KEY1"/><br><br>
+If you have more than one API Key that you would like to run with, please select the number below. <br> 
+
+  <select id="dropdown">
+  <option value="0" selected >Additional Keys</option>
+  <option value="2">1 Key</option>
+  <option value="3">2 Keys</option>
+  <option value="4">3 Keys</option>
+  <option value="5">4 Keys</option> 
+</select>
+<div id="input-holder">
+<input type="hidden" name = "API_KEY2" id="API_KEY2" value="0"/>
+<input type="hidden" name = "API_KEY3" id="API_KEY3" value="0"/>
+<input type="hidden" name = "API_KEY4" id="API_KEY4" value="0"/>
+<input type="hidden" name = "API_KEY5" id="API_KEY5" value="0"/>
+
+</div>​
+
+<script> 
+$(document).ready(function() {
+  $('#dropdown').each(function () {
+    var select = $(this);
+    var selectedValue = select.find('option[selected]').val();
+    if (selectedValue) {
+      select.val(selectedValue);
+    } else {
+      select.prop('selectedIndex', 0);
+    }
+  });
+ $('#dropdown').change(function(){
+    if ($(this).val() > 0) {
+      $('#input-holder').empty();
+       for(i=$(this).val(); i <= 5; ++i){
+             var name = 'API_KEY' + i;
+             console.log("HIDDEN " + name)
+             $('#input-holder').append('<input type="hidden"' + 'name="'+ name + '"id="'+ name + '"value="0">');
+      }
+      for (i = 2; i <= $(this).val(); i++) {
+              var name = 'API_KEY' + i;
+console.log("SHOWN " + name)
+             $('#input-holder').append('Please provide your Additional Google API Key(s): <input type="text"' + 'name="'+ name + '"id="'+ name+  '"><br><br>');
+      }
+    
+    }
+});
+  
+});
+ </script>
+<br> <br>
+<input type="hidden" name="Driving" id = "Driving" value="0" />
+    Driving Mode Active?:  <input name="Driving" Id = "Driving" type="checkbox"  />
+
+<input type="hidden" name="Walking" id = "Walking" value="0" />
+    Walking Mode Active?:  <input name="Walking" Id = "Walking" type="checkbox" />
+
+   <input type="hidden" name="Bicycling" id = "Bicycling" value="0" />
+   Bicycling Mode Active?:  <input name="Bicycling" Id = "Bicycling" type="checkbox" />
+
+   <input type="hidden" name="Transit" id = "Transit" value="0" />
+   Transit Mode Active?:  <input name="Transit" Id = "Transit" type="checkbox" onclick="makefunc(value)" unchecked="false"/><br><br>
+   <div id="transitstuff">
+   	<input id="first" name="first" value="0"  type="hidden">
+   	<input id="second" name="second" value="0" type="hidden">
+   	<input id="third" name="third" value="0" type="hidden">
+   	<input id="fourth" name="fourth" value="0" type="hidden">
+
+   </div>
+<br>
+      <input type="hidden" name="time" id = "time" value="0" />
+   Time?:  <input name="time" Id = "time" type="checkbox"/>  
+   Please provide the value to be used: <input type="text" name = "Time_value"  id="Time_value"/><br>
+Or <br>
+      <input type="hidden" name="dist" id = "dist" value="0" />
+   Distance?:  <input name="dist" Id = "dist" type="checkbox"/>
+   Please provide the value to be used: <input type="text" name = "dist_value"  id="dist_value"/><br><br>
+Number of Points per Isochrone
+<select id="points" name="points">
+  <option value="0" selected >Points per Isochrone</option>
+  <option value="2">2 Points</option>
+  <option value="4">4 Points</option>
+  <option value="8">8 Points</option>
+  <option value="16">16 Points</option>   
+  <option value="32">32 Points</option> 
+  <option value="64">64 Points</option> 
+  <option value="128">128 Points</option> 
+  <option value="256">256 Points</option> 
+
+</select>
+<script> 
+function makefunc(value){
+    console.log(document.getElementById("Transit").checked);
+        if (document.getElementById("Transit").checked == true) {
+      $('#transitstuff').empty();
+        document.getElementById("Transit").checked = false;
+   
+       }
+    else {
+      $('#transitstuff').empty();
+    $('#transitstuff').append('<select id="first" name="first" onchange="firstfunction()"><option value="0" selected >Preference #1</option><option value="Rail">Rail</option><option value="Bus">Bus</option><option value="Train">Train</option><option value="Tram">Tram</option><option value="Subway">Subway</option></select><select id="second" name="second" onchange="secondfunction()"><option value="0" selected >Preference #2</option><option value="Rail">Rail</option><option value="Bus">Bus</option><option value="Train">Train</option><option value="Tram">Tram</option><option value="Subway">Subway</option></select><select id="third" name="third" onchange="thirdfunction()"><option value="0" selected >Preference #3</option><option value="Rail">Rail</option><option value="Bus">Bus</option><option value="Train">Train</option><option value="Tram">Tram</option><option value="Subway">Subway</option></select><select id="fourth" name="fourth"><option value="0" selected >Preference #4</option><option value="Rail">Rail</option><option value="Bus">Bus</option><option value="Train">Train</option><option value="Tram">Tram</option><option value="Subway">Subway</option></select>');  
+      document.getElementById("Transit").checked = true;
+
+      }
+    };
+
+  
+
+ </script>
+<script>
+ function firstfunction(){
+    var el = $('#first').val();
+    if(el === "Rail" ) {
+    var x = document.getElementById("second");
+    x.remove(1);  
+    x.remove(2);
+    x.remove(2);
+    x.remove(2);
+    var x = document.getElementById("third");
+    x.remove(1);                         //Remove all but bus
+    x.remove(2);
+    x.remove(2);
+    x.remove(2);
+    var x = document.getElementById("fourth");
+    x.remove(1);
+    x.remove(2);
+    x.remove(2);
+    x.remove(2);
+    }
+      else if(el === "Train" ) {
+ var x = document.getElementById("second");
+    x.remove(1);  
+    x.remove(2);
+    var x = document.getElementById("third");
+    x.remove(1);                         //Remove all but bus
+    x.remove(2);
+    var x = document.getElementById("fourth");
+    x.remove(1);
+    x.remove(2);
+ }
+  else if(el === "Tram" ) {
+    var x = document.getElementById("second");
+    x.remove(1);  
+    x.remove(3);
+    var x = document.getElementById("third");
+    x.remove(1);                         //Remove all but bus
+    x.remove(3);
+    var x = document.getElementById("fourth");
+    x.remove(1);
+    x.remove(3);
+ }
+  else if(el === "Subway" ) {
+var x = document.getElementById("second");
+    x.remove(1);  
+    x.remove(4);
+    var x = document.getElementById("third");
+    x.remove(1);                         //Remove all but bus
+    x.remove(4);
+    var x = document.getElementById("fourth");
+    x.remove(1);
+    x.remove(4); }
+  else if(el === "Bus" ) {
+var x = document.getElementById("second");
+    x.remove(2);
+    var x = document.getElementById("third");
+    x.remove(2);
+    var x = document.getElementById("fourth");
+    x.remove(2);
+ }
+  };
+  </script>
+
+<script>
+    function secondfunction() {
+    var el = $('#second');
+    if(el.val() === "Rail" ) {
+    var x = document.getElementById("third");
+    x.remove(1);                         //Remove all but bus
+    x.remove(2);
+    x.remove(2);
+    x.remove(1);
+    var x = document.getElementById("fourth");
+    x.remove(1);
+    x.remove(2);
+    x.remove(2);
+    x.remove(1);   
+    }
+      else if(el.val() === "Train" ) {
+    var x = document.getElementById("third");
+    x.remove(2);                         //Remove all but bus
+    x.remove(1);
+    var x = document.getElementById("fourth");
+    x.remove(2);
+    x.remove(1);
+ }
+  else if(el.val() === "Tram" ) {
+  var x = document.getElementById("third");
+    x.remove(3);
+    x.remove(1);
+    var x = document.getElementById("fourth");
+    x.remove(3);
+    x.remove(1);
+ }
+  else if(el.val() === "Subway" ) {
+    var x = document.getElementById("third");
+    x.remove(3);
+    x.remove(1);
+    var x = document.getElementById("fourth");
+    x.remove(3); 
+    x.remove(1);
+ }
+  else if(el.val() === "Bus" ) {
+    var x = document.getElementById("third");
+   // x.remove(2);
+    x.remove(1);
+    var x = document.getElementById("fourth");
+  //  x.remove(2);
+    x.remove(1);
+ }
+  };
+</script>
+
+<script>
+    function thirdfunction() {
+    var el = $('#third');
+    if(el.val() === "Rail" ) {
+    var x = document.getElementById("fourth");
+    x.remove(1);
+    x.remove(2);
+    x.remove(2);
+    x.remove(2);   
+    }
+      else if(el.val() === "Train" ) {
+   
+    var x = document.getElementById("fourth");
+    x.remove(1);
+ }
+  else if(el.val() === "Tram" ) {
+ 
+    var x = document.getElementById("fourth");
+    x.remove(1);
+ }
+  else if(el.val() === "Subway" ) {
+   
+    var x = document.getElementById("fourth");
+    x.remove(2); 
+ }
+  else if(el.val() === "Bus" ) {
+   
+    var x = document.getElementById("fourth");
+    x.remove(1);
+ }
+  };
+</script>
+
+    
+     <script> 
+$(document).ready(function() {
+ $('#durationButton').click(function(){
+      $('#duration').empty();
+        $('#duration').append('   <input type="hidden" name="Start_Time" id = "Start_Time" value="0:00:00" /> <br> <input type="hidden" name="End_Time" id = "End_Time" value="" /> Duration (Format: Hour:Minute:Second) :  <input name="End_Time" Id = "End_Time" type="text" />');
+      
+    
+});
+});
+ </script>
+
+<br><br>
+    <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
+    Input File for Google Maps API:  <input name="userfile" type="file" /><br><br>
+
+   
+
+    <input type="submit" value="Run Google Maps Script" />
+
+</form>
+        
+            
+    </body>
+</html>
