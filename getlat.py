@@ -5,7 +5,7 @@
 # @Last Modified time: 2018-01-18 18:37:28
 import math
 import simplekml
-from test4 import readPoly,polyStats
+from polystuff import readPoly,polyStats
 
 def makekeys(storage,increment):
 	for k in degreelist(increment):
