@@ -13,6 +13,7 @@ import math
 from area import area
 from geographiclib.geodesic import Geodesic
 import math
+from multiprocessing import Lock
 from getlat import latnumbers,longnumbers,makekeys,lastrun,checknumbers,cleanprint,cleanlist,converter,kmlmaker,polyarea,polypoints
 x=1
 gmaps = ""
@@ -35,10 +36,10 @@ square_count = 0
 def gmaps_traveltimeordist(directions11,last,timeordist):
 
   if len(directions11) > 0 and timeordist == 1:
-    #print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
+    print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
     return directions11[0]["legs"][0]["duration"]["value"]   #Extracts json value from google
   if len(directions11) > 0 and timeordist == 0:
-    #print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
+    print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
     return directions11[0]["legs"][0]["distance"]["value"]   #comes back in meters
   else:
     #print "TIME NOT AVAILABLE"
@@ -91,7 +92,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   goaltimeminus = goaltime -  (goaltime * .05) #seconds
   global directions11
   global gmaps
-#  #print "My Algorithm"
+  print "My Algorithm"
   printinglist = ""
   testedlist = []
   testedtimeslist = []
@@ -115,7 +116,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
    # #print "TESTED IS " + str(printinglist)
     printlist = ""
   #  #print "COUNT IS " + str(count)
-  #  #print "BEARING IS " + str(keys[count])
+   # print "BEARING IS " + str(keys[count])
     for item in d[keys[count]]:
       printlist += item + "\n"
  #   #print "LIST IS " + str(printlist
@@ -241,7 +242,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   for item in testedlist:
     printinglist += item + "\n"
   #  #print "TESTED IS " + str(printinglist)
-  #print "ATTEMPTS: " + str(attemptcounter)
+  print "ATTEMPTS: " + str(attemptcounter)
   return finallist
 def format_orderlist(list):
   message = ""
@@ -691,10 +692,12 @@ def get_dist(lat1,lon1,lat2,lon2):
     distance = R * c
     return distance
 
+def remove_newlines(fname):
+    flist = open(fname).readlines()
+    return [s.rstrip('\n') for s in flist]
 
-output = open(sys.argv[2],"w")
+output = open(sys.argv[2],"a")
 ##print sys.argv[1]
-output.write("input_lat,input_long,runtime,mode,#ofpoints,timeordist,area,remainingpoints\n")
 inputfile = open(sys.argv[1],"r")
 testiter = open(sys.argv[1],"r")
 #Path to output file created
@@ -745,46 +748,56 @@ y=0
 #client(API_KEY_INPUT)
 #print str(API_KEY_INPUT)
 client(API_KEY_INPUT)
-linenumber = 0
-for line in inputfile:
-  linenumber += 1
-  for mode in modes_to_run:
-    i=0
-    counter += 1
-    if(counter>=2490):
-        #print "Key #" + str(y) + " Reached its limit.<br>"
-        counter=0
-        y += 1
-        if(KEYS[x] == '0'):
-          #print "END of Keys. Partial data download is available below.\n"
-          exit()
-        API_KEY_INPUT = KEYS[x]
-        x+=1
-
-    time_to_leave = check_timetoleave(line.strip().split(","))
-    PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
-    output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
-    output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
-    output.write(mode+ ",")
-    currentname = {}
-    currentname = makekeys(currentname,int(360/int(numberofpoints)))
-    go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
-    iterate_counter=0
-    thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list)   #Last parameter is 1 = time, 0 = distance
-    #print thelist
-    mypoints = converter(thelist)
-    #print mypoints
-    filename = str(str(sys.argv[2]).split("\\")[1]).split(".")[0]
-    kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-    area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")
-    points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")
-    output.write(str(len(thelist)) + ",")
-    if (int(istime) == 1):
-      output.write("T|" + str(goaltimedist) + ",")
-    output.write(area + ",")
-    cleanprint(thelist,int(goaltimedist),output)
+linenumber = sys.argv[21]
+line = sys.argv[20]
+for mode in modes_to_run:
+  i=0
+  counter += 1
+  if(counter>=2490):
+      #print "Key #" + str(y) + " Reached its limit.<br>"
+      counter=0
+      y += 1
+      if(KEYS[x] == '0'):
+        #print "END of Keys. Partial data download is available below.\n"
+        exit()
+      API_KEY_INPUT = KEYS[x]
+      x+=1
+  time_to_leave = check_timetoleave(line.strip().split(","))
+  PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
+  currentname = {}
+  currentname = makekeys(currentname,int(360/int(numberofpoints)))
+  go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
+  iterate_counter=0
+  thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list)   #Last parameter is 1 = time, 0 = distance
+  #print thelist
+  numofnewlines = 0
+  mypoints = converter(thelist)
+  #print mypoints
+  filename = str(str(sys.argv[2]).split("/")[1]).split(".")[0]
+  kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
+  area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")
+  points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")
+  lock = Lock()
+  lock.acquire()
+  remove_newlines(sys.argv[2])
+  output = open(sys.argv[2],"a")
+  while (int(linenumber) != numofnewlines):
+    output.write("\n")
+    numofnewlines += 1
+  output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
+  print str(PointA[0]) + "," + str(PointA[1]) + ","
+  output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
+  output.write(mode+ ",")
+  output.write(str(len(thelist)) + ",")
+  if (int(istime) == 1):
+    output.write("T|" + str(goaltimedist) + ",")
+  output.write(area + ",")
+  cleanprint(thelist,int(goaltimedist),output)
+  output.write("\n")
+  output.close()
+  lock.release()
 #  for pnt in mypoints:
- #   p.AddPoint(pnt[0], pnt[1])
-  #num, perim, area = p.Compute()
-  ##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
- #10 miles out with 1 mile increments finding times that are at x seconds
+#   p.AddPoint(pnt[0], pnt[1])
+#num, perim, area = p.Compute()
+##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
+#10 miles out with 1 mile increments finding times that are at x seconds
