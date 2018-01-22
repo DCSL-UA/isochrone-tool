@@ -773,10 +773,10 @@ for mode in modes_to_run:
   numofnewlines = 0
   mypoints = converter(thelist)
   #print mypoints
-  filename = str(str(sys.argv[2]).split("/")[1]).split(".")[0]
+  filename = str(str(sys.argv[2]).split("/")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
   kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-  area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")
-  points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")
+  area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
   lock = Lock()
   lock.acquire()
   remove_newlines(sys.argv[2])
@@ -788,6 +788,8 @@ for mode in modes_to_run:
   print str(PointA[0]) + "," + str(PointA[1]) + ","
   output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
   output.write(mode+ ",")
+  output.write(numberofpoints + ",")
+
   output.write(str(len(thelist)) + ",")
   if (int(istime) == 1):
     output.write("T|" + str(goaltimedist) + ",")
