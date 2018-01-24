@@ -2,22 +2,22 @@
 # @Author: Miclain Keffeler
 # @Date:   2017-12-19 09:32:43
 # @Last Modified by:   Miclain Keffeler
-# @Last Modified time: 2018-01-18 18:37:28
+# @Last Modified time: 2018-01-24 07:25:40
 import math
 import simplekml
-from polystuff import readPoly,polyStats
+from polyfuncs import readPoly,polyStats
 
 def makekeys(storage,increment):
-	for k in degreelist(increment):
-		storage[k] = []
-	return storage
+  for k in degreelist(increment):
+    storage[k] = []
+  return storage
 def degreelist(number):
-	mylist = []
-	counter = 0
-	while counter <= 360:
-		mylist.append(counter)
-		counter += number
-	return mylist
+  mylist = []
+  counter = 0
+  while counter < 360:
+    mylist.append(counter)
+    counter += number
+  return mylist
 latnumbers = [68.703,
 68.7108222222,
 68.7186444444,
@@ -200,17 +200,17 @@ longnumbers = [69.172,
 1.20721785808]
 
 def checknumbers(thedict,thepair,thetime):
-	pairtime = ""
-	for key in thedict:
-		pairtime = thedict[key].split("/")
-		if len(pairtime[0]) < 5:
-			if (str(pairtime[1]) == str(thepair)):	
-				if (str(thetime) != str(pairtime[0])):
-					print "bearing: " + str(key) + " pair: " + str(pairtime[1]) + " time was: " + str(pairtime[0]) + " now is " + str(thetime)
-		else:
-			if (str(pairtime[0]) == str(thepair)):	
-				if (str(thetime) != str(pairtime[1])):
-					print "bearing: " + str(key) + " pair: " + str(pairtime[0]) + " time was: " + str(pairtime[1]) + " now is " + str(thetime)
+  pairtime = ""
+  for key in thedict:
+    pairtime = thedict[key].split("/")
+    if len(pairtime[0]) < 5:
+      if (str(pairtime[1]) == str(thepair)):  
+        if (str(thetime) != str(pairtime[0])):
+          print "bearing: " + str(key) + " pair: " + str(pairtime[1]) + " time was: " + str(pairtime[0]) + " now is " + str(thetime)
+    else:
+      if (str(pairtime[0]) == str(thepair)):  
+        if (str(thetime) != str(pairtime[1])):
+          print "bearing: " + str(key) + " pair: " + str(pairtime[0]) + " time was: " + str(pairtime[1]) + " now is " + str(thetime)
 
 lastrun = {0: '41.047526,-73.990548/2212', 135: '40.962568,-74.257683/2187', 270: '40.757461,-74.279822/2129', 15: '41.013693,-73.900913/2123', 150: '40.987156,-74.16327/2223', 285: '40.709271,-73.75631/2296', 30: '40.987156,-73.817826/2321', 165: '40.972997,-74.065767/2112', 300: '40.684945,-73.826962/2201', 45: '40.860015,-73.85698/2250', 180: '40.659492,-74.039437/2216', 315: '40.680415,-73.958151/2217', 60: '40.850584,-73.780476/2196', 195: '40.61737,-74.039437/2290', 330: '40.719506,-73.743892/2213', 75: '40.799701,-73.785231/2263', 210: '40.691625,-73.873301/2128', 345: '40.659485,-73.82111/2250', 90: '40.757461,-73.701274/2194', 225: '40.674512,-73.909691/2306', 360: '40.683313,-73.871979/2273', 105: '40.832535,-74.355461/2263', 240: '40.64623,-74.24147/2134', 120: '40.902494,-74.31772/2215', 255: '40.682387,-74.355461/2272'}
 def cleanprint(thedict,goaltime,output):
@@ -224,8 +224,8 @@ def cleanprint(thedict,goaltime,output):
       output.write('"' + pairtime[1]+'",')
     else:
        output.write('"' + pairtime[0]+'",')
- # print str(counter) + " Were off by more than +- 5%"
- # printoffbypercents(thedict,goaltime)
+  print str(counter) + " Were off by more than +- 5%"
+  printoffbypercents(thedict,goaltime)
 def printoffbypercents(thedict,goaltime):
   print "PERCENT OFF BY"
   pairtime = ""
@@ -262,7 +262,7 @@ def polyarea(filename):
     #  print 'Polygon #%i' % i
       for d,v in desc.iteritems():
         if (d == "area"):
-          return v[1:]
+          return v[1:-4]
 def polypoints(filename):
   fname=filename
   i=0
@@ -287,22 +287,24 @@ def converter(thelist):
   for key in (sorted(thelist)):
   #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
     if int(key) <= 90:
-   #   print "1"
+      print "1"
       first.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
     if 180 >= int(key) >= 91:
-  #    print "2"
+      print "2"
       second.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
     if 270 >= int(key) >= 181:
-  #    print "3"
+      print "3"
       third.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
     if 359 >= int(key) >= 271:
-  #    print "4"
+      print "4"
       fourth.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
   if (len(second) == 0):
     first.insert(0,third[len(third)-2])
+  if (len(second) == 1):
+      first.insert(0,first[len(first)-1])
   else:
-    first.insert(0,second[len(second)-2])
-  totallist = first + fourth + third + second[:-1]
+    first.insert(0,second[len(second)-1])
+  totallist = first + fourth + third + second
  # thedict["coordinates"].append(totallist)
   return totallist
 def find_pointa(pointadist,d,a,b):

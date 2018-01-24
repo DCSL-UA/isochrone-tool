@@ -106,6 +106,8 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   x33 = 2
   lasttime = 0
   numberofmoves = abs(keys[count] - degreeincrements)/4
+  if (numberofmoves >3):
+    numberofmoves = 3
   originalnumberofmoves = numberofmoves
   while count <= len(keys)-1:
    # if (distance < .75):
@@ -362,6 +364,7 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
   global x
   try:
     global directions11
+    print mode
     if mode == "transit":
       directions11 = gmaps.directions(address,destination,mode=mode,units="metric",departure_time="now",transit_mode=Order_list,alternatives="true")
     else:
@@ -370,6 +373,7 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
   #  with open(destination + ".json","w") as file:
      # json.dump(directions11,file)
   except googlemaps.exceptions.ApiError as e:
+    print e
     x += 1
     #print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
@@ -380,6 +384,7 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
       finish_line(len(modes_to_run),modes_to_run.index(mode),modes_to_run,output)
       exit()
   except Exception as e:
+    print e
     x += 1
     #print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
@@ -750,54 +755,63 @@ y=0
 client(API_KEY_INPUT)
 linenumber = sys.argv[21]
 line = sys.argv[20]
-for mode in modes_to_run:
-  i=0
-  counter += 1
-  if(counter>=2490):
-      #print "Key #" + str(y) + " Reached its limit.<br>"
-      counter=0
-      y += 1
-      if(KEYS[x] == '0'):
-        #print "END of Keys. Partial data download is available below.\n"
-        exit()
-      API_KEY_INPUT = KEYS[x]
-      x+=1
-  time_to_leave = check_timetoleave(line.strip().split(","))
-  PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
-  currentname = {}
-  currentname = makekeys(currentname,int(360/int(numberofpoints)))
-  go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
-  iterate_counter=0
-  thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list)   #Last parameter is 1 = time, 0 = distance
-  #print thelist
-  numofnewlines = 0
-  mypoints = converter(thelist)
-  #print mypoints
-  filename = str(str(sys.argv[2]).split("/")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-  area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-  lock = Lock()
-  lock.acquire()
-  remove_newlines(sys.argv[2])
-  output = open(sys.argv[2],"a")
-  while (int(linenumber) != numofnewlines):
-    output.write("\n")
-    numofnewlines += 1
-  output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
-  print str(PointA[0]) + "," + str(PointA[1]) + ","
-  output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
-  output.write(mode+ ",")
-  output.write(numberofpoints + ",")
+currentindex = 0
+i=0
+counter += 1
+mode = sys.argv[22]
+modes_to_run = [mode]
+if(counter>=2490):
+    #print "Key #" + str(y) + " Reached its limit.<br>"
+    counter=0
+    y += 1
+    if(KEYS[x] == '0'):
+      #print "END of Keys. Partial data download is available below.\n"
+      exit()
+    API_KEY_INPUT = KEYS[x]
+    x+=1
+time_to_leave = check_timetoleave(line.strip().split(","))
+PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
+currentname = {}
+currentname = makekeys(currentname,int(360/int(numberofpoints)))
+go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
+iterate_counter=0
+thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list)   #Last parameter is 1 = time, 0 = distance
+#print thelist
+numofnewlines = 0
+mypoints = converter(thelist)
+#print mypoints
+lock = Lock()
+lock.acquire()
+filename = str(str(sys.argv[2]).split("/")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+kmlmaker(mypoints,str(filename)+ "line" + str(counter),thelist)
+area = polyarea("kml\\" + str(filename)+ "line" + str(counter) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+points = polypoints("kml\\" + str(filename)+ "line" + str(counter) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+output = open(sys.argv[2],"a")
+outfile = open(sys.argv[2],"r")
+contents = outfile.readlines()
+while ((int(linenumber)) != int(len(contents))):
+  print contents
+  time.sleep(1)
+  outfile.seek(0)
+  contents = outfile.readlines()
+output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
+print str(PointA[0]) + "," + str(PointA[1]) + ","
+output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
+output.write(mode+ ",")
+output.write(numberofpoints + ",")
 
-  output.write(str(len(thelist)) + ",")
-  if (int(istime) == 1):
-    output.write("T|" + str(goaltimedist) + ",")
-  output.write(area + ",")
-  cleanprint(thelist,int(goaltimedist),output)
-  output.write("\n")
-  output.close()
-  lock.release()
+output.write(str(len(thelist)-1) + ",")
+if (int(istime) == 1):
+  output.write("T|" + str(goaltimedist) + ",")
+else:
+  output.write("D|" + str(goaltimedist) + ",")
+
+output.write(area + ",")
+cleanprint(thelist,int(goaltimedist),output)
+output.write("\n")
+output.close()
+currentindex += 1
+lock.release()
 #  for pnt in mypoints:
 #   p.AddPoint(pnt[0], pnt[1])
 #num, perim, area = p.Compute()

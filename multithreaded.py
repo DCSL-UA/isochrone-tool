@@ -11,13 +11,25 @@ class FuncThread(threading.Thread):
  
     def run(self):
         self._target(*self._args)
-arr = ["t1","t2","t3"]
+arr = []
 storage = []
 # Example usage
-def someOtherFunc(data,linenumber):
+def someOtherFunc(data,linenumber,mode_count,mode):
   print "DATA IS " + str(data)
   print "PROCESS ID: " + str(os.getpid())
-  storage.append(os.system('python isochronescript.py ' + data + " " + str(linenumber)))
+  if (str(linenumber) == "1"):
+    os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode))
+  else:
+    os.system('python isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode))
+def get_mode(count):
+  if(count == 0):
+    return "driving"
+  if(count == 1):
+    return "walking"
+  if(count == 2):
+    return "bicycling"
+  if(count == 3):
+    return "transit"
 def tostring(args):
    message = ""
    for item in args:
@@ -27,15 +39,24 @@ output = open(sys.argv[2],"w")
 ##print sys.argv[1]
 output.write("Slat,Slong,time,mode,#requested points,#calculated points,timeordist,area (m^2),points (lat,long)\n")
 output.close()
+all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
 inputfile = open((sys.argv[1]),"r")
-print "ARGS ARE: " + str(sys.argv)
+mode_count = 0
+modes_to_run = []
+for entry in all_modes:
+  if(entry == "on"):
+    mode = get_mode(mode_count)
+    modes_to_run.append(mode)
+  mode_count += 1
 linenumber = 0
+index = 0 
 thevals = sys.argv[1:]
 for line in inputfile:
-  linenumber += 1
-  print "START THREAD"
-  arr[linenumber] = multiprocessing.Process(target=someOtherFunc,args=(tostring(thevals)+'"' + str(line.rstrip()) + '"',str(linenumber),))
-  arr[linenumber].start()
+  for mode in modes_to_run:
+    print "START THREAD"
+    arr.append(multiprocessing.Process(target=someOtherFunc,args=(tostring(thevals)+'"' + str(line.rstrip()) + '"',str(linenumber+1),str(mode_count),str(mode))))
+    arr[index].start()
+    linenumber += 1
+    index += 1
 
-jobcount = linenumber
-line = 0
+
