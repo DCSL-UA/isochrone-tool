@@ -192,13 +192,13 @@ console.log("SHOWN " + name)
 
    </div>
 <br>
-      <input type="hidden" name="time" id = "time" value="0" />
+      <input type="hidden" name="time" id = "time" value="off" />
    Time?:  <input name="time" Id = "time" type="checkbox"/>  
-   Please provide the value to be used: <input type="text" name = "Time_value"  id="Time_value"/><br>
+   Please provide the value to be used: <input type="text" name = "Time_value"  id="Time_value"/> seconds<br>
 Or <br>
       <input type="hidden" name="dist" id = "dist" value="0" />
    Distance?:  <input name="dist" Id = "dist" type="checkbox"/>
-   Please provide the value to be used: <input type="text" name = "dist_value"  id="dist_value"/><br><br>
+   Please provide the value to be used: <input type="text" name = "dist_value"  id="dist_value"/> meters<br><br>
 Number of Points per Isochrone
 <select id="points" name="points">
   <option value="0" selected >Points per Isochrone</option>
@@ -210,6 +210,7 @@ Number of Points per Isochrone
   <option value="64">64 Points</option> 
   <option value="128">128 Points</option> 
   <option value="256">256 Points</option> 
+  <option value="360">360 Points</option> 
 
 </select>
 <script> 

@@ -300,16 +300,19 @@ if ($goaltime != "0"){
 else{
     $goaltimedist = $goaldist;
 }
-
+if ($istime != "on"){
+    $istime = "off";
+    $goaltimedist = $goaldist;
+}
 $my_file = 'gmaps_isochrone_log.txt';
 $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);
 $data = "\n|| NEW Query: OutputFilename: $name. Input Filename: $filename. InputFileLength: $linecount. Keys Provided: $API_KEYs1, $Filler2, $Filler3, $Filler4, $Filler5. Modes Selected: $Mode1, $Mode2, $Mode3, $Mode4. Transit Preferences Selected: $first, $second, $third, $fourth. Is Time? $istime. Is Dist? $isdist. GoalTime: $goaltime. GoalDist: $goaldist. numberofpoints: $numberofpoints.";
 fwrite($handle, $data);
 
-$string = 'python isochronescript.py "uploads_isochrone' . "\\" . "$filename" . '"' . " output_isochrone" . '\\' . "$name -off $API_KEYs1 $Filler2 $Filler3 $Filler4 $Filler5 $Mode1 $Mode2 $Mode3 $Mode4 $first $second $third $fourth $istime $goaltimedist $numberofpoints 2>&1";
+$string = 'python multithreaded.py "uploads_isochrone' . "\\" . "$filename" . '"' . " output_isochrone" . '\\' . "$name -off $API_KEYs1 $Filler2 $Filler3 $Filler4 $Filler5 $Mode1 $Mode2 $Mode3 $Mode4 $first $second $third $fourth $istime $goaltimedist $numberofpoints 2>&1";
 
 passthru($string);
-echo $string;
+#echo $string;
 #print "python real_schedule_explorer.py uploads_transit/$filename output_transit/$name -off $API_KEYs1 $Filler2 $Filler3 $Filler4 $Filler5 $first $second $third $fourth 2>&1";
 
  #if ($_SESSION['return_var==0) {

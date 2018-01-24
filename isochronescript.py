@@ -36,10 +36,10 @@ square_count = 0
 def gmaps_traveltimeordist(directions11,last,timeordist):
 
   if len(directions11) > 0 and timeordist == 1:
-    print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
+   # print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
     return directions11[0]["legs"][0]["duration"]["value"]   #Extracts json value from google
   if len(directions11) > 0 and timeordist == 0:
-    print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
+   # print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
     return directions11[0]["legs"][0]["distance"]["value"]   #comes back in meters
   else:
     #print "TIME NOT AVAILABLE"
@@ -92,7 +92,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   goaltimeminus = goaltime -  (goaltime * .05) #seconds
   global directions11
   global gmaps
-  print "My Algorithm"
+#  print "My Algorithm"
   printinglist = ""
   testedlist = []
   testedtimeslist = []
@@ -244,7 +244,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   for item in testedlist:
     printinglist += item + "\n"
   #  #print "TESTED IS " + str(printinglist)
-  print "ATTEMPTS: " + str(attemptcounter)
+#  print "ATTEMPTS: " + str(attemptcounter)
   return finallist
 def format_orderlist(list):
   message = ""
@@ -294,39 +294,6 @@ def print_breakdown_types(total_time,total_dist,bus,sub,train,tram,walk,wait,out
   output.write(str(float(100* (float(wait[0])/float(total_time[0])))))
 
 
-def adjust_totals(total_time,total_dist,bus,sub,train,tram,walk,step):
-    if (step['transit_details']['line']['vehicle']['type'] in Types_of_Bus):
-      bus[0] += step['duration']['value']
-      bus[1] += step['distance']['value']
-      total_dist[0] += step['distance']['value']
-      total_time[0] += step['duration']['value']
-
-    if (step['transit_details']['line']['vehicle']['type'] in Types_of_Subway):
-      sub[0] += step['duration']['value'] 
-      sub[1] += step['distance']['value']
-      total_dist[0] += step['distance']['value']
-      total_time[0] += step['duration']['value']
-    if (step['transit_details']['line']['vehicle']['type'] in Types_of_Rail):
-      train[0] += step['duration']['value']
-      train[1] += step['distance']['value']
-      total_dist[0] += step['distance']['value']
-      total_time[0] += step['duration']['value']
-    if (step['transit_details']['line']['vehicle']['type'] in Types_of_Tram):
-      tram[0] += step['duration']['value']
-      tram[1] += step['distance']['value']
-      total_dist[0] += step['distance']['value']
-      total_time[0] += step['duration']['value']
-    return step['distance']['value']
-
-
-
-
-def leaving_adjust(time_to_leave):
-    return (int(time.time())+ (int(time_to_leave)*60))
-def correct_leave_time(duration,departure_epoch,leavetime):
-  time1 = departure_epoch - leavetime
-  time2 = duration + time1
-  return time2
 def client(API_KEY_INPUT):
   global x
   try:
@@ -364,7 +331,6 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
   global x
   try:
     global directions11
-    print mode
     if mode == "transit":
       directions11 = gmaps.directions(address,destination,mode=mode,units="metric",departure_time="now",transit_mode=Order_list,alternatives="true")
     else:
@@ -782,20 +748,19 @@ mypoints = converter(thelist)
 #print mypoints
 lock = Lock()
 lock.acquire()
-filename = str(str(sys.argv[2]).split("/")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
-kmlmaker(mypoints,str(filename)+ "line" + str(counter),thelist)
-area = polyarea("kml\\" + str(filename)+ "line" + str(counter) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-points = polypoints("kml\\" + str(filename)+ "line" + str(counter) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+filename = str(str(sys.argv[2]).split("\\")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
+area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
 output = open(sys.argv[2],"a")
 outfile = open(sys.argv[2],"r")
 contents = outfile.readlines()
 while ((int(linenumber)) != int(len(contents))):
-  print contents
   time.sleep(1)
   outfile.seek(0)
   contents = outfile.readlines()
 output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
-print str(PointA[0]) + "," + str(PointA[1]) + ","
+#print str(PointA[0]) + "," + str(PointA[1]) + ","
 output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
 output.write(mode+ ",")
 output.write(numberofpoints + ",")
