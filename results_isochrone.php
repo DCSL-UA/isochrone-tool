@@ -109,7 +109,7 @@ function goBack() {
 
 function html_form(){
 
-    ?> <html> <body> <form enctype="multipart/form-data" action="results_isochrone.php" method="POST">
+    ?> <html> <body> <form enctype="multipart/form-data" action="isochroneresults.php" method="POST">
 Based on the number of modes selected and number of location pairs in your file, <br><br> You will not be able to fully run this file.<br><br> If you choose to continue, we will run as many as we can and then return those results. <br><br> Otherwise, please go back and add more keys or run with less modes.<br><br>
     <input type="submit" value="Click to Run" />
 
@@ -207,66 +207,7 @@ $handle = fopen($_SESSION['uploadfile'], "r");
   $_SESSION['linecount'] += 1;
 }
 fclose($handle);
-if($_SESSION['Filler2'] == "0" and $_SESSION['Got_key_count'] == 0){
-    if($_SESSION['linecount'] > 2500){
-        $_SESSION['Got_key_count'] = 1;
-        $_SESSION['original'] = $_FILES['userfile']['name'];
-        $_SESSION['temp'] = $_FILES['userfile']['tmp_name'];
-        $_SESSION['name']='out_'.date('m-d_hia').'.csv';
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $_SESSION['uploadfile']);
 
-        html_form();
-        exit;
-    }
-}
-if($_SESSION['Filler3'] == "0"){
-    if( $_SESSION['linecount'] > 5000){
-        $_SESSION['Got_key_count'] = 1;
-        $_SESSION['original'] = $_FILES['userfile']['name'];
-        $_SESSION['temp'] = $_FILES['userfile']['tmp_name'];
-        $_SESSION['name']='out_'.date('m-d_hia').'.csv';
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $_SESSION['uploadfile']);
-
-        html_form();
-        exit;
-    }
-}
-if($_SESSION['Filler4'] == "0" and $_SESSION['Got_key_count'] == 0){
-    if($_SESSION['linecount'] > 7500){
-        $_SESSION['Got_key_count'] = 1;
-        $_SESSION['original'] = $_FILES['userfile']['name'];
-        $_SESSION['name']='out_'.date('m-d_hia').'.csv';
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $_SESSION['uploadfile']);
-
-        html_form();
-        exit;
-    }
-}
-if($_SESSION['Filler5'] == "0" and $_SESSION['Got_key_count'] == 0){
-    if($_SESSION['linecount'] > 10000){
-        $_SESSION['Got_key_count'] = 1;
-        $_SESSION['original'] = $_FILES['userfile']['name'];
-        $_SESSION['temp'] = $_FILES['userfile']['tmp_name'];
-        $_SESSION['name']='out_'.date('m-d_hia').'.csv';
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $_SESSION['uploadfile']);
-
-        html_form();
-        exit;
-    }
-}
-if($_SESSION['Filler5'] != "0" and $_SESSION['Got_key_count'] == 0){
-    if($_SESSION['linecount'] > 12500){
-        $_SESSION['Got_key_count'] = 1;
-        $_SESSION['temp'] = $_FILES['userfile']['tmp_name'];
-        $_SESSION['original'] = $_FILES['userfile']['name'];
-        $_SESSION['name']='out_'.date('m-d_hia').'.csv';
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $_SESSION['uploadfile']);
-
-        html_form();
-        exit;
-    }
-}
-else{
 $_SESSION['original'] = $_FILES['userfile']['name'];
 $_SESSION['temp'] = $_FILES['userfile']['tmp_name'];
 
@@ -324,7 +265,7 @@ passthru($string);
 #if($_SESSION['return_var==0){
     ?><html><body><a href="output_isochrone/<?php echo $_SESSION['name'];?>" download="<?php echo $_SESSION['name'];?>">Download The Summary File Here</a>
 </body><?php
-}
+
 
 #}
 #else{
