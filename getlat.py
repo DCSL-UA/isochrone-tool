@@ -2,7 +2,7 @@
 # @Author: Miclain Keffeler
 # @Date:   2017-12-19 09:32:43
 # @Last Modified by:   Miclain Keffeler
-# @Last Modified time: 2018-01-24 07:25:40
+# @Last Modified time: 2018-01-24 08:05:58
 import math
 import simplekml
 from polyfuncs import readPoly,polyStats
@@ -220,12 +220,12 @@ def cleanprint(thedict,goaltime,output):
     pairtime = thedict[key].split("/")
     if len(pairtime[0]) < 5:
       counter += 1
-      print "OFFFFFF: " + str(pairtime[1]) + " || " + str(pairtime[0])
+      print "Pair off by more than 5%: " + str(pairtime[1]) + " || " + str(pairtime[0])
       output.write('"' + pairtime[1]+'",')
     else:
        output.write('"' + pairtime[0]+'",')
-  print str(counter) + " Were off by more than +- 5%"
-  printoffbypercents(thedict,goaltime)
+#$  print str(counter) + " Were off by more than +- 5%"
+#  printoffbypercents(thedict,goaltime)
 def printoffbypercents(thedict,goaltime):
   print "PERCENT OFF BY"
   pairtime = ""
@@ -287,24 +287,34 @@ def converter(thelist):
   for key in (sorted(thelist)):
   #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
     if int(key) <= 90:
-      print "1"
-      first.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
+ #     print "1"
+      first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 180 >= int(key) >= 91:
-      print "2"
-      second.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
+ #     print "2"
+      second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 270 >= int(key) >= 181:
-      print "3"
-      third.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
+ #     print "3"
+      third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 359 >= int(key) >= 271:
-      print "4"
-      fourth.append(list(str(str(thelist[key]).split("/")[0]).split(",")))
-  if (len(second) == 0):
+  #    print "4"
+      fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+  if (len(second) == 0 and len(third)>=2):
     first.insert(0,third[len(third)-2])
-  if (len(second) == 1):
-      first.insert(0,first[len(first)-1])
+    totallist = first + fourth + third[:-1] + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) >= 2):
+    first.insert(0,fourth[len(fourth)-2])
+    totallist = first + fourth[:-1] + third + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) == 1):
+    first.insert(0,fourth[len(fourth)-1])
+    totallist = first + fourth[:-1] + third + second
+
+  elif (len(second) == 1):
+      first.insert(0,second[len(second)-1])
+      totallist = first + fourth + third + second[:-1]
+
   else:
-    first.insert(0,second[len(second)-1])
-  totallist = first + fourth + third + second
+    first.insert(0,second[len(second)-2])
+    totallist = first + fourth + third + second[:-1]
  # thedict["coordinates"].append(totallist)
   return totallist
 def find_pointa(pointadist,d,a,b):

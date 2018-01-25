@@ -83,7 +83,7 @@ def matchup(testedlist,testedtimeslist,lister):
         lister.append(str(y) + "/" + str(x))
     return lister
 
-def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list):
+def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list,linenumber):
   originaldist = distance
   finallist = {}
   additionalkeys = {}
@@ -128,7 +128,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     lastbeginning = InitialPoint
     testedlist.append(pointa)
     x=0
-    try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list)
+    try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
     attemptcounter += 1
     pointadone = gmaps_traveltimeordist(directions11,lasttime,timeordist)
     lasttime = pointadone
@@ -308,10 +308,16 @@ def client(API_KEY_INPUT):
     else:
       #print "No More keys to run on. None of the keys provided worked."
       exit()
-def finish_line(array_size,array_index,output):
-  while(array_index != array_size):
-    output.write(",transit,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL")
-    array_index += 1
+def finish_line(address,destination,mode,output,linenumber):
+  outfile = open(sys.argv[2],"r")
+  contents = outfile.readlines()
+  while ((int(linenumber)) != int(len(contents))):
+    time.sleep(1)
+    outfile.seek(0)
+    contents = outfile.readlines()
+  output.write(str(address[0]) + "," + str(address[1]) + ",")
+  output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
+  output.write(str(mode) + ",FAILED,\n")
 def format_orderlist(list):
   message = ""
   for item in list:
@@ -325,7 +331,7 @@ def format_orderlist(list):
         message += "|"
   return message
 
-def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order_list):
+def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order_list,linenumber):
   #print "MY MODE: " + str(mode)
   global gmaps
   global x
@@ -347,7 +353,7 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
       try_except(gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
       #print "Key Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
-      finish_line(len(modes_to_run),modes_to_run.index(mode),modes_to_run,output)
+      finish_line(address,destination,mode,output,linenumber)
       exit()
   except Exception as e:
     print e
@@ -358,7 +364,7 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
       try_except(gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
       #print "Key " + str(x-1) + " Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
-      finish_line(len(modes_to_run),modes_to_run.index(mode),modes_to_run,output)
+      finish_line(address,destination,mode,output,linenumber)
       exit()
 
 def get_mode(count):
@@ -578,7 +584,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey,degreeincreme
         lat1 = firstlat
         lon1 = firstlon
   #  degrees = degrees - 15
-    while (degrees >= 270 and degrees <= 360):
+    while (degrees >= 270 and degrees < 360):
       lat1 = decrementlat(degrees,float(btwnmarks),lat1,distlat(lat1))
       lon1 = decrementlon(degrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
@@ -741,7 +747,7 @@ currentname = {}
 currentname = makekeys(currentname,int(360/int(numberofpoints)))
 go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
 iterate_counter=0
-thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list)   #Last parameter is 1 = time, 0 = distance
+thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
 #print thelist
 numofnewlines = 0
 mypoints = converter(thelist)
