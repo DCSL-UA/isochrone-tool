@@ -2,7 +2,7 @@ import threading
 import sys
 import os
 import multiprocessing
-
+import time
 class FuncThread(threading.Thread):
     def __init__(self, target, *args):
         self._target = target
@@ -21,6 +21,7 @@ def someOtherFunc(data,linenumber,mode_count,mode):
     os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode))
   else:
     os.system('python isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode))
+  
 def get_mode(count):
   if(count == 0):
     return "driving"
@@ -51,13 +52,22 @@ if __name__ == '__main__':
     mode_count += 1
   linenumber = 0
   index = 0 
+ # myzip = ZipFile('spam.zip', 'w+')
+ # filename = str(str(sys.argv[2]).split("\\")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+
   thevals = sys.argv[1:]
   for line in inputfile:
     for mode in modes_to_run:
    #   print "START THREAD"
+    #  while (len(arr) > 8):
+    #    time.sleep(1)
+    
       arr.append(multiprocessing.Process(target=someOtherFunc,args=(tostring(thevals)+'"' + str(line.rstrip()) + '"',str(linenumber+1),str(mode_count),str(mode))))
       arr[index].start()
       linenumber += 1
       index += 1
+
+  inputfile.close()
+
 
 
