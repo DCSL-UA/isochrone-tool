@@ -203,16 +203,7 @@ def checknumbers(thedict,thepair,thetime):
   pairtime = ""
   for key in thedict:
     pairtime = thedict[key].split("/")
-    if len(pairtime[0]) < 5:
-      if (str(pairtime[1]) == str(thepair)):  
-        if (str(thetime) != str(pairtime[0])):
-          print "bearing: " + str(key) + " pair: " + str(pairtime[1]) + " time was: " + str(pairtime[0]) + " now is " + str(thetime)
-    else:
-      if (str(pairtime[0]) == str(thepair)):  
-        if (str(thetime) != str(pairtime[1])):
-          print "bearing: " + str(key) + " pair: " + str(pairtime[0]) + " time was: " + str(pairtime[1]) + " now is " + str(thetime)
 
-lastrun = {0: '41.047526,-73.990548/2212', 135: '40.962568,-74.257683/2187', 270: '40.757461,-74.279822/2129', 15: '41.013693,-73.900913/2123', 150: '40.987156,-74.16327/2223', 285: '40.709271,-73.75631/2296', 30: '40.987156,-73.817826/2321', 165: '40.972997,-74.065767/2112', 300: '40.684945,-73.826962/2201', 45: '40.860015,-73.85698/2250', 180: '40.659492,-74.039437/2216', 315: '40.680415,-73.958151/2217', 60: '40.850584,-73.780476/2196', 195: '40.61737,-74.039437/2290', 330: '40.719506,-73.743892/2213', 75: '40.799701,-73.785231/2263', 210: '40.691625,-73.873301/2128', 345: '40.659485,-73.82111/2250', 90: '40.757461,-73.701274/2194', 225: '40.674512,-73.909691/2306', 360: '40.683313,-73.871979/2273', 105: '40.832535,-74.355461/2263', 240: '40.64623,-74.24147/2134', 120: '40.902494,-74.31772/2215', 255: '40.682387,-74.355461/2272'}
 def cleanprint(thedict,goaltime,output):
   counter = 0
   pairtime = ""
@@ -220,24 +211,15 @@ def cleanprint(thedict,goaltime,output):
     pairtime = thedict[key].split("/")
     if len(pairtime[0]) < 5:
       counter += 1
-      print "Pair off by more than 5%: " + str(pairtime[1]) + " || " + str(pairtime[0])
       output.write('"' + pairtime[1]+'",')
     else:
        output.write('"' + pairtime[0]+'",')
 #$  print str(counter) + " Were off by more than +- 5%"
 #  printoffbypercents(thedict,goaltime)
 def printoffbypercents(thedict,goaltime):
-  print "PERCENT OFF BY"
   pairtime = ""
   for key in thedict:
     pairtime = thedict[key].split("/")
-    if len(pairtime[0]) < 5:
-      print str(float(float(float(pairtime[0])/goaltime) * 100))  + "/" + str(pairtime[0]) + "/" + str(key)
-    else:
-      print str(float(float(float(pairtime[1])/goaltime) * 100)) + "/" + str(pairtime[1]) + "/" + str(key)
-def cleanlist(thelist):
-  for item in thelist:
-    print item
 
 def find_key(partial,partial2,thedict):
   for key in thedict:
@@ -327,7 +309,6 @@ def find_pointa(pointadist,d,a,b):
     else:
       count += 1
     if (len(d['45']) == count-1):
-      print "No Item was far enough. Exiting."
       exit(1)
 
 def find_pointb(pointbdist,d,a,b):
@@ -340,5 +321,4 @@ def find_pointb(pointbdist,d,a,b):
     else:
       count += 1
     if (len(d['45']) == count-1):
-      print "No Item was far enough. Exiting."
       exit(1)

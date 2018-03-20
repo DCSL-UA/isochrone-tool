@@ -14,24 +14,142 @@ from area import area
 from geographiclib.geodesic import Geodesic
 import math
 from multiprocessing import Lock
-from getlat import latnumbers,longnumbers,makekeys,lastrun,checknumbers,cleanprint,cleanlist,converter,kmlmaker,polyarea,polypoints
-x=1
-gmaps = ""
-global directions11
-directions11 = ""
-#Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
-Types_of_Bus = ["BUS","INTERCITY_BUS","TROLLEYBUS"]
-Types_of_Rail = ["RAIL","METRO_RAIL","MONORAIL","COMMUTER_TRAIN","HEAVY_RAIL","HIGH_SPEED_TRAIN"]
-Types_of_Tram = ["TRAM"]
-Types_of_Subway = ["SUBWAY"]
-# approximate radius of earth in km
-R = 6373.0
-lat1 = radians(40.834288)
-lon1 = radians(-73.851028)
-lat2 = radians(40.693797)
-lon2 = radians(-73.990696)
-global square_count
-square_count = 0
+
+if __name__ == '__main__':
+	print ("WE IN HERE")
+	x=1
+	gmaps = ""
+	global directions11
+	directions11 = ""
+	#Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
+	Types_of_Bus = ["BUS","INTERCITY_BUS","TROLLEYBUS"]
+	Types_of_Rail = ["RAIL","METRO_RAIL","MONORAIL","COMMUTER_TRAIN","HEAVY_RAIL","HIGH_SPEED_TRAIN"]
+	Types_of_Tram = ["TRAM"]
+	Types_of_Subway = ["SUBWAY"]
+	# approximate radius of earth in km
+	R = 6373.0
+	lat1 = radians(40.834288)
+	lon1 = radians(-73.851028)
+	lat2 = radians(40.693797)
+	lon2 = radians(-73.990696)
+	global square_count
+	square_count = 0
+
+
+	output = open(sys.argv[2],"a")
+	inputfile = open(sys.argv[1],"r")
+	testiter = open(sys.argv[1],"r")
+	#Path to output file created
+	modes_to_run = []
+	#-off and -on
+	Toggle_traffic_models = sys.argv[3]
+	#API KEY STORAGE
+	API_KEY_INPUT = sys.argv[4]
+	KEY2 = sys.argv[5]
+	KEY3 = sys.argv[6]
+	KEY4 = sys.argv[7]
+	KEY5 = sys.argv[8]
+	modes_to_run = []
+	all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
+	Order_list = [sys.argv[13],sys.argv[14],sys.argv[15],sys.argv[16]]
+	istime = sys.argv[17]
+	goaltimedist = sys.argv[18]
+	numberofpoints = sys.argv[19]
+	formated_list = format_orderlist(Order_list)
+	if (istime == "on"):
+	  istime = 1
+	else:
+	  istime = 0
+
+
+	mode_count = 0
+	#Get Count of how many modes we are running
+	for entry in all_modes:
+	  if(entry == "on"):
+	    mode = get_mode(mode_count)
+	    modes_to_run.append(mode)
+	  mode_count += 1
+
+	key_count = 0
+	KEYS=[API_KEY_INPUT,KEY2,KEY3,KEY4,KEY5]
+	for key in KEYS:
+	  if(key != "0"):
+	    key_count += 1
+	#Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
+
+	address = ""
+	traffic_models_list = []
+	destination = ""
+	print ("<br>LINE COUNT: " + str(file_len(str(sys.argv[1]))))
+
+	counter=0
+	y=0
+	#client(API_KEY_INPUT)
+	#print str(API_KEY_INPUT)
+	client(API_KEY_INPUT)
+	linenumber = sys.argv[21]
+	line = sys.argv[20]
+	currentindex = 0
+	i=0
+	counter += 1
+	mode = sys.argv[22]
+	modes_to_run = [mode]
+	if(counter>=2490):
+	    #print "Key #" + str(y) + " Reached its limit.<br>"
+	    counter=0
+	    y += 1
+	    if(KEYS[x] == '0'):
+	      #print "END of Keys. Partial data download is available below.\n"
+	      exit()
+	    API_KEY_INPUT = KEYS[x]
+	    x+=1
+	time_to_leave = check_timetoleave(line.strip().split(","))
+	PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
+	currentname = {}
+	currentname = makekeys(currentname,int(360/int(numberofpoints)))
+	go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
+	iterate_counter=0
+	thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
+	#print thelist
+	numofnewlines = 0
+	mypoints = converter(thelist)
+	#print mypoints
+	lock = Lock()
+	lock.acquire()
+	filename = str(str(sys.argv[2]).split("\\")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+	kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
+	area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+	points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+	output = open(sys.argv[2],"a")
+	outfile = open(sys.argv[2],"r")
+	contents = outfile.readlines()
+	while ((int(linenumber)) != int(len(contents))):
+	  time.sleep(1)
+	  outfile.seek(0)
+	  contents = outfile.readlines()
+	output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
+	#print str(PointA[0]) + "," + str(PointA[1]) + ","
+	output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
+	output.write(mode+ ",")
+	output.write(numberofpoints + ",")
+
+	output.write(str(len(thelist)-1) + ",")
+	if (int(istime) == 1):
+	  output.write("T|" + str(goaltimedist) + ",")
+	else:
+	  output.write("D|" + str(goaltimedist) + ",")
+
+	output.write(area + ",")
+	cleanprint(thelist,int(goaltimedist),output)
+	output.write("\n")
+	output.close()
+	currentindex += 1
+	lock.release()
+	#  for pnt in mypoints:
+	#   p.AddPoint(pnt[0], pnt[1])
+	#num, perim, area = p.Compute()
+	##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
+	#10 miles out with 1 mile increments finding times that are at x seconds
 
 def gmaps_traveltimeordist(directions11,last,timeordist):
 
@@ -345,7 +463,6 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
   #  with open(destination + ".json","w") as file:
      # json.dump(directions11,file)
   except googlemaps.exceptions.ApiError as e:
-    print e
     x += 1
     #print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
@@ -356,7 +473,6 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
       finish_line(address,destination,mode,output,linenumber)
       exit()
   except Exception as e:
-    print e
     x += 1
     #print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
@@ -673,118 +789,385 @@ def remove_newlines(fname):
     flist = open(fname).readlines()
     return [s.rstrip('\n') for s in flist]
 
-output = open(sys.argv[2],"a")
-##print sys.argv[1]
-inputfile = open(sys.argv[1],"r")
-testiter = open(sys.argv[1],"r")
-#Path to output file created
-modes_to_run = []
-#-off and -on
-Toggle_traffic_models = sys.argv[3]
-#API KEY STORAGE
-API_KEY_INPUT = sys.argv[4]
-KEY2 = sys.argv[5]
-KEY3 = sys.argv[6]
-KEY4 = sys.argv[7]
-KEY5 = sys.argv[8]
-modes_to_run = []
-all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
-Order_list = [sys.argv[13],sys.argv[14],sys.argv[15],sys.argv[16]]
-istime = sys.argv[17]
-goaltimedist = sys.argv[18]
-numberofpoints = sys.argv[19]
-formated_list = format_orderlist(Order_list)
-if (istime == "on"):
-  istime = 1
-else:
-  istime = 0
+def makekeys(storage,increment):
+  for k in degreelist(increment):
+    storage[k] = []
+  return storage
+def degreelist(number):
+  mylist = []
+  counter = 0
+  while counter < 360:
+    mylist.append(counter)
+    counter += number
+  return mylist
+def checknumbers(thedict,thepair,thetime):
+  pairtime = ""
+  for key in thedict:
+    pairtime = thedict[key].split("/")
 
+def cleanprint(thedict,goaltime,output):
+  counter = 0
+  pairtime = ""
+  for key in thedict:
+    pairtime = thedict[key].split("/")
+    if len(pairtime[0]) < 5:
+      counter += 1
+      output.write('"' + pairtime[1]+'",')
+    else:
+       output.write('"' + pairtime[0]+'",')
+#$  print str(counter) + " Were off by more than +- 5%"
+#  printoffbypercents(thedict,goaltime)
+def printoffbypercents(thedict,goaltime):
+  pairtime = ""
+  for key in thedict:
+    pairtime = thedict[key].split("/")
 
-mode_count = 0
-#Get Count of how many modes we are running
-for entry in all_modes:
-  if(entry == "on"):
-    mode = get_mode(mode_count)
-    modes_to_run.append(mode)
-  mode_count += 1
+def find_key(partial,partial2,thedict):
+  for key in thedict:
+    if partial in thedict[key]:
+      if (partial2 in thedict[key]):
+        return str(key)
+def kmlmaker(mypoints,filename,thedict):    
+  kml = simplekml.Kml()
+  finallist =  []
+  for pont in mypoints:
+    finallist.append((pont[1],pont[0]))
+  pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
+  kml.save("kml\\" + filename + ".kml")
+def polyarea(filename):
+  fname=filename
+  i=0
+  for p in readPoly(fname):
+      p,desc=p
+      i=i+1
+      stats=polyStats(p)
+      desc.update(stats)
+    #  print 'Polygon #%i' % i
+      for d,v in desc.iteritems():
+        if (d == "area"):
+          return v[1:-4]
+def polypoints(filename):
+  fname=filename
+  i=0
+  for p in readPoly(fname):
+      p,desc=p
+      i=i+1
+      stats=polyStats(p)
+      desc.update(stats)
+  #    print 'Polygon #%i' % i
+      for d,v in desc.iteritems():
+        if (d == "vertices"):
+          return v[1:]
+def converter(thelist):
+  totallist = []
+  first = []
+  second = []
+  third = []
+  fourth = []
+#  thedict = {}
+ # thedict["type"] = "Polygon"
+  #thedict["coordinates"] = []
+  for key in (sorted(thelist)):
+  #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
+    if int(key) <= 90:
+ #     print "1"
+      first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+    if 180 >= int(key) >= 91:
+ #     print "2"
+      second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+    if 270 >= int(key) >= 181:
+ #     print "3"
+      third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+    if 359 >= int(key) >= 271:
+  #    print "4"
+      fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+  if (len(second) == 0 and len(third)>=2):
+    first.insert(0,third[len(third)-2])
+    totallist = first + fourth + third[:-1] + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) >= 2):
+    first.insert(0,fourth[len(fourth)-2])
+    totallist = first + fourth[:-1] + third + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) == 1):
+    first.insert(0,fourth[len(fourth)-1])
+    totallist = first + fourth[:-1] + third + second
 
-key_count = 0
-KEYS=[API_KEY_INPUT,KEY2,KEY3,KEY4,KEY5]
-for key in KEYS:
-  if(key != "0"):
-    key_count += 1
-#Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
+  elif (len(second) == 1):
+      first.insert(0,second[len(second)-1])
+      totallist = first + fourth + third + second[:-1]
 
-address = ""
-traffic_models_list = []
-destination = ""
-##print "<br>LINE COUNT: " + str(file_len(str(sys.argv[1])))
+  else:
+    first.insert(0,second[len(second)-2])
+    totallist = first + fourth + third + second[:-1]
+ # thedict["coordinates"].append(totallist)
+  return totallist
 
-counter=0
-y=0
-#client(API_KEY_INPUT)
-#print str(API_KEY_INPUT)
-client(API_KEY_INPUT)
-linenumber = sys.argv[21]
-line = sys.argv[20]
-currentindex = 0
-i=0
-counter += 1
-mode = sys.argv[22]
-modes_to_run = [mode]
-if(counter>=2490):
-    #print "Key #" + str(y) + " Reached its limit.<br>"
-    counter=0
-    y += 1
-    if(KEYS[x] == '0'):
-      #print "END of Keys. Partial data download is available below.\n"
-      exit()
-    API_KEY_INPUT = KEYS[x]
-    x+=1
-time_to_leave = check_timetoleave(line.strip().split(","))
-PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
-currentname = {}
-currentname = makekeys(currentname,int(360/int(numberofpoints)))
-go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
-iterate_counter=0
-thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
-#print thelist
-numofnewlines = 0
-mypoints = converter(thelist)
-#print mypoints
-lock = Lock()
-lock.acquire()
-filename = str(str(sys.argv[2]).split("\\")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
-kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-output = open(sys.argv[2],"a")
-outfile = open(sys.argv[2],"r")
-contents = outfile.readlines()
-while ((int(linenumber)) != int(len(contents))):
-  time.sleep(1)
-  outfile.seek(0)
-  contents = outfile.readlines()
-output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
-#print str(PointA[0]) + "," + str(PointA[1]) + ","
-output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
-output.write(mode+ ",")
-output.write(numberofpoints + ",")
+def polypoints(filename):
+  fname=filename
+  i=0
+  for p in readPoly(fname):
+      p,desc=p
+      i=i+1
+      stats=polyStats(p)
+      desc.update(stats)
+    #  print 'Polygon #%i' % i
+      for d,v in desc.iteritems():
+        if (d == "area"):
+          return v[1:-4]
+def polypoints(filename):
+  fname=filename
+  i=0
+  for p in readPoly(fname):
+      p,desc=p
+      i=i+1
+      stats=polyStats(p)
+      desc.update(stats)
+  #    print 'Polygon #%i' % i
+      for d,v in desc.iteritems():
+        if (d == "vertices"):
+          return v[1:]
+def converter(thelist):
+  totallist = []
+  first = []
+  second = []
+  third = []
+  fourth = []
+#  thedict = {}
+ # thedict["type"] = "Polygon"
+  #thedict["coordinates"] = []
+  for key in (sorted(thelist)):
+  #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
+    if int(key) <= 90:
+ #     print "1"
+      first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+    if 180 >= int(key) >= 91:
+ #     print "2"
+      second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+    if 270 >= int(key) >= 181:
+ #     print "3"
+      third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+    if 359 >= int(key) >= 271:
+  #    print "4"
+      fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+  if (len(second) == 0 and len(third)>=2):
+    first.insert(0,third[len(third)-2])
+    totallist = first + fourth + third[:-1] + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) >= 2):
+    first.insert(0,fourth[len(fourth)-2])
+    totallist = first + fourth[:-1] + third + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) == 1):
+    first.insert(0,fourth[len(fourth)-1])
+    totallist = first + fourth[:-1] + third + second
 
-output.write(str(len(thelist)-1) + ",")
-if (int(istime) == 1):
-  output.write("T|" + str(goaltimedist) + ",")
-else:
-  output.write("D|" + str(goaltimedist) + ",")
+  elif (len(second) == 1):
+      first.insert(0,second[len(second)-1])
+      totallist = first + fourth + third + second[:-1]
 
-output.write(area + ",")
-cleanprint(thelist,int(goaltimedist),output)
-output.write("\n")
-output.close()
-currentindex += 1
-lock.release()
-#  for pnt in mypoints:
-#   p.AddPoint(pnt[0], pnt[1])
-#num, perim, area = p.Compute()
-##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
-#10 miles out with 1 mile increments finding times that are at x seconds
+  else:
+    first.insert(0,second[len(second)-2])
+    totallist = first + fourth + third + second[:-1]
+ # thedict["coordinates"].append(totallist)
+  return totallist
+def find_pointa(pointadist,d,a,b):
+  count = 0
+  for x in d['45']:
+    lat = x.split(',')[0]
+    lon = x.split(',')[1]
+    if (get_distance(a,b,lat,lon) >= pointadist):
+      return count
+    else:
+      count += 1
+    if (len(d['45']) == count-1):
+      exit(1)
+
+def find_pointb(pointbdist,d,a,b):
+  count = 0
+  for x in d['45']:
+    lat = x.split(',')[0]
+    lon = x.split(',')[1]
+    if (get_distance(a,b,lat,lon) >= pointbdist):
+      return count
+    else:
+      count += 1
+    if (len(d['45']) == count-1):
+      exit(1)
+latnumbers = [68.703,
+68.7108222222,
+68.7186444444,
+68.7264666667,
+68.7342888889,
+68.7421111111,
+68.7499333333,
+68.7577555555,
+68.7655777778,
+68.7734,
+68.7812222222,
+68.7890444444,
+68.7968666666,
+68.8046888889,
+68.8125111111,
+68.8203333333,
+68.8281555555,
+68.8359777777,
+68.8438,
+68.8516222222,
+68.8594444444,
+68.8672666666,
+68.8750888888,
+68.8829111111,
+68.8907333333,
+68.8985555555,
+68.9063777777,
+68.9141999999,
+68.9220222222,
+68.9298444444,
+68.9376666666,
+68.9454888888,
+68.953311111,
+68.9611333333,
+68.9689555555,
+68.9767777777,
+68.9845999999,
+68.9924222221,
+69.0002444444,
+69.0080666666,
+69.0158888888,
+69.023711111,
+69.0315333332,
+69.0393555555,
+69.0471777777,
+69.0549999999,
+69.0628222221,
+69.0706444443,
+69.0784666666,
+69.0862888888,
+69.094111111,
+69.1019333332,
+69.1097555554,
+69.1175777777,
+69.1253999999,
+69.1332222221,
+69.1410444443,
+69.1488666665,
+69.1566888888,
+69.164511111,
+69.1723333332,
+69.1801555554,
+69.1879777776,
+69.1957999999,
+69.2036222221,
+69.2114444443,
+69.2192666665,
+69.2270888887,
+69.234911111,
+69.2427333332,
+69.2505555554,
+69.2583777776,
+69.2661999998,
+69.2740222221,
+69.2818444443,
+69.2896666665,
+69.2974888887,
+69.3053111109,
+69.3131333332,
+69.3209555554,
+69.3287777776,
+69.3365999998,
+69.344422222,
+69.3522444443,
+69.3600666665,
+69.3678888887,
+69.3757111109,
+69.3835333331,
+69.3913555554,
+69.3991777776]
+longnumbers = [69.172,
+69.1614647694,
+69.1298622866,
+69.077202178,
+69.0035004846,
+68.9087796564,
+68.7930685464,
+68.6564024013,
+68.498822851,
+68.3203778956,
+68.1211218914,
+67.9011155334,
+67.660425838,
+67.3991261213,
+67.117295978,
+66.8150212561,
+66.4923940314,
+66.1495125795,
+65.7864813452,
+65.4034109114,
+65.000417965,
+64.5776252617,
+64.1351615881,
+63.673161723,
+63.1917663961,
+62.6911222449,
+62.1713817706,
+61.6327032912,
+61.0752508932,
+60.4991943822,
+59.9047092306,
+59.2919765242,
+58.6611829073,
+58.0125205259,
+57.3461869688,
+56.6623852076,
+55.9613235349,
+55.243215501,
+54.5082798485,
+53.7567404459,
+52.9888262194,
+52.2047710832,
+51.4048138679,
+50.5891982484,
+49.758172669,
+48.9119902682,
+48.0509088014,
+47.1751905622,
+46.2851023031,
+45.3809151533,
+44.4629045372,
+43.5313500897,
+42.5865355712,
+41.6287487815,
+40.6582814716,
+39.6754292553,
+38.6804915189,
+37.6737713301,
+36.6555753455,
+35.6262137177,
+34.586,
+33.5352510517,
+32.474286941,
+31.403430848,
+30.3230089657,
+29.2333504011,
+28.1347870748,
+27.0276536199,
+25.9122872798,
+24.7890278059,
+23.6582173541,
+22.5202003801,
+21.3753235349,
+20.2239355591,
+19.0663871766,
+17.9030309878,
+16.7342213624,
+15.5603143311,
+14.3816674772,
+13.1986398282,
+12.0115917456,
+10.8208848158,
+9.62688173961,
+8.42994622202,
+7.23044286115,
+6.02873703734,
+4.82519480183,
+3.62018276524,
+2.41406798591,
+1.20721785808]
+

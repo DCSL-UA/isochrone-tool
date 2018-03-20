@@ -3,14 +3,6 @@ import sys
 try:
     from Polygon import *
 except ImportError as e:
-    print 'Requires Polygon module from https://github.com/jraedler/Polygon2.'
-    print ''
-    print 'Try to install as follows:'
-    print ''
-    print 'git clone https://github.com/jraedler/Polygon2.git'
-    print 'cd Polygon2'
-    print 'python setup.py build'
-    print 'sudo python setup.py install'
     sys.exit(1)    
 
 from cStringIO import StringIO
@@ -118,7 +110,7 @@ def readPoly(filename):
             invalid=False
             c=n.getElementsByTagName('coordinates')
             if len(c) != 1:
-                print 'invalid polygon found'
+                print ('invalid polygon found')
                 continue
             if not invalid:
                 c=c[0]
@@ -220,7 +212,7 @@ if __name__ == '__main__':
         i=i+1
         stats=polyStats(p)
         desc.update(stats)
-        print 'Polygon #%i' % i
+        print ('Polygon #%i' % i)
         for d,v in desc.iteritems():
-            print '%16s: %s' % (d,v)
-        print ''
+            print ('%16s: %s' % (d,v))
+        print ('')
