@@ -18,9 +18,9 @@ def someOtherFunc(data,linenumber,mode_count,mode):
   print "DATA IS " + str(data)
   print "PROCESS ID: " + str(os.getpid())
   if (str(linenumber) == "1"):
-    os.system('python3 isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode))
+    os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode))
   else:
-    os.system('python3 isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode))
+    os.system('python isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode))
   
 def get_mode(count):
   if(count == 0):

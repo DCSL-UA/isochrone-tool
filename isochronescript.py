@@ -13,143 +13,9 @@ import math
 from area import area
 from geographiclib.geodesic import Geodesic
 import math
+import simplekml
+from polyfuncs import readPoly,polyStats
 from multiprocessing import Lock
-
-if __name__ == '__main__':
-	print ("WE IN HERE")
-	x=1
-	gmaps = ""
-	global directions11
-	directions11 = ""
-	#Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
-	Types_of_Bus = ["BUS","INTERCITY_BUS","TROLLEYBUS"]
-	Types_of_Rail = ["RAIL","METRO_RAIL","MONORAIL","COMMUTER_TRAIN","HEAVY_RAIL","HIGH_SPEED_TRAIN"]
-	Types_of_Tram = ["TRAM"]
-	Types_of_Subway = ["SUBWAY"]
-	# approximate radius of earth in km
-	R = 6373.0
-	lat1 = radians(40.834288)
-	lon1 = radians(-73.851028)
-	lat2 = radians(40.693797)
-	lon2 = radians(-73.990696)
-	global square_count
-	square_count = 0
-
-
-	output = open(sys.argv[2],"a")
-	inputfile = open(sys.argv[1],"r")
-	testiter = open(sys.argv[1],"r")
-	#Path to output file created
-	modes_to_run = []
-	#-off and -on
-	Toggle_traffic_models = sys.argv[3]
-	#API KEY STORAGE
-	API_KEY_INPUT = sys.argv[4]
-	KEY2 = sys.argv[5]
-	KEY3 = sys.argv[6]
-	KEY4 = sys.argv[7]
-	KEY5 = sys.argv[8]
-	modes_to_run = []
-	all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
-	Order_list = [sys.argv[13],sys.argv[14],sys.argv[15],sys.argv[16]]
-	istime = sys.argv[17]
-	goaltimedist = sys.argv[18]
-	numberofpoints = sys.argv[19]
-	formated_list = format_orderlist(Order_list)
-	if (istime == "on"):
-	  istime = 1
-	else:
-	  istime = 0
-
-
-	mode_count = 0
-	#Get Count of how many modes we are running
-	for entry in all_modes:
-	  if(entry == "on"):
-	    mode = get_mode(mode_count)
-	    modes_to_run.append(mode)
-	  mode_count += 1
-
-	key_count = 0
-	KEYS=[API_KEY_INPUT,KEY2,KEY3,KEY4,KEY5]
-	for key in KEYS:
-	  if(key != "0"):
-	    key_count += 1
-	#Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
-
-	address = ""
-	traffic_models_list = []
-	destination = ""
-	print ("<br>LINE COUNT: " + str(file_len(str(sys.argv[1]))))
-
-	counter=0
-	y=0
-	#client(API_KEY_INPUT)
-	#print str(API_KEY_INPUT)
-	client(API_KEY_INPUT)
-	linenumber = sys.argv[21]
-	line = sys.argv[20]
-	currentindex = 0
-	i=0
-	counter += 1
-	mode = sys.argv[22]
-	modes_to_run = [mode]
-	if(counter>=2490):
-	    #print "Key #" + str(y) + " Reached its limit.<br>"
-	    counter=0
-	    y += 1
-	    if(KEYS[x] == '0'):
-	      #print "END of Keys. Partial data download is available below.\n"
-	      exit()
-	    API_KEY_INPUT = KEYS[x]
-	    x+=1
-	time_to_leave = check_timetoleave(line.strip().split(","))
-	PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
-	currentname = {}
-	currentname = makekeys(currentname,int(360/int(numberofpoints)))
-	go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
-	iterate_counter=0
-	thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
-	#print thelist
-	numofnewlines = 0
-	mypoints = converter(thelist)
-	#print mypoints
-	lock = Lock()
-	lock.acquire()
-	filename = str(str(sys.argv[2]).split("\\")[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
-	kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-	area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-	points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-	output = open(sys.argv[2],"a")
-	outfile = open(sys.argv[2],"r")
-	contents = outfile.readlines()
-	while ((int(linenumber)) != int(len(contents))):
-	  time.sleep(1)
-	  outfile.seek(0)
-	  contents = outfile.readlines()
-	output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
-	#print str(PointA[0]) + "," + str(PointA[1]) + ","
-	output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
-	output.write(mode+ ",")
-	output.write(numberofpoints + ",")
-
-	output.write(str(len(thelist)-1) + ",")
-	if (int(istime) == 1):
-	  output.write("T|" + str(goaltimedist) + ",")
-	else:
-	  output.write("D|" + str(goaltimedist) + ",")
-
-	output.write(area + ",")
-	cleanprint(thelist,int(goaltimedist),output)
-	output.write("\n")
-	output.close()
-	currentindex += 1
-	lock.release()
-	#  for pnt in mypoints:
-	#   p.AddPoint(pnt[0], pnt[1])
-	#num, perim, area = p.Compute()
-	##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
-	#10 miles out with 1 mile increments finding times that are at x seconds
 
 def gmaps_traveltimeordist(directions11,last,timeordist):
 
@@ -250,7 +116,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     attemptcounter += 1
     pointadone = gmaps_traveltimeordist(directions11,lasttime,timeordist)
     lasttime = pointadone
-    checknumbers(lastrun,pointa,pointadone)
+  #  checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
     if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)) ):
       if (numberofmoves == originalnumberofmoves and not(negative)):
@@ -362,7 +228,8 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   for item in testedlist:
     printinglist += item + "\n"
   #  #print "TESTED IS " + str(printinglist)
-#  print "ATTEMPTS: " + str(attemptcounter)
+  print ("ATTEMPTS: " + str(attemptcounter))
+
   return finallist
 def format_orderlist(list):
   message = ""
@@ -1171,3 +1038,138 @@ longnumbers = [69.172,
 2.41406798591,
 1.20721785808]
 
+if __name__ == '__main__':
+  print ("WE IN HERE")
+  x=1
+  gmaps = ""
+  global directions11
+  directions11 = ""
+  #Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
+  Types_of_Bus = ["BUS","INTERCITY_BUS","TROLLEYBUS"]
+  Types_of_Rail = ["RAIL","METRO_RAIL","MONORAIL","COMMUTER_TRAIN","HEAVY_RAIL","HIGH_SPEED_TRAIN"]
+  Types_of_Tram = ["TRAM"]
+  Types_of_Subway = ["SUBWAY"]
+  # approximate radius of earth in km
+  R = 6373.0
+  lat1 = radians(40.834288)
+  lon1 = radians(-73.851028)
+  lat2 = radians(40.693797)
+  lon2 = radians(-73.990696)
+  global square_count
+  square_count = 0
+
+
+  output = open(sys.argv[2],"a")
+  inputfile = open(sys.argv[1],"r")
+  testiter = open(sys.argv[1],"r")
+  #Path to output file created
+  modes_to_run = []
+  #-off and -on
+  Toggle_traffic_models = sys.argv[3]
+  #API KEY STORAGE
+  API_KEY_INPUT = sys.argv[4]
+  KEY2 = sys.argv[5]
+  KEY3 = sys.argv[6]
+  KEY4 = sys.argv[7]
+  KEY5 = sys.argv[8]
+  modes_to_run = []
+  all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
+  Order_list = [sys.argv[13],sys.argv[14],sys.argv[15],sys.argv[16]]
+  istime = sys.argv[17]
+  goaltimedist = sys.argv[18]
+  numberofpoints = sys.argv[19]
+  formated_list = format_orderlist(Order_list)
+  if (istime == "on"):
+    istime = 1
+  else:
+    istime = 0
+
+
+  mode_count = 0
+  #Get Count of how many modes we are running
+  for entry in all_modes:
+    if(entry == "on"):
+      mode = get_mode(mode_count)
+      modes_to_run.append(mode)
+    mode_count += 1
+
+  key_count = 0
+  KEYS=[API_KEY_INPUT,KEY2,KEY3,KEY4,KEY5]
+  for key in KEYS:
+    if(key != "0"):
+      key_count += 1
+  #Compile all modes to see which are to be run (ORDER: Driving,Walking,Biking,Transit)
+
+  address = ""
+  traffic_models_list = []
+  destination = ""
+  print ("<br>LINE COUNT: " + str(file_len(str(sys.argv[1]))))
+
+  counter=0
+  y=0
+  #client(API_KEY_INPUT)
+  #print str(API_KEY_INPUT)
+  client(API_KEY_INPUT)
+  linenumber = sys.argv[21]
+  line = sys.argv[20]
+  currentindex = 0
+  i=0
+  counter += 1
+  mode = sys.argv[22]
+  modes_to_run = [mode]
+  if(counter>=2490):
+      #print "Key #" + str(y) + " Reached its limit.<br>"
+      counter=0
+      y += 1
+      if(KEYS[x] == '0'):
+        #print "END of Keys. Partial data download is available below.\n"
+        exit()
+      API_KEY_INPUT = KEYS[x]
+      x+=1
+  time_to_leave = check_timetoleave(line.strip().split(","))
+  PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
+  currentname = {}
+  currentname = makekeys(currentname,int(360/int(numberofpoints)))
+  go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
+  iterate_counter=0
+  thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
+  #print thelist
+  numofnewlines = 0
+  mypoints = converter(thelist)
+  #print mypoints
+  lock = Lock()
+  lock.acquire()
+  filename = str(str(sys.argv[2]).split('/')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
+  area = polyarea("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  points = polypoints("kml\\" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+  output = open(sys.argv[2],"a")
+  outfile = open(sys.argv[2],"r")
+  contents = outfile.readlines()
+  while ((int(linenumber)) != int(len(contents))):
+    time.sleep(1)
+    outfile.seek(0)
+    contents = outfile.readlines()
+  output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
+  #print str(PointA[0]) + "," + str(PointA[1]) + ","
+  output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
+  output.write(mode+ ",")
+  output.write(numberofpoints + ",")
+
+  output.write(str(len(thelist)) + ",")
+  if (int(istime) == 1):
+    output.write("T|" + str(goaltimedist) + ",")
+  else:
+    output.write("D|" + str(goaltimedist) + ",")
+
+  output.write(area + ",")
+  cleanprint(thelist,int(goaltimedist),output)
+  output.write("\n")
+  output.close()
+  currentindex += 1
+  lock.release()
+  #  for pnt in mypoints:
+  #   p.AddPoint(pnt[0], pnt[1])
+  #num, perim, area = p.Compute()
+  ##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
+  #10 miles out with 1 mile increments finding times that are at x seconds
