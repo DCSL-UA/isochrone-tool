@@ -17,6 +17,8 @@ storage = []
 def someOtherFunc(data,linenumber,mode_count,mode):
   print "DATA IS " + str(data)
   print "PROCESS ID: " + str(os.getpid())
+  string = 'python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode)
+  print string
   if (str(linenumber) == "1"):
     os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode))
   else:
