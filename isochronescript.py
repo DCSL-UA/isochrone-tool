@@ -262,7 +262,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   goaltimeminus = goaltime -  (goaltime * .05) #seconds
   global directions11
   global gmaps
-#  print "My Algorithm"
+  print "My Algorithm"
   printinglist = ""
   testedlist = []
   testedtimeslist = []
@@ -280,21 +280,9 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     numberofmoves = 3
   originalnumberofmoves = numberofmoves
   while count <= len(keys)-1:
-   # if (distance < .75):
-    #  #print "DISTANCE WAS TOO SMALL"
-     # distance = .25
-    for item in testedlist:
-      printinglist += item + "\n"
-   # #print "TESTED IS " + str(printinglist)
-    printlist = ""
-  #  #print "COUNT IS " + str(count)
-   # print "BEARING IS " + str(keys[count])
-    for item in d[keys[count]]:
-      printlist += item + "\n"
- #   #print "LIST IS " + str(printlist
+   
     pointa = d[keys[count]][0]    #Closest, the exact distance away
-    #print "Pointa distance = " + str(get_distance(float(InitialPoint[0]),float(InitialPoint[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-    #print "Distance between points: " + str(distance)
+    
     lastbeginning = InitialPoint
     testedlist.append(pointa)
     x=0
@@ -304,14 +292,13 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     lasttime = pointadone
   #  checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
-    if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)) ):
+
+    if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus))):
       if (numberofmoves == originalnumberofmoves and not(negative)):
         bearingproblem = keys[count]
       if (numberofmoves >= 1 and not(negative) and keys[count]+ 2 > 0):  
-        #print "CALLING AGAIN 11with " + str(x33)
-     #   additionalkeys[keys[count]] = []
+        print "CALLING AGAIN 11with " + str(x33)
         keys.insert(count,keys[count]+ 2)
-        #print "TAKE OUT: " + str(keys[count]-2)
         d.pop(keys[count]- 2, None)
         additionalkeys[keys[count]-2] = matchup(testedlist,testedtimeslist,[])
         keys.remove(keys[count]- 2)
@@ -319,20 +306,17 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
         d = singlebearingupdate(InitialPoint,1,1,distance,d,0,keys[count])
         testedlist = []
         testedtimeslist = []
-        #print "Just added: " + str(d[keys[count]])
-        #print "BREAK"
-     #   testedlist = []
-      #  x33 = x33 + 2
+      
         
         numberofmoves = numberofmoves - 1
         if (numberofmoves < 1):
             negative = True
       else:
-        if (numberofmoves < 1):
+        if (numberofmoves < 1): #No moves can be made 
             moveby = abs(keys[count] - bearingproblem)
-            #print "CALLING AGAIN 33with " + str(x33)
+            print "CALLING AGAIN 33with " + str(x33)
             keys.insert(count,keys[count] - moveby - 2)
-            d.pop(keys[count]+ 2+moveby, None)
+            d.pop(keys[count]+ 2 + moveby, None)
             additionalkeys[keys[count]+ 2 + moveby] = matchup(testedlist,testedtimeslist,[])
             keys.remove(keys[count]+ 2+moveby)
 
@@ -341,9 +325,9 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
             numberofmoves = numberofmoves + 1
             testedlist = []
             testedtimeslist = []
-        else: 
+        else: #There is more than 1 move available to be made
             if (numberofmoves < originalnumberofmoves):
-                #print "CALLING AGAIN44 with " + str(x33)
+                print "CALLING AGAIN44 with " + str(x33)
      #   additionalkeys[keys[count]] = []
                 keys.insert(count,keys[count] - 2)
                 d.pop(keys[count]+ 2, None)
@@ -355,7 +339,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
                 testedlist = []
                 testedtimeslist = []
             else:
-
+                print "FULL"
                 d.pop(keys[count-1], None)
                 keys.remove(keys[count-1])
                 additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
@@ -374,7 +358,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
 
 
     elif (pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)):
-        #print "POINT FITS"
+        print "POINT FITS"
         distance = originaldist
         finallist[keys[count]] = str(pointa) + "/" + str(pointadone)
         testedlist = []
@@ -387,7 +371,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
         count += 1
 
     elif(pointadone >= goaltimeminus):   #Must be in range 0 to a
-        #print "0 to a"
+        print "0 to a"
         ratio = float(float(goaltime) / float(pointadone))
         ##print "RATIO is " + str(ratio)
     #    #print "List was: " + str(d[keys[count]])
@@ -399,7 +383,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
         lastend = tuple(pointa.split(","))
    #     d[keys[count]] = d[keys[count]][1:]
     else:
-      #print "A TO B"
+      print "A TO B"
     #  #print "List was: " + str(d[keys[count]])
       ratio = float(float(goaltime) / float(pointadone))
       distance = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
