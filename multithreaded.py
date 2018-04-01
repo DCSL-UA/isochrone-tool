@@ -3,6 +3,7 @@ import sys
 import os
 import multiprocessing
 import time
+import subprocess
 class FuncThread(threading.Thread):
     def __init__(self, target, *args):
         self._target = target
@@ -20,9 +21,9 @@ def someOtherFunc(data,linenumber,mode_count,mode):
   string = 'python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode)
   print string
   if (str(linenumber) == "1"):
-    os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode))
+    os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode)+" &")
   else:
-    os.system('python isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode))
+    os.system('python isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode)+" &")
   
 def get_mode(count):
   if(count == 0):

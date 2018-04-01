@@ -6,7 +6,7 @@ from math import sin, cos, sqrt, atan2, radians
 import json, urllib
 import googlemaps
 import time
-from datetime import datetime
+from datetime import datetime as dt
 import sys
 import datetime
 import math
@@ -19,6 +19,8 @@ from cStringIO import StringIO
 from xml.dom.minidom import parseString
 from zipfile import ZipFile
 from Polygon import *
+import os
+start_time = dt.now()
 kmlstr=\
 '''<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
@@ -531,7 +533,7 @@ def get_mode(count):
     return "transit"
 
 def file_len(fname):
-    with open(fname) as f:
+    with open("/home/pi/Google_DirectionsAPI_PointPicker/"+fname) as f:
         for i, l in enumerate(f):
             pass
     return i + 1
@@ -870,7 +872,7 @@ def kmlmaker(mypoints,filename,thedict):
   for pont in mypoints:
     finallist.append((pont[1],pont[0]))
   pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
-  kml.save("kml\\" + filename + ".kml")
+  kml.save("/home/pi/Google_DirectionsAPI_PointPicker/kml/" + filename + ".kml")
 def polyarea(filename):
   fname=filename
   i=0
@@ -1229,9 +1231,9 @@ if __name__ == '__main__':
   square_count = 0
 
 
-  output = open(sys.argv[2],"a")
-  inputfile = open(sys.argv[1],"r")
-  testiter = open(sys.argv[1],"r")
+  output = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
+  inputfile = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
+  testiter = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
   #Path to output file created
   modes_to_run = []
   #-off and -on
@@ -1311,10 +1313,10 @@ if __name__ == '__main__':
   lock.acquire()
   filename = str(str(sys.argv[2]).split('/')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
   kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-  area = polyarea("kml/" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  points = polypoints("kml/" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-  output = open(sys.argv[2],"a")
-  outfile = open(sys.argv[2],"r")
+  area = polyarea("/home/pi/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  points = polypoints("/home/pi/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+  output = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
+  outfile = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"r")
   contents = outfile.readlines()
   while ((int(linenumber)) != int(len(contents))):
     time.sleep(1)
@@ -1338,6 +1340,8 @@ if __name__ == '__main__':
   output.close()
   currentindex += 1
   lock.release()
+  end_time = dt.now()
+  print("Duration: {}".format(end_time-start_time))
   #  for pnt in mypoints:
   #   p.AddPoint(pnt[0], pnt[1])
   #num, perim, area = p.Compute()
