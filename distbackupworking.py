@@ -10,7 +10,7 @@ from datetime import datetime
 import sys
 import datetime
 import math
-from getlat import latnumbers,longnumbers,makekeys,lastrun,checknumbers,cleanprint,cleanlist
+from getlat import latnumbers,longnumbers,makekeys,checknumbers,cleanprint
 x=1
 gmaps = ""
 global directions11
@@ -45,7 +45,6 @@ def pointfits(pointa,pointadone,goaltimeplus,goaltimeminus):
 def closestpoint(InitialPoint,timelist,latlist,goaltime): 
   print "START CLOSEST"
   print "THE LIST\n\n"
-  print cleanlist(latlist)
   print "\n\n"
   lastclosest = 1000
   thepair = 0
@@ -99,7 +98,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x)
     attemptcounter += 1
     pointadone = gmaps_traveltime(directions11)
-    checknumbers(lastrun,pointa,pointadone)
+   # checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
     if (len(testedlist) >= 10):
       distance = originaldist
@@ -464,7 +463,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey):
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
       print str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
-        degrees += 15
+        degrees += 11.25
         x = 0
         lat1 = firstlat
         lon1 = firstlon
@@ -476,7 +475,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey):
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
       print str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
-        degrees += 15
+        degrees += 11.25
         lat1 = firstlat
         lon1 = firstlon
         x = 0
@@ -489,7 +488,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey):
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
       print str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
-        degrees += 15
+        degrees += 11.25
         x = 0
         lat1 = firstlat
         lon1 = firstlon
@@ -501,7 +500,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey):
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
       print str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
-        degrees += 15
+        degrees += 11.25
         x = 0        
         lat1 = firstlat
         lon1 = firstlon
@@ -634,9 +633,9 @@ for line in inputfile:
   time_to_leave = check_timetoleave(line.strip().split(","))
   PointA = (float(line.strip().split(",")[0]),float(line.strip().split(",")[1]))
   currentname = {}
-  currentname = makekeys(currentname,15)
+  currentname = makekeys(currentname,11.25)
   go_to_corner(PointA,1,1,.5,currentname,0)   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
   iterate_counter=0
-  thelist = my_algorithm(currentname,.5,1,600,PointA,"walking",["walking"],output,KEYS)   #Now we can start to analyze
+  thelist = my_algorithm(currentname,.5,1,500,PointA,"driving",["driving"],output,KEYS)   #Now we can start to analyze
   print "FINAL LIST WAS: " + str(cleanprint(thelist,600))
  #10 miles out with 1 mile increments finding times that are at x seconds
