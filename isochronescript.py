@@ -256,20 +256,19 @@ def matchup(testedlist,testedtimeslist,lister):
     return lister
 
 def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list,linenumber):
+  global directions11
+  global gmaps
+  print "My Algorithm"
   originaldist = distance
   finallist = {}
   additionalkeys = {}
   negative = False
   goaltimeplus = goaltime + (goaltime * .05) #seconds
   goaltimeminus = goaltime -  (goaltime * .05) #seconds
-  global directions11
-  global gmaps
-  print "My Algorithm"
   printinglist = ""
   testedlist = []
   testedtimeslist = []
   keys = [key for key, value in sorted(d.iteritems())]
- # #print "KEYS = " + str(keys)
   count = 0
   attemptcounter = 0
   lastbeginning = InitialPoint
@@ -277,44 +276,44 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   bearingproblem = ""
   x33 = 2
   lasttime = 0
-  numberofmoves = abs(keys[count] - degreeincrements)/4
-  if (numberofmoves >3):
+  numberofmoves = abs(keys[count] - degreeincrements)/4  #Count of degree increments by 2 that we are allowing up or down
+  if (numberofmoves > 3):
     numberofmoves = 3
   originalnumberofmoves = numberofmoves
-  while count <= len(keys)-1:
-   
+  while count <= len(keys)-1: #While we have bearings to get answers for
     pointa = d[keys[count]][0]    #Closest, the exact distance away
-    
     lastbeginning = InitialPoint
     testedlist.append(pointa)
     x=0
+    distance3 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
     try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
+    print "DISTANCE tested was: " + str(distance3)
     attemptcounter += 1
     pointadone = gmaps_traveltimeordist(directions11,lasttime,timeordist)
     lasttime = pointadone
   #  checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
 
-    if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus))):
-      if (numberofmoves == originalnumberofmoves and not(negative)):
+    if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus))): #If we just maxed out and the point we checked doesn't fit
+      if (numberofmoves == originalnumberofmoves and not(negative)): #if we still have moves to be made going down from original bearing, and no more going up
         bearingproblem = keys[count]
-      if (numberofmoves >= 1 and not(negative) and keys[count]+ 2 > 0):  
+      if (numberofmoves >= 1 and not(negative) and keys[count]+ 2 > 0):  #Need to have a positive bearing, can't go into - (start bearing = 0 example)
         print "CALLING AGAIN 11with " + str(x33)
-        keys.insert(count,keys[count]+ 2)
-        d.pop(keys[count]- 2, None)
+        keys.insert(count,keys[count]+ 2)   #Insert this key again but with + 2 degrees
+        d.pop(keys[count]- 2, None) #Pop off the old key
         additionalkeys[keys[count]-2] = matchup(testedlist,testedtimeslist,[])
-        keys.remove(keys[count]- 2)
-        d[keys[count]] = []
-        d = singlebearingupdate(InitialPoint,1,1,distance,d,0,keys[count])
+        keys.remove(keys[count]- 2)  #Remove the old key from main list
+        d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
+        d = singlebearingupdate(InitialPoint,1,1,distance* 0.621371,d,0,keys[count]) #hard coded to same distance away as starting point was
         testedlist = []
         testedtimeslist = []
       
         
-        numberofmoves = numberofmoves - 1
+        numberofmoves = numberofmoves - 1 #Remove 1 move, if we don't have more moves left then set negative to true because next time around we may have to go negative
         if (numberofmoves < 1):
             negative = True
-      else:
-        if (numberofmoves < 1): #No moves can be made 
+      else: 
+        if (numberofmoves < 1): #No moves can be made  
             moveby = abs(keys[count] - bearingproblem)
             print "CALLING AGAIN 33with " + str(x33)
             keys.insert(count,keys[count] - moveby - 2)
@@ -323,40 +322,27 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
             keys.remove(keys[count]+ 2+moveby)
 
             d[keys[count]] = []
-            d = singlebearingupdate(InitialPoint,1,1,distance,d,0,keys[count])
+            d = singlebearingupdate(InitialPoint,1,1,distance* 0.621371,d,0,keys[count])
             numberofmoves = numberofmoves + 1
             testedlist = []
             testedtimeslist = []
         else: #There is more than 1 move available to be made
-            if (numberofmoves < originalnumberofmoves):
-                print "CALLING AGAIN44 with " + str(x33)
-     #   additionalkeys[keys[count]] = []
-                keys.insert(count,keys[count] - 2)
-                d.pop(keys[count]+ 2, None)
-                additionalkeys[keys[count]+ 2] = matchup(testedlist,testedtimeslist,[])
-                keys.remove(keys[count]+ 2)
-                d[keys[count]] = []
-                d = singlebearingupdate(InitialPoint,1,1,distance,d,0,keys[count])
-                numberofmoves = numberofmoves + 1
-                testedlist = []
-                testedtimeslist = []
-            else:
-                print "FULL"
-                d.pop(keys[count-1], None)
-                keys.remove(keys[count-1])
-                additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
-                #finallist = closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
-                #closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
-                finallist.pop(bearingproblem,None)
-                testedtimeslist = []
-                testedlist = []
-                lastbeginning = InitialPoint
-                lastend = "000"
-                numberofmoves = originalnumberofmoves
-                negative = False
-                count += 1
-                distance = originaldist
-                additionalkeys = {}
+            print "FULL"
+            d.pop(keys[count-1], None)
+            keys.remove(keys[count-1])
+            additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
+            #finallist = closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
+            #closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
+            finallist.pop(bearingproblem,None)
+            testedtimeslist = []
+            testedlist = []
+            lastbeginning = InitialPoint
+            lastend = "000"
+            numberofmoves = originalnumberofmoves
+            negative = False
+            count += 1
+            distance = originaldist
+            additionalkeys = {}
 
 
     elif (pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)):
@@ -368,18 +354,25 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
         negative = False
         additionalkeys = {}
         testedtimeslist = []
+        distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
+        print "DISTANCE set to: " + str(distance2)
+
         lastbeginning = InitialPoint
         lastend = "000"
         count += 1
-
+     #   if (count < len(keys)-1):
+      #    print "POINT WAS: " + str(d[keys[count]])
+      #    d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
+      #    d = singlebearingupdate(InitialPoint,1,1,distance2* 0.621371,d,0,keys[count])
+      #    print "POINT IS: " + str(d[keys[count]])
     elif(pointadone >= goaltimeminus):   #Must be in range 0 to a
         print "0 to a"
         ratio = float(float(goaltime) / float(pointadone))
         ##print "RATIO is " + str(ratio)
     #    #print "List was: " + str(d[keys[count]])
-        distance = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-        d = singlebearingupdate(InitialPoint,1,1,float((float(distance)) * float(ratio)) * 0.621371,d,0,keys[count])
-      #  #print "DISTANCE: " + str(distance)
+        distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
+        d = singlebearingupdate(InitialPoint,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
+      
     #    #print "Ration: " + str(float((float(distance)) * float(ratio)) * 0.621371)
     #    #print "List is: " + str(d[keys[count]])
         lastend = tuple(pointa.split(","))
@@ -388,9 +381,9 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
       print "A TO B"
     #  #print "List was: " + str(d[keys[count]])
       ratio = float(float(goaltime) / float(pointadone))
-      distance = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-      d = singlebearingupdate(lastbeginning,1,1,float((float(distance)) * float(ratio)) * 0.621371,d,0,keys[count])
-      #  #print "DISTANCE: " + str(distance)
+      distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
+      d = singlebearingupdate(lastbeginning,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
+   
    #   #print "Ration: " + str( float(ratio))
    #   #print "List is: " + str(d[keys[count]])
       lastbeginning = tuple(pointa.split(","))
@@ -533,7 +526,7 @@ def get_mode(count):
     return "transit"
 
 def file_len(fname):
-    with open("/home/pi/Google_DirectionsAPI_PointPicker/"+fname) as f:
+    with open("/Users/user/Google_DirectionsAPI_PointPicker/"+fname) as f:
         for i, l in enumerate(f):
             pass
     return i + 1
@@ -872,7 +865,7 @@ def kmlmaker(mypoints,filename,thedict):
   for pont in mypoints:
     finallist.append((pont[1],pont[0]))
   pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
-  kml.save("/home/pi/Google_DirectionsAPI_PointPicker/kml/" + filename + ".kml")
+  kml.save("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + filename + ".kml")
 def polyarea(filename):
   fname=filename
   i=0
@@ -1231,9 +1224,9 @@ if __name__ == '__main__':
   square_count = 0
 
 
-  output = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
-  inputfile = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
-  testiter = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
+  output = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
+  inputfile = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
+  testiter = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
   #Path to output file created
   modes_to_run = []
   #-off and -on
@@ -1313,10 +1306,10 @@ if __name__ == '__main__':
   lock.acquire()
   filename = str(str(sys.argv[2]).split('/')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
   kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
-  area = polyarea("/home/pi/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  points = polypoints("/home/pi/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-  output = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
-  outfile = open("/home/pi/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"r")
+  area = polyarea("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  points = polypoints("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+  output = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
+  outfile = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"r")
   contents = outfile.readlines()
   while ((int(linenumber)) != int(len(contents))):
     time.sleep(1)
