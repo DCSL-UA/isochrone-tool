@@ -271,6 +271,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   keys = [key for key, value in sorted(d.iteritems())]
   count = 0
   attemptcounter = 0
+  attempted = []
   lastbeginning = InitialPoint
   previoustestlists = {}
   bearingproblem = ""
@@ -284,6 +285,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     pointa = d[keys[count]][0]    #Closest, the exact distance away
     lastbeginning = InitialPoint
     testedlist.append(pointa)
+    attempted.append(pointa)
     x=0
     distance3 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
     try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
@@ -307,8 +309,6 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
         d = singlebearingupdate(InitialPoint,1,1,distance* 0.621371,d,0,keys[count]) #hard coded to same distance away as starting point was
         testedlist = []
         testedtimeslist = []
-      
-        
         numberofmoves = numberofmoves - 1 #Remove 1 move, if we don't have more moves left then set negative to true because next time around we may have to go negative
         if (numberofmoves < 1):
             negative = True
@@ -320,14 +320,17 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
             d.pop(keys[count]+ 2 + moveby, None)
             additionalkeys[keys[count]+ 2 + moveby] = matchup(testedlist,testedtimeslist,[])
             keys.remove(keys[count]+ 2+moveby)
-
+            testedlist = []
+            testedtimeslist = []
             d[keys[count]] = []
             d = singlebearingupdate(InitialPoint,1,1,distance* 0.621371,d,0,keys[count])
             numberofmoves = numberofmoves + 1
-            testedlist = []
-            testedtimeslist = []
+            
         else: #There is more than 1 move available to be made
             print "FULL"
+            for pnt in testedlist:
+              print (pnt)
+            print "END FULL"
             d.pop(keys[count-1], None)
             keys.remove(keys[count-1])
             additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
@@ -360,11 +363,11 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
         lastbeginning = InitialPoint
         lastend = "000"
         count += 1
-     #   if (count < len(keys)-1):
-      #    print "POINT WAS: " + str(d[keys[count]])
-      #    d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
-      #    d = singlebearingupdate(InitialPoint,1,1,distance2* 0.621371,d,0,keys[count])
-      #    print "POINT IS: " + str(d[keys[count]])
+        if (count < len(keys)-1):
+          print "POINT WAS: " + str(d[keys[count]])
+          d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
+          d = singlebearingupdate(InitialPoint,1,1,distance2* 0.621371,d,0,keys[count])
+          print "POINT IS: " + str(d[keys[count]])
     elif(pointadone >= goaltimeminus):   #Must be in range 0 to a
         print "0 to a"
         ratio = float(float(goaltime) / float(pointadone))
@@ -383,16 +386,16 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
       ratio = float(float(goaltime) / float(pointadone))
       distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
       d = singlebearingupdate(lastbeginning,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
-   
+      
    #   #print "Ration: " + str( float(ratio))
    #   #print "List is: " + str(d[keys[count]])
       lastbeginning = tuple(pointa.split(","))
    #     d[keys[count]] = d[keys[count]][1:]
    #     d[keys[count]].append(pointb)
   
-  for item in testedlist:
+  for item in attempted:
     printinglist += item + "\n"
-  #  #print "TESTED IS " + str(printinglist)
+  print "TESTED IS " + str(printinglist)
   print ("ATTEMPTS: " + str(attemptcounter))
 
   return finallist
