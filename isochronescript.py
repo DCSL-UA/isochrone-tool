@@ -2,6 +2,9 @@
     #returns the array itself, 0 -> 180 (0->90 and -90->-1 = 91 +  )
     #Do the math we have been, store that value in each index through 180
 # python dist.py try1.txt -off AIzaSyBlGF0c9WDFymECTZ15thY0WFOROdlUC5Q 0 0 0 0 1 0 0 0 0
+#Users/user/anaconda/bin/python /Users/user/Google_DirectionsAPI_PointPicker/isochronescript.py uploads_isochrone/testing1.txt output_isochrone/crontab1new.txt -off AIzaSyCvtVQxMV9pSnQsgjKxvqdlj929X3BPncM 0 0 0 0 0 0 on 0 0 0 0 0 on 900 32 "33.217617, -87.558822" 0 bicycling
+
+
 from math import sin, cos, sqrt, atan2, radians
 import json, urllib
 import googlemaps
@@ -261,6 +264,8 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   print "My Algorithm"
   originaldist = distance
   finallist = {}
+  finallist["0"] = {}
+  finallist["1"] = {}
   additionalkeys = {}
   negative = False
   goaltimeplus = goaltime + (goaltime * .05) #seconds
@@ -295,6 +300,11 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     lasttime = pointadone
   #  checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
+    if keys[count] in finallist["1"]:
+      finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone))
+    else:
+      finallist["1"][keys[count]] = []
+      finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone))
 
     if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus))): #If we just maxed out and the point we checked doesn't fit
       if (numberofmoves == originalnumberofmoves and not(negative)): #if we still have moves to be made going down from original bearing, and no more going up
@@ -336,7 +346,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
             additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
             #finallist = closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
             #closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
-            finallist.pop(bearingproblem,None)
+            finallist["0"].pop(bearingproblem,None)
             testedtimeslist = []
             testedlist = []
             lastbeginning = InitialPoint
@@ -351,7 +361,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     elif (pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)):
         print "POINT FITS"
         distance = originaldist
-        finallist[keys[count]] = str(pointa) + "/" + str(pointadone)
+        finallist["0"][keys[count]] = (str(pointa) + "/" + str(pointadone))
         testedlist = []
         numberofmoves = originalnumberofmoves
         negative = False
@@ -529,6 +539,7 @@ def get_mode(count):
     return "transit"
 
 def file_len(fname):
+    i = 0
     with open("/Users/user/Google_DirectionsAPI_PointPicker/"+fname) as f:
         for i, l in enumerate(f):
             pass
@@ -862,8 +873,88 @@ def find_key(partial,partial2,thedict):
     if partial in thedict[key]:
       if (partial2 in thedict[key]):
         return str(key)
+def kmlmaker2(mypoints,filename,thedict,goaltime):
+
+  print (thedict)
+  kml = simplekml.Kml()
+  multilin = kml.newmultigeometry(name="MultiLine")
+  finallist =  {}
+  cnt = 0
+  style = simplekml.Style()
+  style.labelstyle.color = simplekml.Color.red  # Make the text red
+  style.labelstyle.scale = 2  # Make the text twice as big
+  style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+  for key in thedict:
+    for pont in thedict[key]:
+      point,time = pont.split("/")
+      print "TIME: " + str(time)
+      point = point.split(",")
+      pnt = kml.newpoint(name='Travel Time: {} Point: {},{}'.format(time,point[1],point[0]))
+      style = simplekml.Style()
+      style.iconstyle.icon.href = get_pointcolor(goaltime,int(time))
+      pnt.coords = [(point[1],point[0])] 
+      pnt.style = style
+
+  kml.save("/Users/user/Google_DirectionsAPI_PointPicker/kml/allpoints" + filename + ".kml")
+  
+def get_pointcolor(goaltime,time):
+  percentoff = float(float(time)/float(goaltime))
+  print "OFF BY: "  + str(percentoff)
+  if (percentoff > 1): #Time was greater, aka farther
+    percentoff = float(percentoff - 1) *100 #absolute percent off by, can only be green or red at this point
+    if (percentoff < .5): # perfect green
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 1.5 and percentoff > .5): #1 shade off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green2.png"
+    elif (percentoff < 1.5 and percentoff > .5): # 2 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green3.png"
+    elif (percentoff < 2.5 and percentoff > 1.5): #3 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green4.png"
+    elif (percentoff < 3.5 and percentoff > 2.5): # 4 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
+    elif (percentoff < 4.5 and percentoff > 3.5): # 5 shades off red
+      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
+    elif (percentoff < 5.5 and percentoff > 4.5): # 5 shades off red
+      return "http://mkkeffeler.azurewebsites.net/icons/red5.png"
+    elif (percentoff < 6.5 and percentoff > 5.5): #4 shades off red
+      return "http://mkkeffeler.azurewebsites.net/icons/red5.png"
+    elif (percentoff < 7.5 and percentoff > 6.5): #3 shades off red
+      return "http://mkkeffeler.azurewebsites.net/icons/red4.png"
+    elif (percentoff < 8.5 and percentoff > 7.5): #2 shades off red
+      return "http://mkkeffeler.azurewebsites.net/icons/red3.png"
+    elif (percentoff < 9.5 and percentoff > 8.5): # 1 shade off red
+      return "http://mkkeffeler.azurewebsites.net/icons/red2.png"
+    else: #perfect red
+      return "http://mkkeffeler.azurewebsites.net/icons/red1.png"
+  else: #time was shorter, aka closer
+    percentoff = float(1 - percentoff) * 100  #Absolute percent off by, can only be blue or green at this point
+    if (percentoff < .5): #perfect green
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 1.5 and percentoff > .5): #1 shade off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green2.png"
+    elif (percentoff < 1.5 and percentoff > .5): # 2 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green3.png"
+    elif (percentoff < 2.5 and percentoff > 1.5): #3 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green4.png"
+    elif (percentoff < 3.5 and percentoff > 2.5): # 4 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
+    elif (percentoff < 4.5 and percentoff > 3.5): # 5 shades off green
+      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
+    elif (percentoff < 5.5 and percentoff > 4.5): # 5 shades off blue
+      return "http://mkkeffeler.azurewebsites.net/icons/blue5.png"
+    elif (percentoff < 6.5 and percentoff > 5.5): #4 shades off blue
+      return "http://mkkeffeler.azurewebsites.net/icons/blue5.png"
+    elif (percentoff < 7.5 and percentoff > 6.5): #3 shades off blue
+      return "http://mkkeffeler.azurewebsites.net/icons/blue4.png"
+    elif (percentoff < 8.5 and percentoff > 7.5): #2 shades off blue
+      return "http://mkkeffeler.azurewebsites.net/icons/blue3.png"
+    elif (percentoff < 9.5 and percentoff > 8.5): #1 shade off blue
+      return "http://mkkeffeler.azurewebsites.net/icons/blue2.png"
+    else: #perfect blue
+      return "http://mkkeffeler.azurewebsites.net/icons/blue1.png"
 def kmlmaker(mypoints,filename,thedict):    
   kml = simplekml.Kml()
+
   finallist =  []
   for pont in mypoints:
     finallist.append((pont[1],pont[0]))
@@ -893,7 +984,7 @@ def polypoints(filename):
       for d,v in desc.iteritems():
         if (d == "vertices"):
           return v[1:]
-def converter(thelist):
+def converter(thelist,goaltimeminus,goaltimeplus):
   totallist = []
   first = []
   second = []
@@ -905,17 +996,25 @@ def converter(thelist):
   for key in (sorted(thelist)):
   #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
     if int(key) <= 90:
- #     print "1"
-      first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+       point,time = thelist[key].split("/")
+       if int(time) > goaltimeminus and int(time) < goaltimeplus:
+ #      print "1"
+        first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 180 >= int(key) >= 91:
  #     print "2"
-      second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+      point,time = thelist[key].split("/")
+      if int(time) > goaltimeminus and int(time) < goaltimeplus:
+        second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 270 >= int(key) >= 181:
  #     print "3"
-      third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+      point,time = thelist[key].split("/")
+      if int(time) > goaltimeminus and int(time) < goaltimeplus:
+        third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 359 >= int(key) >= 271:
   #    print "4"
-      fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
+      point,time = thelist[key].split("/")
+      if int(time) > goaltimeminus and int(time) < goaltimeplus:
+        fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
   if (len(second) == 0 and len(third)>=2):
     first.insert(0,third[len(third)-2])
     totallist = first + fourth + third[:-1] + second
@@ -960,48 +1059,6 @@ def polypoints(filename):
       for d,v in desc.iteritems():
         if (d == "vertices"):
           return v[1:]
-def converter(thelist):
-  totallist = []
-  first = []
-  second = []
-  third = []
-  fourth = []
-#  thedict = {}
- # thedict["type"] = "Polygon"
-  #thedict["coordinates"] = []
-  for key in (sorted(thelist)):
-  #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
-    if int(key) <= 90:
- #     print "1"
-      first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
-    if 180 >= int(key) >= 91:
- #     print "2"
-      second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
-    if 270 >= int(key) >= 181:
- #     print "3"
-      third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
-    if 359 >= int(key) >= 271:
-  #    print "4"
-      fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
-  if (len(second) == 0 and len(third)>=2):
-    first.insert(0,third[len(third)-2])
-    totallist = first + fourth + third[:-1] + second
-  elif (len(second) == 0 and len(third) == 0 and len(fourth) >= 2):
-    first.insert(0,fourth[len(fourth)-2])
-    totallist = first + fourth[:-1] + third + second
-  elif (len(second) == 0 and len(third) == 0 and len(fourth) == 1):
-    first.insert(0,fourth[len(fourth)-1])
-    totallist = first + fourth[:-1] + third + second
-
-  elif (len(second) == 1):
-      first.insert(0,second[len(second)-1])
-      totallist = first + fourth + third + second[:-1]
-
-  else:
-    first.insert(0,second[len(second)-2])
-    totallist = first + fourth + third + second[:-1]
- # thedict["coordinates"].append(totallist)
-  return totallist
 def find_pointa(pointadist,d,a,b):
   count = 0
   for x in d['45']:
@@ -1301,14 +1358,15 @@ if __name__ == '__main__':
   go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
   iterate_counter=0
   thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
-  #print thelist
+  print thelist
   numofnewlines = 0
-  mypoints = converter(thelist)
+  mypoints = converter(thelist["0"],int(goaltimedist) - (int(goaltimedist) * .05),int(goaltimedist) +  (int(goaltimedist) * .05))
   #print mypoints
   lock = Lock()
   lock.acquire()
   filename = str(str(sys.argv[2]).split('/')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist)
+  kmlmaker2(mypoints,str(filename)+ "line" + str(linenumber),thelist["1"],int(goaltimedist))
+  kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist["0"])
   area = polyarea("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
   points = polypoints("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
   output = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
@@ -1324,14 +1382,14 @@ if __name__ == '__main__':
   output.write(mode+ ",")
   output.write(numberofpoints + ",")
 
-  output.write(str(len(thelist)) + ",")
+  output.write(str(len(thelist["0"])) + ",")
   if (int(istime) == 1):
     output.write("T|" + str(goaltimedist) + ",")
   else:
     output.write("D|" + str(goaltimedist) + ",")
 
   output.write(area + ",")
-  cleanprint(thelist,int(goaltimedist),output)
+  cleanprint(thelist["0"],int(goaltimedist),output)
   output.write("\n")
   output.close()
   currentindex += 1
