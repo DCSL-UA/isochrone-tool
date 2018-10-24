@@ -115,7 +115,7 @@ def readPoly(filename):
             invalid=False
             c=n.getElementsByTagName('coordinates')
             if len(c) != 1:
-                print ('invalid polygon found')
+                #print ('invalid polygon found')
                 continue
             if not invalid:
                 c=c[0]
@@ -211,13 +211,13 @@ def poly2kmz(pp,fname):
 def gmaps_traveltimeordist(directions11,last,timeordist):
 
   if len(directions11) > 0 and timeordist == 1:
-   # print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
+   # #print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
     return directions11[0]["legs"][0]["duration"]["value"]   #Extracts json value from google
   if len(directions11) > 0 and timeordist == 0:
-   # print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
+   # #print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
     return directions11[0]["legs"][0]["distance"]["value"]   #comes back in meters
   else:
-    #print "TIME NOT AVAILABLE"
+    ##print "TIME NOT AVAILABLE"
     return last
 def pointfits(pointa,pointadone,goaltimeplus,goaltimeminus):
   if (pointadone >= goaltimeminus and pointadone <= goaltimeplus):
@@ -225,28 +225,28 @@ def pointfits(pointa,pointadone,goaltimeplus,goaltimeminus):
   else:
     return False
 def closestpoint(InitialPoint,timelist,latlist,goaltime,additionalkeys,finallist): 
-  #print "START CLOSEST"
-  #print "THE LIST\n\n"
-  #print cleanlist(latlist)
-  #print "\n\n"
+  ##print "START CLOSEST"
+  ##print "THE LIST\n\n"
+  ##print cleanlist(latlist)
+  ##print "\n\n"
   lastclosest = 1000
   thepair = 0
   thekey = 0
   thetime = 0
   thepair = 0
   for key in additionalkeys:
-      #print "KEY is  " + str(key)
+      ##print "KEY is  " + str(key)
       for combo in additionalkeys[key]:
         combo = combo.split("/") 
       if abs(int(combo[0])-goaltime) < lastclosest:
         lastclosest = abs(int(combo[0])-goaltime) 
-        #print combo[1]
-        #print "New Closest is " + str(lastclosest)
+        ##print combo[1]
+        ##print "New Closest is " + str(lastclosest)
         thetime = combo[0]
         thepair = combo[1]
         thekey = key
   finallist[thekey] = str(thetime) + "/" + str(thepair)
-  #print "END CLOSEST"
+  ##print "END CLOSEST"
   return finallist
 def isunevenbearing(keys,count):
   if (abs(keys[count+1] - keys[count]) != abs(keys[count] - keys[count-1])):
@@ -261,7 +261,7 @@ def matchup(testedlist,testedtimeslist,lister):
 def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list,linenumber):
   global directions11
   global gmaps
-  print "My Algorithm"
+  #print "My Algorithm"
   originaldist = distance
   finallist = {}
   finallist["0"] = {}
@@ -270,7 +270,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
   negative = False
   goaltimeplus = goaltime + (goaltime * .05) #seconds
   goaltimeminus = goaltime -  (goaltime * .05) #seconds
-  printinglist = ""
+  #printinglist = ""
   testedlist = []
   testedtimeslist = []
   keys = [key for key, value in sorted(d.iteritems())]
@@ -294,23 +294,23 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     x=0
     distance3 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
     try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
-    print "DISTANCE tested was: " + str(distance3)
+    #print "DISTANCE tested was: " + str(distance3)
     attemptcounter += 1
     pointadone = gmaps_traveltimeordist(directions11,lasttime,timeordist)
     lasttime = pointadone
   #  checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
     if keys[count] in finallist["1"]:
-      finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone))
+      finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone) + "/" + str(distance3))
     else:
       finallist["1"][keys[count]] = []
-      finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone))
+      finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone) + "/" + str(distance3))
 
     if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus))): #If we just maxed out and the point we checked doesn't fit
       if (numberofmoves == originalnumberofmoves and not(negative)): #if we still have moves to be made going down from original bearing, and no more going up
         bearingproblem = keys[count]
       if (numberofmoves >= 1 and not(negative) and keys[count]+ 2 > 0):  #Need to have a positive bearing, can't go into - (start bearing = 0 example)
-        print "CALLING AGAIN 11with " + str(x33)
+        #print "CALLING AGAIN 11with " + str(x33)
         keys.insert(count,keys[count]+ 2)   #Insert this key again but with + 2 degrees
         d.pop(keys[count]- 2, None) #Pop off the old key
         additionalkeys[keys[count]-2] = matchup(testedlist,testedtimeslist,[])
@@ -325,7 +325,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
       else: 
         if (numberofmoves < 1): #No moves can be made  
             moveby = abs(keys[count] - bearingproblem)
-            print "CALLING AGAIN 33with " + str(x33)
+            #print "CALLING AGAIN 33with " + str(x33)
             keys.insert(count,keys[count] - moveby - 2)
             d.pop(keys[count]+ 2 + moveby, None)
             additionalkeys[keys[count]+ 2 + moveby] = matchup(testedlist,testedtimeslist,[])
@@ -337,10 +337,9 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
             numberofmoves = numberofmoves + 1
             
         else: #There is more than 1 move available to be made
-            print "FULL"
-            for pnt in testedlist:
-              print (pnt)
-            print "END FULL"
+            #print "FULL"
+              #print (pnt)
+            #print "END FULL"
             d.pop(keys[count-1], None)
             keys.remove(keys[count-1])
             additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
@@ -359,54 +358,52 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
 
 
     elif (pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)):
-        print "POINT FITS"
+        #print "POINT FITS"
         distance = originaldist
-        finallist["0"][keys[count]] = (str(pointa) + "/" + str(pointadone))
+        finallist["0"][keys[count]] = (str(pointa) + "/" + str(pointadone) + "/" + str(distance3))
         testedlist = []
         numberofmoves = originalnumberofmoves
         negative = False
         additionalkeys = {}
         testedtimeslist = []
         distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-        print "DISTANCE set to: " + str(distance2)
+        #print "DISTANCE set to: " + str(distance2)
 
         lastbeginning = InitialPoint
         lastend = "000"
         count += 1
         if (count < len(keys)-1):
-          print "POINT WAS: " + str(d[keys[count]])
+          #print "POINT WAS: " + str(d[keys[count]])
           d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
           d = singlebearingupdate(InitialPoint,1,1,distance2* 0.621371,d,0,keys[count])
-          print "POINT IS: " + str(d[keys[count]])
+          #print "POINT IS: " + str(d[keys[count]])
     elif(pointadone >= goaltimeminus):   #Must be in range 0 to a
-        print "0 to a"
+        #print "0 to a"
         ratio = float(float(goaltime) / float(pointadone))
-        ##print "RATIO is " + str(ratio)
-    #    #print "List was: " + str(d[keys[count]])
+        ###print "RATIO is " + str(ratio)
+    #    ##print "List was: " + str(d[keys[count]])
         distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
         d = singlebearingupdate(InitialPoint,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
       
-    #    #print "Ration: " + str(float((float(distance)) * float(ratio)) * 0.621371)
-    #    #print "List is: " + str(d[keys[count]])
+    #    ##print "Ration: " + str(float((float(distance)) * float(ratio)) * 0.621371)
+    #    ##print "List is: " + str(d[keys[count]])
         lastend = tuple(pointa.split(","))
    #     d[keys[count]] = d[keys[count]][1:]
     else:
-      print "A TO B"
-    #  #print "List was: " + str(d[keys[count]])
+      #print "A TO B"
+    #  ##print "List was: " + str(d[keys[count]])
       ratio = float(float(goaltime) / float(pointadone))
       distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
       d = singlebearingupdate(lastbeginning,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
       
-   #   #print "Ration: " + str( float(ratio))
-   #   #print "List is: " + str(d[keys[count]])
+   #   ##print "Ration: " + str( float(ratio))
+   #   ##print "List is: " + str(d[keys[count]])
       lastbeginning = tuple(pointa.split(","))
    #     d[keys[count]] = d[keys[count]][1:]
    #     d[keys[count]].append(pointb)
-  
-  for item in attempted:
-    printinglist += item + "\n"
-  print "TESTED IS " + str(printinglist)
-  print ("ATTEMPTS: " + str(attemptcounter))
+    #printinglist += item + "\n"
+  #print "TESTED IS " + str(#printinglist)
+  #print ("ATTEMPTS: " + str(attemptcounter))
 
   return finallist
 def format_orderlist(list):
@@ -430,46 +427,20 @@ def google_leaving(time_to_leave):
     else:
       return (int(time.time())+ (int(time_to_leave)*60))
 
-def print_breakdown_types(total_time,total_dist,bus,sub,train,tram,walk,wait,output):
-  output.write(",")
-  output.write(str(bus[0]))
-  output.write(",")
-  output.write(str(float(100* (float(bus[0])/float(total_time[0])))))
-  output.write(",")
-  output.write(str(sub[0]))
-  output.write(",")
-  output.write(str(float(100* (float(sub[0])/float(total_time[0])))))
-  output.write(",")
-  output.write(str(train[0]))
-  output.write(",")
-  output.write(str(float(100* (float(train[0])/float(total_time[0])))))
-  output.write(",")
-  output.write(str(tram[0]))
-  output.write(",")
-  output.write(str(float(100* (float(tram[0])/float(total_time[0])))))
-  output.write(",")
-  output.write(str(walk[0]))
-  output.write(",")
-  output.write(str(float(100* (float(walk[0])/float(total_time[0])))))
-  output.write(",")
-  output.write(str(wait[0]))
-  output.write(",")
-  output.write(str(float(100* (float(wait[0])/float(total_time[0])))))
-
 
 def client(API_KEY_INPUT):
   global x
   try:
     global gmaps
-    #print "CLIENT KEY" + str(API_KEY_INPUT)
+    ##print "CLIENT KEY" + str(API_KEY_INPUT)
     gmaps = googlemaps.Client(key = str(API_KEY_INPUT))
   except:
-    #print "API Key " + str(x-1) + " Was Full or invalid.<br>"
+    ##print "API Key " + str(x-1) + " Was Full or invalid.<br>"
     x += 1
     if (got_more_keys(KEYS,x) != False):      
       client(got_more_keys(KEYS,x))
     else:
-      #print "No More keys to run on. None of the keys provided worked."
+      ##print "No More keys to run on. None of the keys provided worked."
       exit()
 def finish_line(address,destination,mode,output,linenumber):
   outfile = open(sys.argv[2],"r")
@@ -495,7 +466,7 @@ def format_orderlist(list):
   return message
 
 def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order_list,linenumber):
-  #print "MY MODE: " + str(mode)
+  ##print "MY MODE: " + str(mode)
   global gmaps
   global x
   try:
@@ -508,23 +479,25 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
   #  with open(destination + ".json","w") as file:
      # json.dump(directions11,file)
   except googlemaps.exceptions.ApiError as e:
+    print(e)
     x += 1
-    #print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
+    ##print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
       client(got_more_keys(KEYS,x))
       try_except(gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
-      #print "Key Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
+      ##print "Key Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
       finish_line(address,destination,mode,output,linenumber)
       exit()
   except Exception as e:
+    print(e)
     x += 1
-    #print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
+    ##print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
       client(got_more_keys(KEYS,x))
       try_except(gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
-      #print "Key " + str(x-1) + " Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
+      ##print "Key " + str(x-1) + " Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
       finish_line(address,destination,mode,output,linenumber)
       exit()
 
@@ -540,7 +513,7 @@ def get_mode(count):
 
 def file_len(fname):
     i = 0
-    with open("/Users/user/Google_DirectionsAPI_PointPicker/"+fname) as f:
+    with open(str(os.getcwd()) + "/" + fname) as f:
         for i, l in enumerate(f):
             pass
     return i + 1
@@ -560,7 +533,7 @@ def check_timetoleave(line):
   if(len(line) > 2):
     return line[3]
   else:
-    #print "ELSE"
+    ##print "ELSE"
     return "0"
 
 def getEarthRadius(PointA):
@@ -605,7 +578,6 @@ def check_dest_space(line):
   else:
     return line.strip().split(",")[2] + "," +line.strip().split(",")[3]
 
-def calculate_initial_compass_bearing(pointA, pointB):
     if (type(pointA) != tuple) or (type(pointB) != tuple):
         raise TypeError("Only tuples are supported as arguments")
 
@@ -641,12 +613,12 @@ def singlebearingupdate(PointA,radius,numberofpairs,btwnmarks,currentdict,Dictke
    # PointB[1] = decrementlon(0,distance,PointA[1],distanceindegree(PointA[1],PointA[0]))
     PointB[0] = PointA[0]
     PointB[1] = PointA[1]
-    #print "BEARING: " + str(bearing)
+    ##print "BEARING: " + str(bearing)
   #  lat1 = incrementlat(-180,.125/4,lat1,distlat(lat1)) 
     currentdict[bearing] = circularsingle(PointB[0],PointB[1],numberofpairs,btwnmarks,currentdict,Dictkey,bearing)
     if (len(currentdict[bearing]) >= 2):
       currentdict[bearing] = currentdict[bearing][numberofpairs:]
-    #print "PAIRS:" + str(numberofpairs)
+    ##print "PAIRS:" + str(numberofpairs)
 
     return currentdict
 def distlat(lat1):
@@ -655,38 +627,38 @@ def distlat(lat1):
   else:
     return latnumbers[int(str(lat1).split('.')[0])]
 def incrementlat(currentbearing,a,lat1,distance):
-    ##print "DIST: " + str(distance)
+    ###print "DIST: " + str(distance)
     x = .1
     while(float(distance/x) > a + .01 or float(distance/x) < a - .01):
-    #   #print float(distance/x)
+    #   ##print float(distance/x)
         x += .001
-    ##print "X : " + str(x)
-    ##print "LAT INC: " + str(float(float(lat1) + float( float(1.000/float(x)) * math.cos(math.radians(currentbearing)))))
+    ###print "X : " + str(x)
+    ###print "LAT INC: " + str(float(float(lat1) + float( float(1.000/float(x)) * math.cos(math.radians(currentbearing)))))
     return float(float(lat1) + float( float(1.000/float(x)) * math.cos(math.radians(currentbearing))))
 
 def incrementlon(currentbearing,a,lon1,distance):
-#   #print "DIST: " + str(distance)
+#   ##print "DIST: " + str(distance)
     x = .1
     while(float(distance/x) > a + .01 or float(distance/x) <  a - .01 ):
-    #   #print float(distance/x)
+    #   ##print float(distance/x)
         x += .001
-    ##print "X : " + str(x)
-    ##print "LONG INC: " + str(float(float(lon1) + float( float(1.000/float(x)) * math.sin(math.radians(currentbearing)))))
+    ###print "X : " + str(x)
+    ###print "LONG INC: " + str(float(float(lon1) + float( float(1.000/float(x)) * math.sin(math.radians(currentbearing)))))
     return float(float(lon1) + float(float(1.000/float(x)) * math.sin(math.radians(currentbearing))))
 
 def decrementlat(currentbearing,a,lat1,distance):
-    ##print "DIST: " + str(distance)
+    ###print "DIST: " + str(distance)
     x = .1
     while(float(distance/x) > a + .01 or float(distance/x) <  a - .01):
-    #   #print float(distance/x)
+    #   ##print float(distance/x)
         x += .001
     return float(float(lat1) - float( float(1.000/float(x)) * math.cos(math.radians(currentbearing))))
 
 def decrementlon(currentbearing,a,lon1,distance):
-    ##print "DIST: " + str(distance)
+    ###print "DIST: " + str(distance)
     x = .1
     while(float(distance/x) > a + .01 or float(distance/x) <  a - .01 ):
-    #   #print float(distance/x)
+    #   ##print float(distance/x)
         x += .001
     return float(float(lon1) - float(float(1.000/float(x)) * math.sin(math.radians(currentbearing))))
 
@@ -707,14 +679,14 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey,degreeincreme
     firstlat = lat1
     firstlon = lon1
     degrees = 0
-    #print str(degrees) + " " + str(lat1) + "," + str(lon1)
+    ##print str(degrees) + " " + str(lat1) + "," + str(lon1)
 
     while (degrees <= 90):
       lat1 = incrementlat(degrees,float(btwnmarks),lat1,distlat(lat1))
       lon1 = incrementlon(degrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-      #print str(degrees) + " " + str(lat1) + "," + str(lon1)
+      ##print str(degrees) + " " + str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
         degrees += degreeincrements
         x = 0
@@ -726,20 +698,20 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey,degreeincreme
       lon1 = decrementlon(degrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-      #print str(degrees) + " " + str(lat1) + "," + str(lon1)
+      ##print str(degrees) + " " + str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
         degrees += degreeincrements
         lat1 = firstlat
         lon1 = firstlon
         x = 0
    # degrees = degrees - 15
-   # #print "DONE"
+   # ##print "DONE"
     while (degrees >= 180 and degrees <= 270):
       lat1 = incrementlat(degrees,float(btwnmarks),lat1,distlat(lat1))
       lon1 = incrementlon(degrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-      #print str(degrees) + " " + str(lat1) + "," + str(lon1)
+      ##print str(degrees) + " " + str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
         degrees += degreeincrements
         x = 0
@@ -751,7 +723,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey,degreeincreme
       lon1 = decrementlon(degrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-      #print str(degrees) + " " + str(lat1) + "," + str(lon1)
+      ##print str(degrees) + " " + str(lat1) + "," + str(lon1)
       if (x == numberofpairs):
         degrees += degreeincrements
         x = 0        
@@ -760,7 +732,7 @@ def circular(lat1,lon1,numberofpairs,btwnmarks,currentdict,Dictkey,degreeincreme
     lastlat = lat1
     lastlon = lon1
     distance = get_distance(firstlat,firstlon,lastlat,lastlon) * 0.621371
-      #print key,value    
+      ##print key,value    
 def circularsingle(lat1,lon1,count,btwnmarks,currentdict,Dictkey,degrees):
     originallong = lon1
     originallat = lat1
@@ -770,7 +742,7 @@ def circularsingle(lat1,lon1,count,btwnmarks,currentdict,Dictkey,degrees):
     
     firstlat = lat1
     firstlon = lon1
-   # #print str(lat1) + "," + str(lon1)
+   # ##print str(lat1) + "," + str(lon1)
     fixeddegrees = degrees
     if (degrees > 360):
       fixeddegrees = degrees - 360
@@ -779,7 +751,7 @@ def circularsingle(lat1,lon1,count,btwnmarks,currentdict,Dictkey,degrees):
       lon1 = incrementlon(fixeddegrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-   #   #print str(lat1) + "," + str(lon1)
+   #   ##print str(lat1) + "," + str(lon1)
       if (x == count):
         return currentdict[degrees]
     while (fixeddegrees >= 90 and fixeddegrees < 180 ):
@@ -787,17 +759,17 @@ def circularsingle(lat1,lon1,count,btwnmarks,currentdict,Dictkey,degrees):
       lon1 = decrementlon(fixeddegrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-  #    #print str(lat1) + "," + str(lon1)
+  #    ##print str(lat1) + "," + str(lon1)
       if (x == count):
         return currentdict[degrees]
    # degrees = degrees - 15
-   # #print "DONE"
+   # ##print "DONE"
     while (fixeddegrees >= 180 and fixeddegrees <= 270):
       lat1 = incrementlat(fixeddegrees,float(btwnmarks),lat1,distlat(lat1))
       lon1 = incrementlon(fixeddegrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[degrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-   #   #print str(lat1) + "," + str(lon1)
+   #   ##print str(lat1) + "," + str(lon1)
       if (x == count):
         return currentdict[degrees]
   #  degrees = degrees - 15
@@ -806,19 +778,19 @@ def circularsingle(lat1,lon1,count,btwnmarks,currentdict,Dictkey,degrees):
       lon1 = decrementlon(fixeddegrees,float(btwnmarks),lon1,distanceindegree(lon1,lat1)) #Go directly .05 miles to the right and query
       x += 1
       currentdict[fixeddegrees].append(str(round(lat1,6)) + "," + str(round(lon1,6)))
-    #  #print str(lat1) + "," + str(lon1)
+    #  ##print str(lat1) + "," + str(lon1)
       if (x == count):
         return currentdict[degrees]
     lastlat = lat1
     lastlon = lon1
     distance = get_distance(firstlat,firstlon,lastlat,lastlon) * 0.621371
    # for key, value in currentdict.iteritems() :
-      #print key,value    
+      ##print key,value    
     return currentdict[degrees]
 
 def tomyratio(numofmeters):
     numofkm = float(numofmeters) * 4.38888888889 * .001
-    ##print "NUM: " + str(numofkm)
+    ###print "NUM: " + str(numofkm)
     return numofkm
 
 def get_dist(lat1,lon1,lat2,lon2): 
@@ -853,15 +825,14 @@ def checknumbers(thedict,thepair,thetime):
 
 def cleanprint(thedict,goaltime,output):
   counter = 0
-  pairtime = ""
   for key in thedict:
-    pairtime = thedict[key].split("/")
-    if len(pairtime[0]) < 5:
-      counter += 1
-      output.write('"' + pairtime[1]+'",')
-    else:
-       output.write('"' + pairtime[0]+'",')
-#$  print str(counter) + " Were off by more than +- 5%"
+    pairtime = key
+  #  if len(pairtime[0]) < 5:
+    counter += 1
+    output.write('"' + pairtime[0] + "," + pairtime[1] + '",')
+   # else:
+   #    output.write('"' + pairtime[0]+'",')
+#$  #print str(counter) + " Were off by more than +- 5%"
 #  printoffbypercents(thedict,goaltime)
 def printoffbypercents(thedict,goaltime):
   pairtime = ""
@@ -873,11 +844,34 @@ def find_key(partial,partial2,thedict):
     if partial in thedict[key]:
       if (partial2 in thedict[key]):
         return str(key)
-def kmlmaker2(mypoints,filename,thedict,goaltime):
-
-  print (thedict)
+def kmlmerged(mypoints,filename,greenpoints,allpoints,goaltime):
   kml = simplekml.Kml()
-  multilin = kml.newmultigeometry(name="MultiLine")
+  finallist =  {}
+  cnt = 0
+  style = simplekml.Style()
+  style.labelstyle.color = simplekml.Color.red  # Make the text red
+  style.labelstyle.scale = 2  # Make the text twice as big
+  style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+  for key in allpoints:
+    for pont in allpoints[key]:
+      point,time,distance = pont.split("/")
+      #print "TIME: " + str(time)
+      point = point.split(",")
+      pnt = kml.newpoint(name='Travel Time: {} Point: {},{}'.format(time,point[1],point[0]))
+      style = simplekml.Style()
+      style.iconstyle.icon.href = get_pointcolor(goaltime,int(time))
+      pnt.coords = [(point[1],point[0])] 
+      pnt.style = style
+  finallist =  []
+  for pont in mypoints:
+    finallist.append((pont[1],pont[0]))
+  pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
+  kml.save(str(os.getcwd()) + "\\merged_kml\\merged_" + filename + ".kml")
+
+def kmlcolor(mypoints,filename,thedict,goaltime):
+
+  #print (thedict)
+  kml = simplekml.Kml()
   finallist =  {}
   cnt = 0
   style = simplekml.Style()
@@ -886,8 +880,8 @@ def kmlmaker2(mypoints,filename,thedict,goaltime):
   style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
   for key in thedict:
     for pont in thedict[key]:
-      point,time = pont.split("/")
-      print "TIME: " + str(time)
+      point,time,distance = pont.split("/")
+      #print "TIME: " + str(time)
       point = point.split(",")
       pnt = kml.newpoint(name='Travel Time: {} Point: {},{}'.format(time,point[1],point[0]))
       style = simplekml.Style()
@@ -895,25 +889,26 @@ def kmlmaker2(mypoints,filename,thedict,goaltime):
       pnt.coords = [(point[1],point[0])] 
       pnt.style = style
 
-  kml.save("/Users/user/Google_DirectionsAPI_PointPicker/kml/allpoints" + filename + ".kml")
+
+  kml.save(str(os.getcwd()) + "\\color_points_kml\\color_" + filename + ".kml")
   
 def get_pointcolor(goaltime,time):
   percentoff = float(float(time)/float(goaltime))
-  print "OFF BY: "  + str(percentoff)
+  #print "OFF BY: "  + str(percentoff)
   if (percentoff > 1): #Time was greater, aka farther
     percentoff = float(percentoff - 1) *100 #absolute percent off by, can only be green or red at this point
     if (percentoff < .5): # perfect green
       return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
-    elif (percentoff < 1.5 and percentoff > .5): #1 shade off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green2.png"
-    elif (percentoff < 1.5 and percentoff > .5): # 2 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green3.png"
-    elif (percentoff < 2.5 and percentoff > 1.5): #3 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green4.png"
-    elif (percentoff < 3.5 and percentoff > 2.5): # 4 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
-    elif (percentoff < 4.5 and percentoff > 3.5): # 5 shades off red
-      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
+    elif (percentoff < 1.5 and percentoff > .5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 1.5 and percentoff > .5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 2.5 and percentoff > 1.5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 3.5 and percentoff > 2.5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 4.5 and percentoff > 3.5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
     elif (percentoff < 5.5 and percentoff > 4.5): # 5 shades off red
       return "http://mkkeffeler.azurewebsites.net/icons/red5.png"
     elif (percentoff < 6.5 and percentoff > 5.5): #4 shades off red
@@ -930,16 +925,16 @@ def get_pointcolor(goaltime,time):
     percentoff = float(1 - percentoff) * 100  #Absolute percent off by, can only be blue or green at this point
     if (percentoff < .5): #perfect green
       return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
-    elif (percentoff < 1.5 and percentoff > .5): #1 shade off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green2.png"
-    elif (percentoff < 1.5 and percentoff > .5): # 2 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green3.png"
-    elif (percentoff < 2.5 and percentoff > 1.5): #3 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green4.png"
-    elif (percentoff < 3.5 and percentoff > 2.5): # 4 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
-    elif (percentoff < 4.5 and percentoff > 3.5): # 5 shades off green
-      return "http://mkkeffeler.azurewebsites.net/icons/green5.png"
+    elif (percentoff < 1.5 and percentoff > .5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 1.5 and percentoff > .5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 2.5 and percentoff > 1.5):# removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 3.5 and percentoff > 2.5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
+    elif (percentoff < 4.5 and percentoff > 3.5): # removed shades of green, just perfect because it doesn't really matter
+      return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
     elif (percentoff < 5.5 and percentoff > 4.5): # 5 shades off blue
       return "http://mkkeffeler.azurewebsites.net/icons/blue5.png"
     elif (percentoff < 6.5 and percentoff > 5.5): #4 shades off blue
@@ -952,14 +947,15 @@ def get_pointcolor(goaltime,time):
       return "http://mkkeffeler.azurewebsites.net/icons/blue2.png"
     else: #perfect blue
       return "http://mkkeffeler.azurewebsites.net/icons/blue1.png"
-def kmlmaker(mypoints,filename,thedict):    
+def kmlunedited(mypoints,filename,thedict):    
   kml = simplekml.Kml()
 
   finallist =  []
   for pont in mypoints:
+    #print pont
     finallist.append((pont[1],pont[0]))
   pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
-  kml.save("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + filename + ".kml")
+  kml.save(str(os.getcwd()) + "\\" + filename + ".kml")
 def polyarea(filename):
   fname=filename
   i=0
@@ -968,22 +964,48 @@ def polyarea(filename):
       i=i+1
       stats=polyStats(p)
       desc.update(stats)
-    #  print 'Polygon #%i' % i
+    #  #print 'Polygon #%i' % i
       for d,v in desc.iteritems():
         if (d == "area"):
           return v[1:-4]
-def polypoints(filename):
-  fname=filename
-  i=0
-  for p in readPoly(fname):
-      p,desc=p
-      i=i+1
-      stats=polyStats(p)
-      desc.update(stats)
-  #    print 'Polygon #%i' % i
-      for d,v in desc.iteritems():
-        if (d == "vertices"):
-          return v[1:]
+def getclosest(origin,thelist,goaltimeplus,goaltimeminus):
+  prevpoint = ""
+  prevdistance = ""
+  prevtime = ""
+  curpoint = ""
+  for pnt in thelist:
+    #print str(pnt)
+    point,time,distance = pnt.split("/")
+    if int(time) < goaltimeplus and prevpoint == "": #if this point fits the bill and we don't currently have a solution
+      prevpoint = point
+      prevdistance = distance
+      prevtime = time
+    elif int(time) < goaltimeplus: #this point is valid
+      if distance > prevdistance: #and it is further than the current point we have as the answer
+        prevpoint = point
+        prevdistance = distance
+        prevtime = time
+  if prevpoint == "":
+    for pnt in thelist:
+      #print str(pnt)
+      point,time,distance = pnt.split("/")
+      if int(time) > goaltimeplus and prevpoint == "": #if this point fits the bill and we don't currently have a solution
+        prevpoint = point
+        prevdistance = distance
+        prevtime = time
+      elif int(time) > goaltimeplus: #this point is valid
+        if distance < prevdistance: #and it is closer than the current point we have as the answer
+          prevpoint = point
+          prevdistance = distance
+          prevtime = time
+    if prevpoint == "":
+      return "0","0","0"
+    else:
+      #print "RETURNING A RED"
+      return origin,0,0
+  else:
+    "RETURNING A BLUE or GREEN"
+    return prevpoint,prevtime,prevdistance
 def converter(thelist,goaltimeminus,goaltimeplus):
   totallist = []
   first = []
@@ -994,25 +1016,25 @@ def converter(thelist,goaltimeminus,goaltimeplus):
  # thedict["type"] = "Polygon"
   #thedict["coordinates"] = []
   for key in (sorted(thelist)):
-  #  print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
+  #  #print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
     if int(key) <= 90:
-       point,time = thelist[key].split("/")
+       point,time,distance = thelist[key].split("/")
        if int(time) > goaltimeminus and int(time) < goaltimeplus:
- #      print "1"
+ #      #print "1"
         first.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 180 >= int(key) >= 91:
- #     print "2"
-      point,time = thelist[key].split("/")
+ #     #print "2"
+      point,time,distance = thelist[key].split("/")
       if int(time) > goaltimeminus and int(time) < goaltimeplus:
         second.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 270 >= int(key) >= 181:
- #     print "3"
-      point,time = thelist[key].split("/")
+ #     #print "3"
+      point,time,distance = thelist[key].split("/")
       if int(time) > goaltimeminus and int(time) < goaltimeplus:
         third.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
     if 359 >= int(key) >= 271:
-  #    print "4"
-      point,time = thelist[key].split("/")
+  #    #print "4"
+      point,time,distance = thelist[key].split("/")
       if int(time) > goaltimeminus and int(time) < goaltimeplus:
         fourth.append(tuple(str(str(thelist[key]).split("/")[0]).split(",")))
   if (len(second) == 0 and len(third)>=2):
@@ -1033,6 +1055,64 @@ def converter(thelist,goaltimeminus,goaltimeplus):
     first.insert(0,second[len(second)-2])
     totallist = first + fourth + third + second[:-1]
  # thedict["coordinates"].append(totallist)
+  #print (totallist)
+  #print ("LEAVE NOW")
+  return totallist
+
+def converteralt(origin,thelist,goaltimeminus,goaltimeplus):
+  totallist = []
+  first = []
+  second = []
+  third = []
+  fourth = []
+#  thedict = {}
+ # thedict["type"] = "Polygon"
+  #thedict["coordinates"] = []
+  for key in (sorted(thelist)):
+  #  #print "KEY : " + str(key) + " PNT: " + str(thelist[key].split("/")[0])
+    if int(key) <= 90:
+      point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
+  #    if int(time) > goaltimeminus and int(time) < goaltimeplus:
+      first.append(tuple(point.split(",")))
+      #print (tuple(point.split(",")))
+    if 180 >= int(key) >= 91:
+ #     #print "2"
+      point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
+ #     if int(time) > goaltimeminus and int(time) < goaltimeplus:
+      second.append(tuple(point.split(",")))
+      #print (tuple(point.split(",")))
+    if 270 >= int(key) >= 181:
+ #     #print "3"
+      point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
+ #     if int(time) > goaltimeminus and int(time) < goaltimeplus:
+      #print (tuple(point.split(",")))
+      third.append(tuple(point.split(",")))
+    if 359 >= int(key) >= 271:
+  #    #print "4"
+      point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
+  #    if int(time) > goaltimeminus and int(time) < goaltimeplus:
+      if (point != "0"):
+        fourth.append(tuple(point.split(",")))
+  if (len(second) == 0 and len(third)>=2):
+    first.insert(0,third[len(third)-2])
+    totallist = first + fourth + third[:-1] + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) >= 2):
+    first.insert(0,fourth[len(fourth)-2])
+    totallist = first + fourth[:-1] + third + second
+  elif (len(second) == 0 and len(third) == 0 and len(fourth) == 1):
+    first.insert(0,fourth[len(fourth)-1])
+    totallist = first + fourth[:-1] + third + second
+
+  elif (len(second) == 1):
+      first.insert(0,second[len(second)-1])
+      totallist = first + fourth + third + second[:-1]
+
+  else:
+    first.insert(0,second[len(second)-2])
+    totallist = first + fourth + third + second[:-1]
+ # thedict["coordinates"].append(totallist)
+  #print (totallist)
+  #print ("LEAVE NOW alt")
   return totallist
 
 def polypoints(filename):
@@ -1043,19 +1123,7 @@ def polypoints(filename):
       i=i+1
       stats=polyStats(p)
       desc.update(stats)
-    #  print 'Polygon #%i' % i
-      for d,v in desc.iteritems():
-        if (d == "area"):
-          return v[1:-4]
-def polypoints(filename):
-  fname=filename
-  i=0
-  for p in readPoly(fname):
-      p,desc=p
-      i=i+1
-      stats=polyStats(p)
-      desc.update(stats)
-  #    print 'Polygon #%i' % i
+  #    #print 'Polygon #%i' % i
       for d,v in desc.iteritems():
         if (d == "vertices"):
           return v[1:]
@@ -1082,24 +1150,7 @@ def find_pointb(pointbdist,d,a,b):
       count += 1
     if (len(d['45']) == count-1):
       exit(1)
-latnumbers = [68.703,
-68.7108222222,
-68.7186444444,
-68.7264666667,
-68.7342888889,
-68.7421111111,
-68.7499333333,
-68.7577555555,
-68.7655777778,
-68.7734,
-68.7812222222,
-68.7890444444,
-68.7968666666,
-68.8046888889,
-68.8125111111,
-68.8203333333,
-68.8281555555,
-68.8359777777,
+latnumbers = [68.703, 68.7108222222, 68.7186444444, 68.7264666667, 68.7342888889, 68.7421111111, 68.7499333333, 68.7577555555, 68.7655777778, 68.7734, 68.7812222222, 68.7890444444, 68.7968666666, 68.8046888889, 68.8125111111, 68.8203333333, 68.8281555555,  68.8359777777,
 68.8438,
 68.8516222222,
 68.8594444444,
@@ -1264,7 +1315,7 @@ longnumbers = [69.172,
 1.20721785808]
 
 if __name__ == '__main__':
-  print ("WE IN HERE")
+  #print ("WE IN HERE")
   x=1
   gmaps = ""
   global directions11
@@ -1284,9 +1335,9 @@ if __name__ == '__main__':
   square_count = 0
 
 
-  output = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
-  inputfile = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
-  testiter = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[1],"r")
+  output = open(str(os.getcwd()) + "/" + sys.argv[2],"a")
+  inputfile = open(str(os.getcwd()) + "/" + sys.argv[1],"r")
+  testiter = open(str(os.getcwd()) + "/" + sys.argv[1],"r")
   #Path to output file created
   modes_to_run = []
   #-off and -on
@@ -1328,12 +1379,12 @@ if __name__ == '__main__':
   address = ""
   traffic_models_list = []
   destination = ""
-  print ("<br>LINE COUNT: " + str(file_len(str(sys.argv[1]))))
+  #print ("<br>LINE COUNT: " + str(file_len(str(sys.argv[1]))))
 
   counter=0
   y=0
   #client(API_KEY_INPUT)
-  #print str(API_KEY_INPUT)
+  ##print str(API_KEY_INPUT)
   client(API_KEY_INPUT)
   linenumber = sys.argv[21]
   line = sys.argv[20]
@@ -1343,11 +1394,11 @@ if __name__ == '__main__':
   mode = sys.argv[22]
   modes_to_run = [mode]
   if(counter>=2490):
-      #print "Key #" + str(y) + " Reached its limit.<br>"
+      ##print "Key #" + str(y) + " Reached its limit.<br>"
       counter=0
       y += 1
       if(KEYS[x] == '0'):
-        #print "END of Keys. Partial data download is available below.\n"
+        ##print "END of Keys. Partial data download is available below.\n"
         exit()
       API_KEY_INPUT = KEYS[x]
       x+=1
@@ -1358,46 +1409,59 @@ if __name__ == '__main__':
   go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
   iterate_counter=0
   thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
-  print thelist
+  ##print thelist
   numofnewlines = 0
+  mypointsalt = converteralt(PointA,thelist["1"],int(goaltimedist) - (int(goaltimedist) * .05),int(goaltimedist) +  (int(goaltimedist) * .05))
   mypoints = converter(thelist["0"],int(goaltimedist) - (int(goaltimedist) * .05),int(goaltimedist) +  (int(goaltimedist) * .05))
-  #print mypoints
   lock = Lock()
   lock.acquire()
-  filename = str(str(sys.argv[2]).split('/')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  kmlmaker2(mypoints,str(filename)+ "line" + str(linenumber),thelist["1"],int(goaltimedist))
-  kmlmaker(mypoints,str(filename)+ "line" + str(linenumber),thelist["0"])
-  area = polyarea("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  points = polypoints("/Users/user/Google_DirectionsAPI_PointPicker/kml/" + str(filename)+ "line" + str(linenumber) + ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-  output = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"a")
-  outfile = open("/Users/user/Google_DirectionsAPI_PointPicker/"+sys.argv[2],"r")
+  filename = str(str(sys.argv[2]).split('\\')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  kmlcolor(mypoints,str(filename),thelist["1"],int(goaltimedist))
+  kmlunedited(mypoints,"original_kml\\original_" + str(filename),thelist["0"])
+  kmlunedited(mypointsalt,"edited_kml\\edited_" + str(filename),thelist["0"])
+  kmlmerged(mypointsalt,str(filename),thelist["0"],thelist["1"],int(goaltimedist))
+  #print mypointsalt
+  area = polyarea(str(os.getcwd()) + "\\original_kml\\original_" + str(filename)+ ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  areaalt = polyarea(str(os.getcwd()) + "\\edited_kml\\edited_" + str(filename)+ ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  points = polypoints(str(os.getcwd()) + "\\edited_kml\\edited_" + str(filename)+ ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+  output = open(str(os.getcwd()) + "\\" +  sys.argv[2],"a")
+  outfile = open(str(os.getcwd()) + "\\" + sys.argv[2],"r")
   contents = outfile.readlines()
-  while ((int(linenumber)) != int(len(contents))):
-    time.sleep(1)
-    outfile.seek(0)
-    contents = outfile.readlines()
   output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
-  #print str(PointA[0]) + "," + str(PointA[1]) + ","
+  ##print str(PointA[0]) + "," + str(PointA[1]) + ","
   output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
   output.write(mode+ ",")
   output.write(numberofpoints + ",")
 
-  output.write(str(len(thelist["0"])) + ",")
+  output.write(str(len(mypoints)) + ",")
   if (int(istime) == 1):
     output.write("T|" + str(goaltimedist) + ",")
   else:
     output.write("D|" + str(goaltimedist) + ",")
 
   output.write(area + ",")
-  cleanprint(thelist["0"],int(goaltimedist),output)
+  cleanprint(mypoints,int(goaltimedist),output)
+  output.write("\n")
+  output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
+  ##print str(PointA[0]) + "," + str(PointA[1]) + ","
+  output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
+  output.write(mode+ ",")
+  output.write(numberofpoints + ",")
+  output.write(str(len(mypointsalt)) + ",")
+  if (int(istime) == 1):
+    output.write("T|" + str(goaltimedist) + ",")
+  else:
+    output.write("D|" + str(goaltimedist) + ",")
+  output.write(areaalt + ",")
+  cleanprint(mypointsalt,int(goaltimedist),output)
   output.write("\n")
   output.close()
   currentindex += 1
   lock.release()
   end_time = dt.now()
-  print("Duration: {}".format(end_time-start_time))
+  #print("Duration: {}".format(end_time-start_time))
   #  for pnt in mypoints:
   #   p.AddPoint(pnt[0], pnt[1])
   #num, perim, area = p.Compute()
-  ##print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
+  ###print "Perimeter/area of Antarctica are {:.3f} m / {:.1f} m^2".format(perim, area)
   #10 miles out with 1 mile increments finding times that are at x seconds
