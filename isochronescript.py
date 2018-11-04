@@ -258,7 +258,7 @@ def matchup(testedlist,testedtimeslist,lister):
         lister.append(str(y) + "/" + str(x))
     return lister
 
-def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list,linenumber):
+def my_algorithm(outputfile,d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list,linenumber):
   global directions11
   global gmaps
   #print "My Algorithm"
@@ -293,7 +293,7 @@ def my_algorithm(d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_t
     attempted.append(pointa)
     x=0
     distance3 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-    try_except(gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
+    try_except(outputfile,gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
     #print "DISTANCE tested was: " + str(distance3)
     attemptcounter += 1
     pointadone = gmaps_traveltimeordist(directions11,lasttime,timeordist)
@@ -442,7 +442,7 @@ def client(API_KEY_INPUT):
     else:
       ##print "No More keys to run on. None of the keys provided worked."
       exit()
-def finish_line(address,destination,mode,output,linenumber):
+def finish_line(outputfile,address,destination,mode,output,linenumber):
   outfile = open(sys.argv[2],"r")
   contents = outfile.readlines()
   while ((int(linenumber)) != int(len(contents))):
@@ -465,7 +465,7 @@ def format_orderlist(list):
         message += "|"
   return message
 
-def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order_list,linenumber):
+def try_except(outputfile,gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order_list,linenumber):
   ##print "MY MODE: " + str(mode)
   global gmaps
   global x
@@ -484,10 +484,10 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
     ##print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
       client(got_more_keys(KEYS,x))
-      try_except(gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
+      try_except(outputfile,gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
       ##print "Key Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
-      finish_line(address,destination,mode,output,linenumber)
+      finish_line(outputfile,address,destination,mode,output,linenumber)
       exit()
   except Exception as e:
     print(e)
@@ -495,10 +495,10 @@ def try_except(gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order
     ##print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
     if(got_more_keys(KEYS,x) != False):
       client(got_more_keys(KEYS,x))
-      try_except(gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
+      try_except(outputfile,gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
       ##print "Key " + str(x-1) + " Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
-      finish_line(address,destination,mode,output,linenumber)
+      finish_line(outputfile,address,destination,mode,output,linenumber)
       exit()
 
 def get_mode(count):
@@ -664,8 +664,9 @@ def decrementlon(currentbearing,a,lon1,distance):
 
 
 def distanceindegree(lon1,latitude):
-  if (lat1 < 0):
-    return longnumbers[int(str(latitude[1:]).split('.')[0])]
+  print(lon1)
+  if (lon1 < 0):
+    return longnumbers[int(str(latitude).split('.')[0])]
   else:
     return longnumbers[int(str(latitude).split('.')[0])]
 
@@ -829,7 +830,7 @@ def cleanprint(thedict,goaltime,output):
     pairtime = key
   #  if len(pairtime[0]) < 5:
     counter += 1
-    output.write('"' + pairtime[0] + "," + pairtime[1] + '",')
+    output.write('"' + str(pairtime[0]) + "," + str(pairtime[1]) + '",')
    # else:
    #    output.write('"' + pairtime[0]+'",')
 #$  #print str(counter) + " Were off by more than +- 5%"
@@ -866,7 +867,9 @@ def kmlmerged(mypoints,filename,greenpoints,allpoints,goaltime):
   for pont in mypoints:
     finallist.append((pont[1],pont[0]))
   pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
-  kml.save(str(os.getcwd()) + "\\merged_kml\\merged_" + filename + ".kml")
+  os.chdir("merged_kml")
+  kml.save("merged_" + filename + ".kml")
+  os.chdir("..")
 
 def kmlcolor(mypoints,filename,thedict,goaltime):
 
@@ -889,9 +892,9 @@ def kmlcolor(mypoints,filename,thedict,goaltime):
       pnt.coords = [(point[1],point[0])] 
       pnt.style = style
 
-
-  kml.save(str(os.getcwd()) + "\\color_points_kml\\color_" + filename + ".kml")
-  
+  os.chdir("color_points_kml")
+  kml.save("color_" + filename + ".kml")
+  os.chdir("..")
 def get_pointcolor(goaltime,time):
   percentoff = float(float(time)/float(goaltime))
   #print "OFF BY: "  + str(percentoff)
@@ -947,17 +950,21 @@ def get_pointcolor(goaltime,time):
       return "http://mkkeffeler.azurewebsites.net/icons/blue2.png"
     else: #perfect blue
       return "http://mkkeffeler.azurewebsites.net/icons/blue1.png"
-def kmlunedited(mypoints,filename,thedict):    
+def kmlunedited(mypoints,mydirectory,filename,thedict):    
   kml = simplekml.Kml()
-
+  os.chdir(mydirectory)
   finallist =  []
   for pont in mypoints:
-    #print pont
-    finallist.append((pont[1],pont[0]))
+    try:
+      finallist.append((pont[1],pont[0]))
+    except:
+      mypoints.remove(pont)
+      pass
   pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
-  kml.save(str(os.getcwd()) + "\\" + filename + ".kml")
-def polyarea(filename):
+  kml.save(str(filename + ".kml"))
+def polyarea(mydirectory,filename):
   fname=filename
+  os.chdir(mydirectory)
   i=0
   for p in readPoly(fname):
       p,desc=p
@@ -1073,26 +1080,41 @@ def converteralt(origin,thelist,goaltimeminus,goaltimeplus):
     if int(key) <= 90:
       point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
   #    if int(time) > goaltimeminus and int(time) < goaltimeplus:
-      first.append(tuple(point.split(",")))
+      if (point != "0"):
+        if type(point) != tuple:
+          first.append(tuple(point.split(",")))
+        else:
+          first.append(point)
       #print (tuple(point.split(",")))
     if 180 >= int(key) >= 91:
  #     #print "2"
       point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
  #     if int(time) > goaltimeminus and int(time) < goaltimeplus:
-      second.append(tuple(point.split(",")))
+      if (point != "0"):
+        if type(point) != tuple:
+          second.append(tuple(point.split(",")))
+        else:
+          second.append(point)
       #print (tuple(point.split(",")))
     if 270 >= int(key) >= 181:
  #     #print "3"
       point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
  #     if int(time) > goaltimeminus and int(time) < goaltimeplus:
       #print (tuple(point.split(",")))
-      third.append(tuple(point.split(",")))
+      if (point != "0"):
+        if type(point) != tuple:
+          third.append(tuple(point.split(",")))
+        else:
+          third.append(point)
     if 359 >= int(key) >= 271:
   #    #print "4"
       point,time,distance = getclosest(origin,thelist[key],goaltimeplus,goaltimeminus)
   #    if int(time) > goaltimeminus and int(time) < goaltimeplus:
       if (point != "0"):
-        fourth.append(tuple(point.split(",")))
+        if type(point) != tuple:
+          fourth.append(tuple(point.split(",")))
+        else:
+          fourth.append(point)
   if (len(second) == 0 and len(third)>=2):
     first.insert(0,third[len(third)-2])
     totallist = first + fourth + third[:-1] + second
@@ -1115,8 +1137,9 @@ def converteralt(origin,thelist,goaltimeminus,goaltimeplus):
   #print ("LEAVE NOW alt")
   return totallist
 
-def polypoints(filename):
+def polypoints(mydirectory,filename):
   fname=filename
+  os.chdir(mydirectory)
   i=0
   for p in readPoly(fname):
       p,desc=p
@@ -1314,7 +1337,7 @@ longnumbers = [69.172,
 2.41406798591,
 1.20721785808]
 
-if __name__ == '__main__':
+def kickofffunc(inputfile,outputfile,traffictoggle,apikeys,key2,key3,key4,key5,drive,walk,bike,transit,orderparam1,orderparam2,orderparam3,orderparam4,timevar,goaltimeordistvar,numofpoints,line,linenumber,mode):
   #print ("WE IN HERE")
   x=1
   gmaps = ""
@@ -1334,26 +1357,28 @@ if __name__ == '__main__':
   global square_count
   square_count = 0
 
-
-  output = open(str(os.getcwd()) + "/" + sys.argv[2],"a")
-  inputfile = open(str(os.getcwd()) + "/" + sys.argv[1],"r")
-  testiter = open(str(os.getcwd()) + "/" + sys.argv[1],"r")
+  os.chdir("output_isochrone")
+  output = open(str(outputfile),"a")
+  os.chdir("..")
+  os.chdir("uploads_isochrone")
+  inputfile = open(str(inputfile),"r")
+  os.chdir("..")
   #Path to output file created
   modes_to_run = []
   #-off and -on
-  Toggle_traffic_models = sys.argv[3]
+  Toggle_traffic_models = traffictoggle
   #API KEY STORAGE
-  API_KEY_INPUT = sys.argv[4]
-  KEY2 = sys.argv[5]
-  KEY3 = sys.argv[6]
-  KEY4 = sys.argv[7]
-  KEY5 = sys.argv[8]
+  API_KEY_INPUT = apikeys
+  KEY2 = key2
+  KEY3 = key3
+  KEY4 = key4
+  KEY5 = key5
   modes_to_run = []
-  all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
-  Order_list = [sys.argv[13],sys.argv[14],sys.argv[15],sys.argv[16]]
-  istime = sys.argv[17]
-  goaltimedist = sys.argv[18]
-  numberofpoints = sys.argv[19]
+  all_modes = [drive,walk,bike,transit]
+  Order_list = [orderparam1,orderparam2,orderparam3,orderparam4]
+  istime = timevar
+  goaltimedist = goaltimeordistvar
+  numberofpoints = numofpoints
   formated_list = format_orderlist(Order_list)
   if (istime == "on"):
     istime = 1
@@ -1386,12 +1411,9 @@ if __name__ == '__main__':
   #client(API_KEY_INPUT)
   ##print str(API_KEY_INPUT)
   client(API_KEY_INPUT)
-  linenumber = sys.argv[21]
-  line = sys.argv[20]
   currentindex = 0
   i=0
   counter += 1
-  mode = sys.argv[22]
   modes_to_run = [mode]
   if(counter>=2490):
       ##print "Key #" + str(y) + " Reached its limit.<br>"
@@ -1408,24 +1430,30 @@ if __name__ == '__main__':
   currentname = makekeys(currentname,int(360/int(numberofpoints)))
   go_to_corner(PointA,1,1,.5,currentname,0,int(360/int(numberofpoints)))   #This gets 3 pairs that are 10,20, and 30 miles from origin on bearing
   iterate_counter=0
-  thelist = my_algorithm(currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
+  thelist = my_algorithm(outputfile,currentname,.5,1,int(goaltimedist),PointA,mode,modes_to_run,output,KEYS,int(360/int(numberofpoints)),int(istime),formated_list,linenumber)   #Last parameter is 1 = time, 0 = distance
   ##print thelist
   numofnewlines = 0
   mypointsalt = converteralt(PointA,thelist["1"],int(goaltimedist) - (int(goaltimedist) * .05),int(goaltimedist) +  (int(goaltimedist) * .05))
   mypoints = converter(thelist["0"],int(goaltimedist) - (int(goaltimedist) * .05),int(goaltimedist) +  (int(goaltimedist) * .05))
   lock = Lock()
   lock.acquire()
-  filename = str(str(sys.argv[2]).split('\\')[1]).split(".")[0]#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  filename = str(os.path.basename(outputfile).split(".")[0])#These need to be changed based on either windows or mac (windows = \\, mac = /)
   kmlcolor(mypoints,str(filename),thelist["1"],int(goaltimedist))
-  kmlunedited(mypoints,"original_kml\\original_" + str(filename),thelist["0"])
-  kmlunedited(mypointsalt,"edited_kml\\edited_" + str(filename),thelist["0"])
+  kmlunedited(mypoints,"original_kml","original_" + str(filename),thelist["0"])
+  os.chdir("..")
+  kmlunedited(mypointsalt,"edited_kml","edited_" + str(filename),thelist["0"])
+  os.chdir("..")
   kmlmerged(mypointsalt,str(filename),thelist["0"],thelist["1"],int(goaltimedist))
   #print mypointsalt
-  area = polyarea(str(os.getcwd()) + "\\original_kml\\original_" + str(filename)+ ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  areaalt = polyarea(str(os.getcwd()) + "\\edited_kml\\edited_" + str(filename)+ ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
-  points = polypoints(str(os.getcwd()) + "\\edited_kml\\edited_" + str(filename)+ ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
-  output = open(str(os.getcwd()) + "\\" +  sys.argv[2],"a")
-  outfile = open(str(os.getcwd()) + "\\" + sys.argv[2],"r")
+  area = polyarea("original_kml","original_" + str(filename)+ ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  os.chdir("..")
+  areaalt = polyarea("edited_kml","edited_" + str(filename)+ ".kml")#These need to be changed based on either windows or mac (windows = \\, mac = /)
+  os.chdir("..")
+  points = polypoints("edited_kml","edited_" + str(filename)+ ".kml") #These need to be changed based on either windows or mac (windows = \\, mac = /)
+  os.chdir("..")
+  os.chdir("output_isochrone")
+  output = open(outputfile,"a")
+  outfile = open(outputfile,"r")
   contents = outfile.readlines()
   output.write(str(PointA[0]) + "," + str(PointA[1]) + ",")
   ##print str(PointA[0]) + "," + str(PointA[1]) + ","

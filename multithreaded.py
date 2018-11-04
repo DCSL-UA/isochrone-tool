@@ -4,6 +4,8 @@ import os
 import multiprocessing
 import time
 import subprocess
+from isochronescript import kickofffunc
+openprocesses = []
 class FuncThread(threading.Thread):
     def __init__(self, target, *args):
         self._target = target
@@ -16,15 +18,19 @@ arr = []
 storage = []
 # Example usage
 def someOtherFunc(data,linenumber,mode_count,mode):
-  print "DATA IS " + str(data)
+  args = []
+  for arg in sys.argv[1:]:
+    args.append(arg)
+    print(arg)
+  args.append(data)
+  print(str(data) + "HERE")
+  openprocesses.append(os.getpid())
   print "PROCESS ID: " + str(os.getpid())
-  string = 'python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode)
-  print string
   if (str(linenumber) == "1"):
-    os.system('python isochronescript.py ' + data + " " + str(linenumber)+ " " + str(mode)+" &")
+    kickofffunc(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12],args[13],args[14],args[15],args[16],args[17],args[18],args[19],str(linenumber),str(mode))
   else:
-    os.system('python isochronescript.py ' + data + " " + str(int(linenumber)) + " " + str(mode)+" &")
-  
+    kickofffunc(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8],args[9],args[10],args[11],args[12],args[13],args[14],args[15],args[16],args[17],args[18],args[19],str(linenumber),str(mode))
+  return
 def get_mode(count):
   if(count == 0):
     return "driving"
@@ -39,13 +45,19 @@ def tostring(args):
    for item in args:
       message += str(item) + " "
    return message
-if __name__ == '__main__':    
+if __name__ == '__main__':
+  processes = []
+  print(os.getcwd()) 
+  os.chdir("output_isochrone") 
   output = open(sys.argv[2],"w")
   ##print sys.argv[1]
   output.write("Slat,Slong,time,mode,#requested points,#calculated points,timeordist,area (m^2),points (lat,long)\n")
   output.close()
   all_modes = [sys.argv[9],sys.argv[10],sys.argv[11],sys.argv[12]]
+  os.chdir("..")
+  os.chdir("uploads_isochrone") 
   inputfile = open((sys.argv[1]),"r")
+  os.chdir("..")
   mode_count = 0
   modes_to_run = []
   for entry in all_modes:
@@ -65,11 +77,11 @@ if __name__ == '__main__':
       while (len(arr) > 8):
         time.sleep(1)
     
-      arr.append(multiprocessing.Process(target=someOtherFunc,args=(tostring(thevals)+'"' + str(line.rstrip()) + '"',str(linenumber+1),str(mode_count),str(mode))))
-      arr[index].start()
+      p = multiprocessing.Process(target=someOtherFunc,args=(str(line.rstrip()),str(linenumber+1),str(mode_count),str(mode)))
+      p.start()
+      processes.append(p)
       linenumber += 1
       index += 1
-
   inputfile.close()
 
 
