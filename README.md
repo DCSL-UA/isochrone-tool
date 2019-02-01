@@ -8,3 +8,5 @@ python multithreaded.py "try1.txt" "myruntodayfresh2.txt" -off AIzaSyA9VrtjosIim
 try1.txt contains the input, myruntodayfresh2.txt is the output file name. 
 
 Note, the PHP scripts that accompany this app will be appending uploads_isochrone and output_isochrone to try1.txt and myruntodayfresh2.txt, respectively. This functionality had to be changed so as to make these scripts agnostic of the OS. 
+=======
+gmaps_isochrone_log.txt is where logs are stored
