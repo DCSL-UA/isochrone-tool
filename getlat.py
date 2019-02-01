@@ -5,12 +5,14 @@
 # @Last Modified time: 2018-01-24 08:05:58
 import math
 import simplekml
-from polyfuncs import readPoly,polyStats
 
-def makekeys(storage,increment):
+from polyfuncs import readPoly, polyStats
+
+def makekeys(storage, increment):
   for k in degreelist(increment):
     storage[k] = []
   return storage
+
 def degreelist(number):
   mylist = []
   counter = 0
@@ -18,6 +20,7 @@ def degreelist(number):
     mylist.append(counter)
     counter += number
   return mylist
+
 latnumbers = [68.703,
 68.7108222222,
 68.7186444444,
@@ -199,64 +202,69 @@ longnumbers = [69.172,
 2.41406798591,
 1.20721785808]
 
-def checknumbers(thedict,thepair,thetime):
+def checknumbers(thedict, thepair, thetime):
   pairtime = ""
   for key in thedict:
     pairtime = thedict[key].split("/")
 
-def cleanprint(thedict,goaltime,output):
+def cleanprint(thedict, goaltime, output):
   counter = 0
   pairtime = ""
   for key in thedict:
     pairtime = thedict[key].split("/")
     if len(pairtime[0]) < 5:
       counter += 1
-      output.write('"' + pairtime[1]+'",')
+      output.write('"' + pairtime[1] + '",')
     else:
-       output.write('"' + pairtime[0]+'",')
+       output.write('"' + pairtime[0] + '",')
+
 #$  print str(counter) + " Were off by more than +- 5%"
 #  printoffbypercents(thedict,goaltime)
-def printoffbypercents(thedict,goaltime):
+def printoffbypercents(thedict, goaltime):
   pairtime = ""
   for key in thedict:
     pairtime = thedict[key].split("/")
 
-def find_key(partial,partial2,thedict):
+def find_key(partial, partial2, thedict):
   for key in thedict:
     if partial in thedict[key]:
       if (partial2 in thedict[key]):
         return str(key)
-def kmlmaker(mypoints,filename,thedict):    
+
+def kmlmaker(mypoints, filename, thedict):    
   kml = simplekml.Kml()
   finallist =  []
   for pont in mypoints:
-    finallist.append((pont[1],pont[0]))
-  pol = kml.newpolygon(name=filename,outerboundaryis=finallist)
+    finallist.append((pont[1], pont[0]))
+  pol = kml.newpolygon(name = filename, outerboundaryis = finallist)
   kml.save("kml\\" + filename + ".kml")
+
 def polyarea(filename):
-  fname=filename
-  i=0
+  fname = filename
+  i = 0
   for p in readPoly(fname):
-      p,desc=p
-      i=i+1
-      stats=polyStats(p)
+      p, desc = p
+      i = i + 1
+      stats = polyStats(p)
       desc.update(stats)
     #  print 'Polygon #%i' % i
       for d,v in desc.iteritems():
         if (d == "area"):
           return v[1:-4]
+
 def polypoints(filename):
-  fname=filename
-  i=0
+  fname = filename
+  i = 0
   for p in readPoly(fname):
-      p,desc=p
-      i=i+1
-      stats=polyStats(p)
+      p,desc = p
+      i = i + 1
+      stats = polyStats(p)
       desc.update(stats)
   #    print 'Polygon #%i' % i
       for d,v in desc.iteritems():
         if (d == "vertices"):
           return v[1:]
+
 def converter(thelist):
   totallist = []
   first = []
@@ -299,26 +307,27 @@ def converter(thelist):
     totallist = first + fourth + third + second[:-1]
  # thedict["coordinates"].append(totallist)
   return totallist
-def find_pointa(pointadist,d,a,b):
+
+def find_pointa(pointadist, d, a, b):
   count = 0
   for x in d['45']:
     lat = x.split(',')[0]
     lon = x.split(',')[1]
-    if (get_distance(a,b,lat,lon) >= pointadist):
+    if (get_distance(a, b, lat, lon) >= pointadist):
       return count
     else:
       count += 1
     if (len(d['45']) == count-1):
       exit(1)
 
-def find_pointb(pointbdist,d,a,b):
+def find_pointb(pointbdist, d, a, b):
   count = 0
   for x in d['45']:
     lat = x.split(',')[0]
     lon = x.split(',')[1]
-    if (get_distance(a,b,lat,lon) >= pointbdist):
+    if (get_distance(a, b, lat, lon) >= pointbdist):
       return count
     else:
       count += 1
-    if (len(d['45']) == count-1):
+    if (len(d['45']) == count - 1):
       exit(1)
