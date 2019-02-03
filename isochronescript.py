@@ -1,30 +1,31 @@
-#Function to create an array that is the amount to increment or decrement by based on lat/long
-    #returns the array itself, 0 -> 180 (0->90 and -90->-1 = 91 +  )
-    #Do the math we have been, store that value in each index through 180
+# Function to create an array that is the amount to increment or decrement by based on lat/long
+# returns the array itself, 0 -> 180 (0->90 and -90->-1 = 91 + )
+# Do the math we have been, store that value in each index through 180
 # python dist.py try1.txt -off AIzaSyBlGF0c9WDFymECTZ15thY0WFOROdlUC5Q 0 0 0 0 1 0 0 0 0
-#Users/user/anaconda/bin/python /Users/user/Google_DirectionsAPI_PointPicker/isochronescript.py uploads_isochrone/testing1.txt output_isochrone/crontab1new.txt -off AIzaSyCvtVQxMV9pSnQsgjKxvqdlj929X3BPncM 0 0 0 0 0 0 on 0 0 0 0 0 on 900 32 "33.217617, -87.558822" 0 bicycling
+# Users/user/anaconda/bin/python /Users/user/Google_DirectionsAPI_PointPicker/isochronescript.py uploads_isochrone/testing1.txt output_isochrone/crontab1new.txt -off AIzaSyCvtVQxMV9pSnQsgjKxvqdlj929X3BPncM 0 0 0 0 0 0 on 0 0 0 0 0 on 900 32 "33.217617, -87.558822" 0 bicycling
 
-
-from math import sin, cos, sqrt, atan2, radians
-import json, urllib
-import googlemaps
-import time
-from datetime import datetime as dt
-import sys
 import datetime
+import googlemaps
+import json
 import math
-from area import area
-from geographiclib.geodesic import Geodesic
-import math
+import os
+import urllib
 import simplekml
-from multiprocessing import Lock
+import sys
+import time
+
+from area import area
 from cStringIO import StringIO
+from datetime import datetime as dt
+from geographiclib.geodesic import Geodesic
+from math import sin, cos, sqrt, atan2, radians
+from multiprocessing import Lock
+from Polygon import *
 from xml.dom.minidom import parseString
 from zipfile import ZipFile
-from Polygon import *
-import os
+
 start_time = dt.now()
-kmlstr=\
+kmlstr = \
 '''<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
 <Document>
@@ -33,8 +34,7 @@ kmlstr=\
   %s
 </Document>
 </kml>'''
-
-polystr=\
+polystr = \
 '''     <Placemark>
          <name>%i</name>
          <Polygon>
@@ -50,218 +50,214 @@ polystr=\
        </Placemark>'''
 
 def openKMZ(filename):
-    zip=ZipFile(filename)
-    for z in zip.filelist:
-        if z.filename[-4:] == '.kml':
-            fstring=zip.read(z)
-            break
+  zip = ZipFile(filename)
+  for z in zip.filelist:
+    if z.filename[-4:] == '.kml':
+      fstring = zip.read(z)
+      break
     else:
-        raise Exception("Could not find kml file in %s" % filename)
-    return fstring
+      raise Exception("Could not find kml file in %s" % filename)
+  
+  return fstring
 
 def openKML(filename):
-    try:
-        fstring=openKMZ(filename)
-    except Exception:
-        fstring=open(filename,'r').read()
+  try:
+    fstring = openKMZ(filename)
+  except Exception:
+    fstring=open(filename,'r').read()
     return parseString(fstring)
 
-
 def readPoly(filename):
-    def parseData(d):
-        dlines=d.split()
-        poly=[]
-        for l in dlines:
-            l=l.strip()
-            if l:
-                point=[]
-                for x in l.split(','):
-                    point.append(float(x))
-                poly.append(point[:2])
-        return poly
+  def parseData(d):
+    poly = []
+    dlines = d.split()
+    for l in dlines:
+      l = l.strip()
+      if l:
+        point = []
+        for x in l.split(','):
+          point.append(float(x))
+        poly.append(point[:2])
+    return poly
 
-    xml=openKML(filename)
-    nodes=xml.getElementsByTagName('Placemark')
-    desc={}
+    desc = {}
+    xml = openKML(filename)
+    nodes = xml.getElementsByTagName('Placemark')
     for n in nodes:
-        names=n.getElementsByTagName('name')
-        try:
-            desc['name']=names[0].childNodes[0].data.strip()
-        except Exception:
-            pass
+      names = n.getElementsByTagName('name')
+      try:
+        desc['name'] = names[0].childNodes[0].data.strip()
+      except Exception:
+        pass
         
-        descriptions=n.getElementsByTagName('description')
-        try:
-            desc['description']=names[0].childNodes[0].data.strip()
-        except Exception:
-            pass
+      descriptions = n.getElementsByTagName('description')
+      try:
+        desc['description']=names[0].childNodes[0].data.strip()
+      except Exception:
+        pass
 
-        times=n.getElementsByTagName('TimeSpan')
-        try:
-            desc['beginTime']=times[0].getElementsByTagName('begin')[0].childNodes[0].data.strip()
-            desc['endTime'  ]=times[0].getElementsByTagName('end'  )[0].childNodes[0].data.strip()
-        except Exception:
-            pass
+      times = n.getElementsByTagName('TimeSpan')
+      try:
+        desc['beginTime']=times[0].getElementsByTagName('begin')[0].childNodes[0].data.strip()
+        desc['endTime'  ]=times[0].getElementsByTagName('end'  )[0].childNodes[0].data.strip()
+      except Exception:
+        pass
 
-        times=n.getElementsByTagName('TimeStamp')
-        try:
-            desc['timeStamp']=times[0].getElementsByTagName('when')[0].childNodes[0].data.strip()
-        except Exception:
-            pass
+      times = n.getElementsByTagName('TimeStamp')
+      try:
+        desc['timeStamp']=times[0].getElementsByTagName('when')[0].childNodes[0].data.strip()
+      except Exception:
+        pass
 
-            
-        polys=n.getElementsByTagName('Polygon')
-        for poly in polys:
-            invalid=False
-            c=n.getElementsByTagName('coordinates')
-            if len(c) != 1:
-                #print ('invalid polygon found')
-                continue
-            if not invalid:
-                c=c[0]
-                d=c.childNodes[0].data.strip()
-                data=parseData(d)
-                yield (data,desc)
+      polys = n.getElementsByTagName('Polygon')
+      for poly in polys:
+        invalid = False
+        c = n.getElementsByTagName('coordinates')
+        if len(c) != 1:
+          #print ('invalid polygon found')
+          continue
+        if not invalid:
+          c = c[0]
+          d = c.childNodes[0].data.strip()
+          data = parseData(d)
+          yield (data,desc)
 
 def latlon2meters(p):
-    pi2=2.*math.pi
-    reradius=1./6370000
-    alat=0
-    alon=0
-    for i in p:
-        alon=alon+i[0]
-        alat=alat+i[1]
-    lon_ctr=alon/len(p)
-    lat_ctr=alat/len(p)
-    unit_fxlat=pi2/(360. * reradius)
-    unit_fxlon=math.cos(lat_ctr*pi2/360.) * unit_fxlat
-
-    q=[]
-    olon=p[0][0]
-    olat=p[0][1]
-    for i in p:
-        q.append( ( (i[0] - olon) * unit_fxlon , \
-                    (i[1] - olat) * unit_fxlat ) )
+  pi2 = 2. * math.pi
+  reradius = 1. / 6370000
+  alat = 0
+  alon = 0
+  for i in p:
+    alon = alon + i[0]
+    alat = alat + i[1]
+  lon_ctr=alon/len(p)
+  lat_ctr=alat/len(p)
+  unit_fxlat=pi2/(360. * reradius)
+  unit_fxlon=math.cos(lat_ctr*pi2/360.) * unit_fxlat
+    
+  q=[]
+  olon=p[0][0]
+  olat=p[0][1]
+  for i in p:
+    q.append(((i[0] - olon) * unit_fxlon, \
+      (i[1] - olat) * unit_fxlat))
     return q
 
 def polyStats(p):
-    pm=Polygon(latlon2meters(p))
-    area=pm.area()
-    numpts=len(p)
-    pl=Polygon(p)
-    bbox=pl.boundingBox()
-    center=pl.center()
-
-    stat=\
-            {'vertices':'%i' % numpts,
-             'bounding box':'(%f , %f) - (%f , %f)' % (bbox[0],bbox[2],bbox[1],bbox[3]),
-             'center':'(%f , %f)' % (center[0],center[1]),
-             'area':'%f m^2' % (area) }
-    return stat
+  pm = Polygon(latlon2meters(p))
+  area = pm.area()
+  numpts = len(p)
+  pl = Polygon(p)
+  bbox = pl.boundingBox()
+  center = pl.center()
+  stat = { \
+    'vertices':'%i' % numpts,
+    'bounding box':'(%f , %f) - (%f , %f)' % (bbox[0],bbox[2],bbox[1],bbox[3]),
+    'center':'(%f , %f)' % (center[0],center[1]),
+    'area':'%f m^2' % (area) }
+  return stat
 
 def makepoly(p):
-    return Polygon(p)
+  return Polygon(p)
 
-def intersect(p1,p2):
-    q1=makepoly(p1)
-    q2=makepoly(p2)
-
-    q=q1 & q2
-
-    return q
+def intersect(p1, p2):
+  q1 = makepoly(p1)
+  q2 = makepoly(p2)
+  q = q1 & q2
+  return q
 
 def get_area(p):
-    q=makepoly(p)
-    return p.area()
+  q = makepoly(p)
+  return p.area()
 
 def write_poly(p,fname):
-    if isinstance(fname,basestring):
-        f=open(fname,'w')
-    else:
-        f=fname
-    for i in p:
-        f.write('%19.16f,%19.16f,0.\n' % (i[0],i[1]))
-    f.flush()
+  if isinstance(fname,basestring):
+    f = open(fname,'w')
+  else:
+    f = fname
+
+  for i in p:
+    f.write('%19.16f,%19.16f,0.\n' % (i[0],i[1]))
+  f.flush()
 
 def read_poly(fname):
-    if isinstance(fname,basestring):
-        f=open(fname,'r')
-    else:
-        f=fname
-    s=f.readlines()
-    p=[]
-    for i in s:
-        i=i.strip()
-        j=i.split(',')
-        p.append((float(j[0]),float(j[1])))
-    return p
+  if isinstance(fname,basestring):
+    f = open(fname,'r')
+  else:
+    f = fname
+    s = f.readlines()
+    p = []
 
-def poly2kmz(pp,fname):
-    strs=[]
-    i=0
-    for p in pp:
-        i=i+1
-        f=StringIO()
-        write_poly(p,f)
-        strs.append(polystr % (i,f.getvalue()))
-    s='\n'.join(strs)
-    s=kmlstr % (fname,s)
-    open(fname,'w').write(s)
+  for i in s:
+    i = i.strip()
+    j = i.split(',')
+    p.append((float(j[0]),float(j[1])))
+  
+  return p
 
-def gmaps_traveltimeordist(directions11,last,timeordist):
+def poly2kmz(pp, fname):
+  strs = []
+  i = 0
+  for p in pp:
+    i += 1
+    f = StringIO()
+    write_poly(p,f)
+    strs.append(polystr % (i,f.getvalue()))
+    s = '\n'.join(strs)
+    s = kmlstr % (fname,s)
+    open(fname, 'w').write(s)
 
+def gmaps_traveltimeordist(directions11, last, timeordist):
   if len(directions11) > 0 and timeordist == 1:
-   # #print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
-    return directions11[0]["legs"][0]["duration"]["value"]   #Extracts json value from google
+    #print "TIME : " + str(directions11[0]["legs"][0]["duration"]["value"])
+    return directions11[0]["legs"][0]["duration"]["value"]   # extracts json value from google
   if len(directions11) > 0 and timeordist == 0:
-   # #print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
-    return directions11[0]["legs"][0]["distance"]["value"]   #comes back in meters
+    #print "DIST : " + str(directions11[0]["legs"][0]["distance"]["value"])
+    return directions11[0]["legs"][0]["distance"]["value"]   # comes back in meters
   else:
-    ##print "TIME NOT AVAILABLE"
+    #print "TIME NOT AVAILABLE"
     return last
-def pointfits(pointa,pointadone,goaltimeplus,goaltimeminus):
-  if (pointadone >= goaltimeminus and pointadone <= goaltimeplus):
-    return pointa
-  else:
-    return False
-def closestpoint(InitialPoint,timelist,latlist,goaltime,additionalkeys,finallist): 
-  ##print "START CLOSEST"
-  ##print "THE LIST\n\n"
-  ##print cleanlist(latlist)
-  ##print "\n\n"
-  lastclosest = 1000
+
+def pointfits(pointa, pointadone, goaltimeplus, goaltimeminus):
+  return pointa if pointadone >= goaltimeminus and pointadone <= goaltimeplus else False
+
+def closestpoint(InitialPoint, timelist, latlist, goaltime, additionalkeys, finallist): 
+  #print "START CLOSEST"
+  #print "THE LIST\n\n"
+  #print cleanlist(latlist)
+  #print "\n\n"
   thepair = 0
   thekey = 0
   thetime = 0
   thepair = 0
+  lastclosest = 1000
   for key in additionalkeys:
-      ##print "KEY is  " + str(key)
-      for combo in additionalkeys[key]:
-        combo = combo.split("/") 
-      if abs(int(combo[0])-goaltime) < lastclosest:
-        lastclosest = abs(int(combo[0])-goaltime) 
-        ##print combo[1]
-        ##print "New Closest is " + str(lastclosest)
-        thetime = combo[0]
-        thepair = combo[1]
-        thekey = key
-  finallist[thekey] = str(thetime) + "/" + str(thepair)
-  ##print "END CLOSEST"
-  return finallist
-def isunevenbearing(keys,count):
-  if (abs(keys[count+1] - keys[count]) != abs(keys[count] - keys[count-1])):
-    return True
-  else:
-    return False
-def matchup(testedlist,testedtimeslist,lister):
-    for x,y in zip(testedlist,testedtimeslist):
-        lister.append(str(y) + "/" + str(x))
-    return lister
+    #print "KEY is  " + str(key)
+    for combo in additionalkeys[key]:
+      combo = combo.split("/") 
+    if abs(int(combo[0]) - goaltime) < lastclosest:
+      lastclosest = abs(int(combo[0]) - goaltime) 
+      #print combo[1]
+      #print "New Closest is " + str(lastclosest)
+      thetime = combo[0]
+      thepair = combo[1]
+      thekey = key
 
-def my_algorithm(outputfile,d,distance,Initial_increment,goaltime,InitialPoint,mode,modes_to_run,output,KEYS,degreeincrements,timeordist,Order_list,linenumber):
-  global directions11
+  #print "END CLOSEST"
+  finallist[thekey] = str(thetime) + "/" + str(thepair)
+  return finallist
+
+def isunevenbearing(keys, count):
+  return True if abs(keys[count+1] - keys[count]) != abs(keys[count] - keys[count-1]) else False
+
+def matchup(testedlist, testedtimeslist, lister):
+  for x, y in zip(testedlist, testedtimeslist):
+    lister.append(str(y) + "/" + str(x))
+  return lister
+
+def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPoint, mode, modes_to_run, \
+  output, KEYS, degreeincrements,timeordist,Order_list,linenumber):
   global gmaps
-  #print "My Algorithm"
   originaldist = distance
   finallist = {}
   finallist["0"] = {}
@@ -270,7 +266,6 @@ def my_algorithm(outputfile,d,distance,Initial_increment,goaltime,InitialPoint,m
   negative = False
   goaltimeplus = goaltime + (goaltime * .05) #seconds
   goaltimeminus = goaltime -  (goaltime * .05) #seconds
-  #printinglist = ""
   testedlist = []
   testedtimeslist = []
   keys = [key for key, value in sorted(d.iteritems())]
@@ -282,83 +277,78 @@ def my_algorithm(outputfile,d,distance,Initial_increment,goaltime,InitialPoint,m
   bearingproblem = ""
   x33 = 2
   lasttime = 0
-  numberofmoves = abs(keys[count] - degreeincrements)/4  #Count of degree increments by 2 that we are allowing up or down
-  if (numberofmoves > 3):
+  numberofmoves = abs(keys[count] - degreeincrements) // 4  # Count of degree increments by 2 that we are allowing up or down
+
+  if numberofmoves > 3:
     numberofmoves = 3
   originalnumberofmoves = numberofmoves
-  while count <= len(keys)-1: #While we have bearings to get answers for
-    pointa = d[keys[count]][0]    #Closest, the exact distance away
+
+  while count <= len(keys) - 1:     # While we have bearings to get answers for
+    x = 0                           # closest, the exact distance away
+    pointa = d[keys[count]][0]
     lastbeginning = InitialPoint
     testedlist.append(pointa)
     attempted.append(pointa)
-    x=0
-    distance3 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-    try_except(outputfile,gmaps,InitialPoint,pointa,mode,modes_to_run,output,KEYS,x,Order_list,linenumber)
-    #print "DISTANCE tested was: " + str(distance3)
+    distance3 = float(get_distance( \
+      float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
+
+    try_except(outputfile, gmaps, InitialPoint, pointa, mode, modes_to_run, output, KEYS, x, Order_list, linenumber)
+
     attemptcounter += 1
-    pointadone = gmaps_traveltimeordist(directions11,lasttime,timeordist)
+    pointadone = gmaps_traveltimeordist(directions11, lasttime, timeordist)
     lasttime = pointadone
-  #  checknumbers(lastrun,pointa,pointadone)
     testedtimeslist.append(pointadone)
+
     if keys[count] in finallist["1"]:
       finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone) + "/" + str(distance3))
     else:
       finallist["1"][keys[count]] = []
       finallist["1"][keys[count]].append(str(pointa) + "/" + str(pointadone) + "/" + str(distance3))
 
-    if (len(testedlist) >= 6 and not(pointfits(pointa,pointadone,goaltimeplus,goaltimeminus))): #If we just maxed out and the point we checked doesn't fit
-      if (numberofmoves == originalnumberofmoves and not(negative)): #if we still have moves to be made going down from original bearing, and no more going up
+    if len(testedlist) >= 6 and not pointfits(pointa, pointadone, goaltimeplus, goaltimeminus): # If we just maxed out and the point we checked doesn't fit
+      if numberofmoves == originalnumberofmoves and not negative: # If we still have moves to be made going down from original bearing, and no more going up
         bearingproblem = keys[count]
-      if (numberofmoves >= 1 and not(negative) and keys[count]+ 2 > 0):  #Need to have a positive bearing, can't go into - (start bearing = 0 example)
-        #print "CALLING AGAIN 11with " + str(x33)
-        keys.insert(count,keys[count]+ 2)   #Insert this key again but with + 2 degrees
-        d.pop(keys[count]- 2, None) #Pop off the old key
-        additionalkeys[keys[count]-2] = matchup(testedlist,testedtimeslist,[])
-        keys.remove(keys[count]- 2)  #Remove the old key from main list
-        d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
-        d = singlebearingupdate(InitialPoint,1,1,distance* 0.621371,d,0,keys[count]) #hard coded to same distance away as starting point was
+
+      if numberofmoves >= 1 and not negative and keys[count] + 2 > 0:  # Need to have a positive bearing, can't go into - (start bearing = 0 example)
+        keys.insert(count, keys[count] + 2)   # Insert this key again but with + 2 degrees
+        d.pop(keys[count] - 2, None)          # Pop off the old key
+        additionalkeys[keys[count] - 2] = matchup(testedlist, testedtimeslist, [])
+        keys.remove(keys[count] - 2)          # Remove the old key from main list
+        d[keys[count]] = []                   # Create new lat long point, empty list and below is where we create
+        d = singlebearingupdate(InitialPoint, 1, 1, distance * 0.621371, d, 0, keys[count]) # hard coded to same distance away as starting point was
         testedlist = []
         testedtimeslist = []
         numberofmoves = numberofmoves - 1 #Remove 1 move, if we don't have more moves left then set negative to true because next time around we may have to go negative
-        if (numberofmoves < 1):
-            negative = True
+        if numberofmoves < 1:
+          negative = True
       else: 
-        if (numberofmoves < 1): #No moves can be made  
-            moveby = abs(keys[count] - bearingproblem)
-            #print "CALLING AGAIN 33with " + str(x33)
-            keys.insert(count,keys[count] - moveby - 2)
-            d.pop(keys[count]+ 2 + moveby, None)
-            additionalkeys[keys[count]+ 2 + moveby] = matchup(testedlist,testedtimeslist,[])
-            keys.remove(keys[count]+ 2+moveby)
-            testedlist = []
-            testedtimeslist = []
-            d[keys[count]] = []
-            d = singlebearingupdate(InitialPoint,1,1,distance* 0.621371,d,0,keys[count])
-            numberofmoves = numberofmoves + 1
-            
-        else: #There is more than 1 move available to be made
-            #print "FULL"
-              #print (pnt)
-            #print "END FULL"
-            d.pop(keys[count-1], None)
-            keys.remove(keys[count-1])
-            additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
-            #finallist = closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
-            #closestpoint(InitialPoint,testedtimeslist,testedlist,goaltime,additionalkeys,finallist)
-            finallist["0"].pop(bearingproblem,None)
-            testedtimeslist = []
-            testedlist = []
-            lastbeginning = InitialPoint
-            lastend = "000"
-            numberofmoves = originalnumberofmoves
-            negative = False
-            count += 1
-            distance = originaldist
-            additionalkeys = {}
-
-
-    elif (pointfits(pointa,pointadone,goaltimeplus,goaltimeminus)):
-        #print "POINT FITS"
+        if numberofmoves < 1:   # No moves can be made  
+          moveby = abs(keys[count] - bearingproblem)
+          #print "CALLING AGAIN 33with " + str(x33)
+          keys.insert(count, keys[count] - moveby - 2)
+          d.pop(keys[count] + 2 + moveby, None)
+          additionalkeys[keys[count] + 2 + moveby] = matchup(testedlist, testedtimeslist, [])
+          keys.remove(keys[count] + 2 + moveby)
+          testedlist = []
+          testedtimeslist = []
+          d[keys[count]] = []
+          d = singlebearingupdate(InitialPoint, 1, 1, distance * 0.621371, d, 0, keys[count])
+          numberofmoves += 1  
+        else:   # There is more than 1 move available to be made
+          d.pop(keys[count-1], None)
+          keys.remove(keys[count-1])
+          additionalkeys[keys[count-1]] = matchup(testedlist,testedtimeslist,[])
+          finallist["0"].pop(bearingproblem,None)
+          testedtimeslist = []
+          testedlist = []
+          lastbeginning = InitialPoint
+          lastend = "000"
+          numberofmoves = originalnumberofmoves
+          negative = False
+          count += 1
+          distance = originaldist
+          additionalkeys = {}
+    elif pointfits(pointa, pointadone, goaltimeplus, goaltimeminus):
         distance = originaldist
         finallist["0"][keys[count]] = (str(pointa) + "/" + str(pointadone) + "/" + str(distance3))
         testedlist = []
@@ -366,46 +356,29 @@ def my_algorithm(outputfile,d,distance,Initial_increment,goaltime,InitialPoint,m
         negative = False
         additionalkeys = {}
         testedtimeslist = []
-        distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-        #print "DISTANCE set to: " + str(distance2)
-
+        distance2 = float(get_distance( \
+          float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
         lastbeginning = InitialPoint
         lastend = "000"
         count += 1
-        if (count < len(keys)-1):
-          #print "POINT WAS: " + str(d[keys[count]])
-          d[keys[count]] = [] #Create new lat long point, empty list and below is where we create
-          d = singlebearingupdate(InitialPoint,1,1,distance2* 0.621371,d,0,keys[count])
-          #print "POINT IS: " + str(d[keys[count]])
-    elif(pointadone >= goaltimeminus):   #Must be in range 0 to a
-        #print "0 to a"
+        if count < len(keys) - 1:
+          d[keys[count]] = []   # Create new lat long point, empty list and below is where we create
+          d = singlebearingupdate(InitialPoint, 1, 1, distance2 * 0.621371, d, 0, keys[count])
+    elif pointadone >= goaltimeminus:   # Must be in range 0 to a
         ratio = float(float(goaltime) / float(pointadone))
-        ###print "RATIO is " + str(ratio)
-    #    ##print "List was: " + str(d[keys[count]])
-        distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-        d = singlebearingupdate(InitialPoint,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
-      
-    #    ##print "Ration: " + str(float((float(distance)) * float(ratio)) * 0.621371)
-    #    ##print "List is: " + str(d[keys[count]])
+        distance2 = float(get_distance( \
+          float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
+        d = singlebearingupdate(InitialPoint, 1, 1, float((float(distance2)) * float(ratio)) * 0.621371, d, 0, keys[count])
         lastend = tuple(pointa.split(","))
-   #     d[keys[count]] = d[keys[count]][1:]
     else:
-      #print "A TO B"
-    #  ##print "List was: " + str(d[keys[count]])
       ratio = float(float(goaltime) / float(pointadone))
-      distance2 = float(get_distance(float(lastbeginning[0]),float(lastbeginning[1]),float(pointa.split(",")[0]),float(pointa.split(",")[1])))
-      d = singlebearingupdate(lastbeginning,1,1,float((float(distance2)) * float(ratio)) * 0.621371,d,0,keys[count])
-      
-   #   ##print "Ration: " + str( float(ratio))
-   #   ##print "List is: " + str(d[keys[count]])
+      distance2 = float(get_distance( \
+        float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
+      d = singlebearingupdate(lastbeginning, 1, 1, float(float(distance2) * float(ratio)) * 0.621371, d, 0, keys[count])
       lastbeginning = tuple(pointa.split(","))
-   #     d[keys[count]] = d[keys[count]][1:]
-   #     d[keys[count]].append(pointb)
-    #printinglist += item + "\n"
-  #print "TESTED IS " + str(#printinglist)
-  #print ("ATTEMPTS: " + str(attemptcounter))
 
   return finallist
+
 def format_orderlist(list):
   message = ""
   for item in list:
@@ -414,44 +387,41 @@ def format_orderlist(list):
     else:
       if item != "0":
         message += item.lower()
-    if list.index(item) != len(list)-1:
+    if list.index(item) != len(list) - 1:
       if list[list.index(item)+1] != "0":
         message += "|"
   return message
 
 def leaving(time_to_leave):
-  return (time.time()+ (int(time_to_leave)*60))
-def google_leaving(time_to_leave):
-    if (time_to_leave == "0"):
-      return "now"
-    else:
-      return (int(time.time())+ (int(time_to_leave)*60))
+  return time.time() + int(time_to_leave) * 60
 
+def google_leaving(time_to_leave):
+  return "now" if time_to_leave == "0" else time.time() + int(time_to_leave) * 60
 
 def client(API_KEY_INPUT):
   global x
   try:
     global gmaps
-    ##print "CLIENT KEY" + str(API_KEY_INPUT)
-    gmaps = googlemaps.Client(key = str(API_KEY_INPUT))
+    gmaps = googlemaps.Client(key=str(API_KEY_INPUT))
   except:
-    ##print "API Key " + str(x-1) + " Was Full or invalid.<br>"
     x += 1
-    if (got_more_keys(KEYS,x) != False):      
+    if got_more_keys(KEYS, x) != False:      
       client(got_more_keys(KEYS,x))
     else:
-      ##print "No More keys to run on. None of the keys provided worked."
       exit()
-def finish_line(outputfile,address,destination,mode,output,linenumber):
-  outfile = open(sys.argv[2],"r")
+
+def finish_line(outputfile, address, destination, mode, output, linenumber):
+  outfile = open(sys.argv[2], "r")
   contents = outfile.readlines()
-  while ((int(linenumber)) != int(len(contents))):
+  while int(linenumber) != int(len(contents)):
     time.sleep(1)
     outfile.seek(0)
     contents = outfile.readlines()
+
   output.write(str(address[0]) + "," + str(address[1]) + ",")
   output.write(time.strftime('%H:%M:%S', time.localtime(time.time()))+ ",")
   output.write(str(mode) + ",FAILED,\n")
+
 def format_orderlist(list):
   message = ""
   for item in list:
@@ -460,100 +430,97 @@ def format_orderlist(list):
     else:
       if item != "0":
         message += item.lower()
-    if list.index(item) != len(list)-1:
+    if list.index(item) != len(list) - 1:
       if list[list.index(item)+1] != "0":
         message += "|"
+
   return message
 
-def try_except(outputfile,gmaps12,address,destination,mode,modes_to_run,output,KEYS,a,Order_list,linenumber):
-  ##print "MY MODE: " + str(mode)
+def try_except(outputfile, gmaps12, address, destination, mode, modes_to_run, output, KEYS, a, Order_list, linenumber):
   global gmaps
   global x
   try:
     global directions11
     if mode == "transit":
-      directions11 = gmaps.directions(address,destination,mode=mode,units="metric",departure_time="now",transit_mode=Order_list,alternatives="true")
+      directions11 = gmaps.directions(address, destination, mode=mode, units="metric", departure_time="now", \
+        transit_mode=Order_list, alternatives="true")
     else:
-      directions11 = gmaps.directions(address,destination,mode=mode,units="metric",departure_time="now",alternatives="true")
-
-  #  with open(destination + ".json","w") as file:
-     # json.dump(directions11,file)
+      directions11 = gmaps.directions(address, destination, mode=mode, units="metric", departure_time="now", \
+        alternatives="true")
   except googlemaps.exceptions.ApiError as e:
     print(e)
     x += 1
-    ##print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
-    if(got_more_keys(KEYS,x) != False):
-      client(got_more_keys(KEYS,x))
-      try_except(outputfile,gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
+    if got_more_keys(KEYS, x):
+      client(got_more_keys(KEYS, x))
+      try_except(outputfile, gmaps, address, destination, mode, modes_to_run, output, KEYS, a, Order_list)
     else:
-      ##print "Key Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
       finish_line(outputfile,address,destination,mode,output,linenumber)
       exit()
   except Exception as e:
     print(e)
     x += 1
-    ##print "Key " + str(x-2) + " Has filled up or another error has occured.<br>\n"
-    if(got_more_keys(KEYS,x) != False):
-      client(got_more_keys(KEYS,x))
+    if got_more_keys(KEYS, x):
+      client(got_more_keys(KEYS, x))
       try_except(outputfile,gmaps,address,destination,mode,modes_to_run,output,KEYS,a,Order_list)
     else:
-      ##print "Key " + str(x-1) + " Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
       finish_line(outputfile,address,destination,mode,output,linenumber)
       exit()
 
 def get_mode(count):
-  if(count == 0):
+  if count == 0:
     return "driving"
-  if(count == 1):
+  if count == 1:
     return "walking"
-  if(count == 2):
+  if count == 2:
     return "bicycling"
-  if(count == 3):
+  if count == 3:
     return "transit"
 
 def file_len(fname):
     i = 0
     with open(str(os.getcwd()) + "/" + fname) as f:
-        for i, l in enumerate(f):
-            pass
+      for i, l in enumerate(f):
+        pass
+
     return i + 1
-def get_seconds(t1,t2,Entry_count,mode_count):
+
+def get_seconds(t1, t2, Entry_count, mode_count):
   h1, m1, s1 = t1.hour, t1.minute, t1.second
   h2, m2, s2 = t2.hour, t2.minute, t2.second
-  t1_secs = s1 + 60 * (m1 + 60*h1)
-  t2_secs = s2 + 60 * (m2 + 60*h2)
-  return((t2_secs/Entry_count)/mode_count)
+  t1_secs = s1 + 60 * (m1 + 60 * h1)
+  t2_secs = s2 + 60 * (m2 + 60 * h2)
 
-def got_more_keys(KEYS,count):
+  return (t2_secs / Entry_count) / mode_count
+
+def got_more_keys(KEYS, count):
   global x
-  if(KEYS[count-1] == str("0") or x > len(KEYS)-1):
+  if KEYS[count - 1] == str("0") or x > len(KEYS) - 1:
     return False
-  return KEYS[count-1]
+  return KEYS[count - 1]
+
 def check_timetoleave(line):
-  if(len(line) > 2):
+  if len(line) > 2:
     return line[3]
   else:
-    ##print "ELSE"
     return "0"
 
 def getEarthRadius(PointA):
   return getEarthRadiusAtLatitude(PointA[0])
-  
+
 def getEarthRadiusAtLatitude(latitude):
   earthRadius = 6367
   equatorRadius = 6378.137
   polarRadius = 6356.7523142
 
   lat = radians(latitude)
-  part1 = equatorRadius * sqrt(pow(polarRadius,4)/pow(equatorRadius,4)*pow((sin(lat)),2)+pow(cos(lat),2))
+  part1 = equatorRadius * sqrt(pow(polarRadius,4) / pow(equatorRadius,4) * pow((sin(lat)), 2) + pow(cos(lat), 2))
   part2 = sqrt(1-(1-(polarRadius*polarRadius)/(equatorRadius*equatorRadius)) * pow(sin(lat),2))
-  return part1/part2
-def get_distance(a,b,c,d):
-# approximate radius of earth in km
-    R = 6373.0
+  
+  return part1 / part2
 
-# optimized for locations around 39 degrees from the equator (roughly the Latitude of Washington, DC, USA).
-    lat1 = radians(a)
+def get_distance(a, b, c, d):
+    R = 6373.0            # approximate radius of earth in km
+    lat1 = radians(a)     # Optimized for locations around 39 degrees from the equator (roughly the Latitude of Washington, DC, USA).
     lon1 = radians(b)
     lat2 = radians(c)
     lon2 = radians(d)
@@ -565,20 +532,23 @@ def get_distance(a,b,c,d):
     c = 2 * atan2(sqrt(arc), sqrt(1 - arc))
 
     distance = getEarthRadiusAtLatitude(lat1) * c
+
     return distance
+
 def get_departuretime(directions):
   if "departure_time" in directions.keys():
     if "value" in directions['departure_time'].keys():
       return directions['departure_time']['value']
   else:
     return int(time.time())
-def check_dest_space(line):
-  if(line.strip().split(',')[2][0] == ' '):
-    return line.strip().split(",")[2][1:] + "," +line.strip().split(",")[3]
-  else:
-    return line.strip().split(",")[2] + "," +line.strip().split(",")[3]
 
-    if (type(pointA) != tuple) or (type(pointB) != tuple):
+def check_dest_space(line):
+  if line.strip().split(',')[2][0] == ' ':
+    return line.strip().split(",")[2][1:] + "," + line.strip().split(",")[3]
+  else:
+    return line.strip().split(",")[2] + "," + line.strip().split(",")[3]
+
+    if type(pointA) != tuple or type(pointB) != tuple:
         raise TypeError("Only tuples are supported as arguments")
 
     lat1 = math.radians(int(pointA[0]))
@@ -591,21 +561,21 @@ def check_dest_space(line):
     initial_bearing = math.atan2(x, y)
     initial_bearing = math.degrees(initial_bearing)
     compass_bearing = initial_bearing
+
     return compass_bearing
 
 def numofiterations(square_count): 
     return 3
-def go_to_corner(PointA,radius,numberofpairs,btwnmarks,currentdict,Dictkey,degreeincrements):
+
+def go_to_corner(PointA, radius, numberofpairs, btwnmarks, currentdict, Dictkey, degreeincrements):
     global square_count
     square_count += 1
     PointB = [0,0]
-   # PointB[0] = incrementlat(0,distance,PointA[0],distlat(PointA[0]))
-   # PointB[1] = decrementlon(0,distance,PointA[1],distanceindegree(PointA[1],PointA[0]))
     PointB[0] = PointA[0]
     PointB[1] = PointA[1]
-  #  lat1 = incrementlat(-180,.125/4,lat1,distlat(lat1)) 
-    circular(PointB[0],PointB[1],numberofpairs,btwnmarks,currentdict,Dictkey,degreeincrements)
-def singlebearingupdate(PointA,radius,numberofpairs,btwnmarks,currentdict,Dictkey,bearing):
+    circular(PointB[0], PointB[1], numberofpairs, btwnmarks, currentdict, Dictkey, degreeincrements)
+
+def singlebearingupdate(PointA, radius, numberofpairs,btwnmarks,currentdict,Dictkey,bearing):
     global square_count
     square_count += 1
     PointB = [0,0]
