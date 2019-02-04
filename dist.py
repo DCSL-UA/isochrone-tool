@@ -6,9 +6,12 @@ increment or decrement by based on lat/long.
 
 Example execution:
     python3 dist.py try1.txt -off YOUR_API_KEY_HERE 0 0 0 0 1 0 0 0 0
+
+Last modified: Myles McLeroy, 2/3/2019
 """
 
 from __future__ import print_function
+from math import *
 
 import googlemaps
 import json
@@ -22,7 +25,6 @@ from getlat import cleanprint
 from getlat import latnumbers
 from getlat import longnumbers
 from getlat import makekeys
-from math import *
 
 x = 1
 gmaps = ""
@@ -73,7 +75,7 @@ def closestpoint(InitialPoint, timelist, latlist, goaltime):
                 thetime = time
                 thepair = pair
 
-  return str(thetime) + "/" + str(thepair)
+    return str(thetime) + "/" + str(thepair)
 
 """"""
 def my_algorithm(d, distance, Initial_increment, goaltime, InitialPoint, mode, modes_to_run, output, KEYS):
@@ -153,8 +155,8 @@ def my_algorithm(d, distance, Initial_increment, goaltime, InitialPoint, mode, m
     for item in testedlist:
         printinglist += item + "\n"
 
-  print("ATTEMPTS: " + str(attemptcounter))
-  return finallist
+    print("ATTEMPTS: " + str(attemptcounter))
+    return finallist
 
 """"""
 def leaving(time_to_leave):
@@ -239,7 +241,7 @@ def client(API_KEY_INPUT):
         if (got_more_keys(KEYS,x) != False):      
             client(got_more_keys(KEYS,x))
         else:
-            print "No More keys to run on. None of the keys provided worked."
+            print("No More keys to run on. None of the keys provided worked.")
             exit()
 
 """"""
@@ -282,7 +284,7 @@ def try_except(gmaps12, address, destination, mode, modes_to_run, output, KEYS, 
             try_except(gmaps, address, destination, mode, modes_to_run, output, KEYS, a)
         else:
             print("API Key has filled up or another error has occured. Any partial data from Google can be downloaded below.<br>\n")
-            finish_line(len(modes_to_run),modes_to_run.index(mode),modes_to_run,output)
+            finish_line(len(modes_to_run), modes_to_run.index(mode), modes_to_run, output)
             exit()
     except Exception as e:
         x += 1
@@ -291,8 +293,8 @@ def try_except(gmaps12, address, destination, mode, modes_to_run, output, KEYS, 
             client(got_more_keys(KEYS, x))
             try_except(gmaps, address, destination, mode, modes_to_run, output, KEYS, a)
         else:
-            print "Key " + str(x-1) + " Has filled up or another error has occured. Any partial data from google can be downloaded below.<br>\n"
-            finish_line(len(modes_to_run),modes_to_run.index(mode),modes_to_run,output)
+            print("Key " + str(x - 1) + " has filled up or another error has occured. Any partial data from Google can be downloaded below.<br>\n")
+            finish_line(len(modes_to_run), modes_to_run.index(mode), modes_to_run, output)
             exit()
 
 """"""
@@ -671,4 +673,4 @@ for line in inputfile:
     iterate_counter = 0
     thelist = my_algorithm(currentname, .5, 1, 500, PointA,
                            "driving", ["driving"], output, KEYS)
-    print("FINAL LIST WAS: " + str(cleanprint(thelist,600)))
+    print("FINAL LIST WAS: " + str(cleanprint(thelist, 600)))

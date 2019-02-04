@@ -3,6 +3,8 @@
 """
 This script sets up a multithreaded process based on 
 executing system's operating system.
+
+Last modified: Myles Mcleroy, 2/3/2019
 """
 
 from __future__ import print_function
