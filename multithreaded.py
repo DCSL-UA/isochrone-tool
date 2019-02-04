@@ -1,6 +1,9 @@
 #!/usr/bin/python3
-"""This script sets up a multithreaded process based on executing system's
-operating system"""
+
+"""
+This script sets up a multithreaded process based on 
+executing system's operating system.
+"""
 
 from __future__ import print_function
 
