@@ -26,7 +26,6 @@ import sys
 import time
 
 from area import area
-from cStringIO import StringIO
 from datetime import datetime as dt
 from geographiclib.geodesic import Geodesic
 from math import sin, cos, sqrt, atan2, radians
@@ -34,6 +33,11 @@ from multiprocessing import Lock
 from Polygon import *
 from xml.dom.minidom import parseString
 from zipfile import ZipFile
+
+try:    # Python 2
+    from cStringIO import StringIO
+except: # Python 3
+    from io import cStringIO
 
 start_time = dt.now()
 kmlstr = \

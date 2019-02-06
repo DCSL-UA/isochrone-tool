@@ -26,7 +26,7 @@ class FuncThread(threading.Thread):
     def run(self):
         self._target(*self._args)
 
-def open_process(data, line_number, trans_mode):
+def open_process(data, line_number, mode_count, trans_mode):
     """Opens a new process and records it"""
     args = []
     openprocesses = []
