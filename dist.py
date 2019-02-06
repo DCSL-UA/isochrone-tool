@@ -469,10 +469,10 @@ def decrementlon(currentbearing, a, lon1, distance):
 
 """"""
 def distanceindegree(lon1, latitude):
-  if lat1 < 0:
-    return longnumbers[int(str(latitude[1:]).split('.')[0])]
+    if lat1 < 0:
+        return longnumbers[int(str(latitude[1:]).split('.')[0])]
   
-  return longnumbers[int(str(latitude).split('.')[0])]
+    return longnumbers[int(str(latitude).split('.')[0])]
 
 """"""
 def circular(lat1, lon1, numberofpairs, btwnmarks, currentdict, Dictkey):

@@ -66,7 +66,7 @@ if __name__ == '__main__':
     os.chdir("output_isochrone")
     output = open(sys.argv[2], "w")
     all_modes = [sys.argv[9], sys.argv[10], sys.argv[11], sys.argv[12]]
-    output.write("Slat,Slong,time,mode,#requested points,#calculated points, \
+    output.write("Slat,Slong,time,mode,#requested points,#calculated points,\
                   timeordist,area (m^2),points (lat,long)\n")
     output.close()
 
