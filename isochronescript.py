@@ -13,7 +13,7 @@ Last modified: Myles Mcleroy, 2/4/2019
 # python dist.py try1.txt -off AIzaSyBlGF0c9WDFymECTZ15thY0WFOROdlUC5Q 0 0 0 0 1 0 0 0 0
 # Users/user/anaconda/bin/python /Users/user/Google_DirectionsAPI_PointPicker/isochronescript.py uploads_isochrone/testing1.txt output_isochrone/crontab1new.txt -off AIzaSyCvtVQxMV9pSnQsgjKxvqdlj929X3BPncM 0 0 0 0 0 0 on 0 0 0 0 0 on 900 32 "33.217617, -87.558822" 0 bicycling
 
-from __future___ import print_function
+from __future__ import print_function
 
 import datetime
 import googlemaps
@@ -1348,7 +1348,7 @@ def kickofffunc(inputfile, outputfile, traffictoggle, apikeys, key2, key3, key4,
     currentindex += 1
     lock.release()
     end_time = dt.now()
-    
+
     #print("Duration: {}".format(end_time-start_time))
     #  for pnt in mypoints:
     #   p.AddPoint(pnt[0], pnt[1])
