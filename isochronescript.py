@@ -34,10 +34,10 @@ from Polygon import *
 from xml.dom.minidom import parseString
 from zipfile import ZipFile
 
-try:    # Python 2
-    from cStringIO import StringIO
-except: # Python 3
-    from io import cStringIO
+#try:    # Python 2
+#    from cStringIO import StringIO
+#except: # Python 3
+from io import StringIO
 
 start_time = dt.now()
 kmlstr = \
@@ -276,8 +276,8 @@ def matchup(testedlist, testedtimeslist, lister):
     return lister
 
 """"""
-def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPoint, mode, modes_to_run, \
-  output, KEYS, degreeincrements,timeordist,Order_list,linenumber):
+def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPoint, mode, modes_to_run,
+    output, KEYS, degreeincrements,timeordist,Order_list,linenumber):
     global gmaps
     originaldist = distance
     finallist = {}
@@ -289,7 +289,7 @@ def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPo
     goaltimeminus = goaltime -  (goaltime * .05) #seconds
     testedlist = []
     testedtimeslist = []
-    keys = [key for key, value in sorted(d.iteritems())]
+    keys = [key for key, value in sorted(d.items())]
     count = 0
     attemptcounter = 0
     attempted = []
@@ -305,14 +305,15 @@ def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPo
     originalnumberofmoves = numberofmoves
 
     while count <= len(keys) - 1:       # While we have bearings to get answers for
-        x = 0                           # closest, the exact distance away
         pointa = d[keys[count]][0]
         lastbeginning = InitialPoint
         testedlist.append(pointa)
         attempted.append(pointa)
-        distance3 = float(get_distance( \
-          float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
-
+        x = 0                           # closest, the exact distance away
+        distance3 = float(get_distance(float(lastbeginning[0]),
+                                       float(lastbeginning[1]),
+                                       float(pointa.split(",")[0]),
+                                       float(pointa.split(",")[1])))
         try_except(outputfile, gmaps, InitialPoint, pointa, mode, modes_to_run, output, KEYS, x, Order_list, linenumber)
 
         attemptcounter += 1
@@ -345,7 +346,6 @@ def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPo
             else: 
                 if numberofmoves < 1:   # No moves can be made  
                     moveby = abs(keys[count] - bearingproblem)
-                    #print "CALLING AGAIN 33with " + str(x33)
                     keys.insert(count, keys[count] - moveby - 2)
                     d.pop(keys[count] + 2 + moveby, None)
                     additionalkeys[keys[count] + 2 + moveby] = matchup(testedlist, testedtimeslist, [])
@@ -377,7 +377,7 @@ def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPo
             negative = False
             additionalkeys = {}
             testedtimeslist = []
-            distance2 = float(get_distance( \
+            distance2 = float(get_distance( 
               float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
             lastbeginning = InitialPoint
             lastend = "000"
@@ -395,7 +395,7 @@ def my_algorithm(outputfile, d, distance, Initial_increment, goaltime, InitialPo
             lastend = tuple(pointa.split(","))
         else:
             ratio = float(float(goaltime) / float(pointadone))
-            distance2 = float(get_distance( \
+            distance2 = float(get_distance( 
               float(lastbeginning[0]), float(lastbeginning[1]), float(pointa.split(",")[0]), float(pointa.split(",")[1])))
             d = singlebearingupdate(lastbeginning, 1, 1, float(float(distance2) * float(ratio)) * 0.621371, d, 0, keys[count])
             lastbeginning = tuple(pointa.split(","))
@@ -613,7 +613,8 @@ def go_to_corner(PointA, radius, numberofpairs, btwnmarks, currentdict, Dictkey,
     circular(PointB[0], PointB[1], numberofpairs, btwnmarks, currentdict, Dictkey, degreeincrements)
 
 """"""
-def singlebearingupdate(PointA, radius, numberofpairs, btwnmarks, currentdict, Dictkey, bearing):
+def singlebearingupdate(PointA, radius, numberofpairs, 
+        btwnmarks, currentdict, Dictkey, bearing):
     global square_count
     square_count += 1
     PointB = [0,0]
@@ -624,6 +625,7 @@ def singlebearingupdate(PointA, radius, numberofpairs, btwnmarks, currentdict, D
                                           btwnmarks, currentdict, Dictkey,bearing)
     if len(currentdict[bearing]) >= 2:
         currentdict[bearing] = currentdict[bearing][numberofpairs:]
+
     return currentdict
 
 """"""
@@ -666,8 +668,8 @@ def decrementlon(currentbearing, a, lon1, distance):
 
 """"""
 def distanceindegree(lon1, latitude):
-    if lat1 < 0:
-        return LONG_NUMBERS[int(str(latitude[1:]).split('.')[0])]
+    #if lon1 < 0:
+    #    return LONG_NUMBERS[int(str(latitude[1:]).split('.')[0])]
   
     return LONG_NUMBERS[int(str(latitude).split('.')[0])]
 
@@ -756,7 +758,7 @@ def circularsingle(lat1, lon1, count, btwnmarks, currentdict, Dictkey, degrees):
     
     firstlat = lat1
     firstlon = lon1
-    fixeddegrees = degrees if degrees > 360 else degrees - 360
+    fixeddegrees = degrees - 360 if degrees > 360 else degrees
 
     while 0 <= fixeddegrees <= 90:   # Go .05 miles to the right and query
         lat1 = incrementlat(fixeddegrees, float(btwnmarks), lat1,
@@ -921,7 +923,7 @@ def kmlcolor(mypoints, filename, thedict, goaltime):
     kml.save("color_" + filename + ".kml")
     os.chdir("..")
 
-"""
+
 def get_pointcolor(goaltime,time):
     percentoff = float(float(time) / float(goaltime))
     if percentoff > 1:  # Time was greater, aka farther
@@ -950,7 +952,7 @@ def get_pointcolor(goaltime,time):
           return "http://mkkeffeler.azurewebsites.net/icons/red2.png"
         else: #perfect red
           return "http://mkkeffeler.azurewebsites.net/icons/red1.png"
-      else: #time was shorter, aka closer
+    else: #time was shorter, aka closer
         percentoff = float(1 - percentoff) * 100  #Absolute percent off by, can only be blue or green at this point
         if (percentoff < .5): #perfect green
           return "http://mkkeffeler.azurewebsites.net/icons/green1.png"
@@ -976,7 +978,7 @@ def get_pointcolor(goaltime,time):
           return "http://mkkeffeler.azurewebsites.net/icons/blue2.png"
         else: #perfect blue
           return "http://mkkeffeler.azurewebsites.net/icons/blue1.png"
-"""
+
 
 """"""
 def kmlunedited(mypoints, mydirectory, filename, thedict):
@@ -1002,7 +1004,7 @@ def polyarea(mydirectory, filename):
       i += 1
       stats=polyStats(p)
       desc.update(stats)
-      for d, v in desc.iteritems():
+      for d, v in desc.items():
           if d == "area":
               return v[1:-4]
 
@@ -1139,7 +1141,7 @@ def polypoints(mydirectory, filename):
         i += 1
         stats = polyStats(p)
         desc.update(stats)
-        for d, v in desc.iteritems():
+        for d, v in desc.items():
             if d == "vertices":
                 return v[1:]
 
