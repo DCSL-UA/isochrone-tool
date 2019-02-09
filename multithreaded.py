@@ -37,17 +37,11 @@ def open_process(data, line_number, mode_count, trans_mode):
 
     openprocesses.append(os.getpid())
     
-    if str(line_number) == "1":
-        kickofffunc(args[0], args[1], args[2], args[3], args[4], args[5],
-                    args[6], args[7], args[8], args[9], args[10], args[11],
-                    args[12], args[13], args[14], args[15], args[16], args[17],
-                    args[18], args[19], str(line_number), str(trans_mode))
-    else:
-        kickofffunc(args[0], args[1], args[2], args[3], args[4], args[5],
-                    args[6], args[7], args[8], args[9], args[10], args[11],
-                    args[12], args[13], args[14], args[15], args[16], args[17],
-                    args[18], args[19], str(line_number), str(trans_mode))
 
+    kickofffunc(args[0], args[1], args[2], args[3], args[4], args[5],
+                args[6], args[7], args[8], args[9], args[10], args[11],
+                args[12], args[13], args[14], args[15], args[16], args[17],
+                args[18], args[19], str(line_number), str(trans_mode))
 
 def get_mode(count):
     """Returns transportation mode as a string literal"""
