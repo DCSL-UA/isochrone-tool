@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="68">
+        <Placemark id="70">
+            <name>edited_output1</name>
+            <Polygon id="69">
+                <outerBoundaryIs>
+                    <LinearRing id="71">
+                        <coordinates>-73.982551,40.740476,0.0 -73.982551,40.759606,0.0 -73.982093,40.761072,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

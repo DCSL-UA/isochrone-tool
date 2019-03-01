@@ -1,0 +1,3371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Style id="8">
+            <IconStyle id="9">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="10">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="13">
+            <IconStyle id="14">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="15">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="18">
+            <IconStyle id="19">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="20">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="23">
+            <IconStyle id="24">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="25">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="28">
+            <IconStyle id="29">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="30">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="33">
+            <IconStyle id="34">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="35">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="38">
+            <IconStyle id="39">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="40">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="43">
+            <IconStyle id="44">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="45">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="48">
+            <IconStyle id="49">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="50">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="53">
+            <IconStyle id="54">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="55">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="58">
+            <IconStyle id="59">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="60">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="63">
+            <IconStyle id="64">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="65">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="68">
+            <IconStyle id="69">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="70">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="73">
+            <IconStyle id="74">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="75">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="78">
+            <IconStyle id="79">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="80">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="83">
+            <IconStyle id="84">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="85">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue4.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="88">
+            <IconStyle id="89">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="90">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="93">
+            <IconStyle id="94">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="95">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="98">
+            <IconStyle id="99">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="100">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="103">
+            <IconStyle id="104">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="105">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="108">
+            <IconStyle id="109">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="110">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="113">
+            <IconStyle id="114">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="115">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="118">
+            <IconStyle id="119">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="120">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="123">
+            <IconStyle id="124">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="125">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="128">
+            <IconStyle id="129">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="130">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="133">
+            <IconStyle id="134">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="135">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="138">
+            <IconStyle id="139">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="140">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="143">
+            <IconStyle id="144">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="145">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="148">
+            <IconStyle id="149">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="150">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="153">
+            <IconStyle id="154">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="155">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="158">
+            <IconStyle id="159">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="160">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red2.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="163">
+            <IconStyle id="164">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="165">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="168">
+            <IconStyle id="169">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="170">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="173">
+            <IconStyle id="174">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="175">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="178">
+            <IconStyle id="179">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="180">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="183">
+            <IconStyle id="184">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="185">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="188">
+            <IconStyle id="189">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="190">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="193">
+            <IconStyle id="194">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="195">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="198">
+            <IconStyle id="199">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="200">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="203">
+            <IconStyle id="204">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="205">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="208">
+            <IconStyle id="209">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="210">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="213">
+            <IconStyle id="214">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="215">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="218">
+            <IconStyle id="219">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="220">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="223">
+            <IconStyle id="224">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="225">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="228">
+            <IconStyle id="229">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="230">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="233">
+            <IconStyle id="234">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="235">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="238">
+            <IconStyle id="239">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="240">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="243">
+            <IconStyle id="244">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="245">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="248">
+            <IconStyle id="249">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="250">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="253">
+            <IconStyle id="254">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="255">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="258">
+            <IconStyle id="259">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="260">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="263">
+            <IconStyle id="264">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="265">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="268">
+            <IconStyle id="269">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="270">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue2.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="273">
+            <IconStyle id="274">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="275">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="278">
+            <IconStyle id="279">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="280">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="283">
+            <IconStyle id="284">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="285">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red2.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="288">
+            <IconStyle id="289">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="290">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="293">
+            <IconStyle id="294">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="295">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="298">
+            <IconStyle id="299">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="300">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="303">
+            <IconStyle id="304">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="305">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="308">
+            <IconStyle id="309">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="310">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue4.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="313">
+            <IconStyle id="314">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="315">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="318">
+            <IconStyle id="319">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="320">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="323">
+            <IconStyle id="324">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="325">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="328">
+            <IconStyle id="329">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="330">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="333">
+            <IconStyle id="334">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="335">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="338">
+            <IconStyle id="339">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="340">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="343">
+            <IconStyle id="344">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="345">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="348">
+            <IconStyle id="349">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="350">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="353">
+            <IconStyle id="354">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="355">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="358">
+            <IconStyle id="359">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="360">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="363">
+            <IconStyle id="364">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="365">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="368">
+            <IconStyle id="369">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="370">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="373">
+            <IconStyle id="374">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="375">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="378">
+            <IconStyle id="379">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="380">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="383">
+            <IconStyle id="384">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="385">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="388">
+            <IconStyle id="389">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="390">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="393">
+            <IconStyle id="394">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="395">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="398">
+            <IconStyle id="399">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="400">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="403">
+            <IconStyle id="404">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="405">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="408">
+            <IconStyle id="409">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="410">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="413">
+            <IconStyle id="414">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="415">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="418">
+            <IconStyle id="419">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="420">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="423">
+            <IconStyle id="424">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="425">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="428">
+            <IconStyle id="429">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="430">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="433">
+            <IconStyle id="434">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="435">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="438">
+            <IconStyle id="439">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="440">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="443">
+            <IconStyle id="444">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="445">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="448">
+            <IconStyle id="449">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="450">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="453">
+            <IconStyle id="454">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="455">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="458">
+            <IconStyle id="459">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="460">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="463">
+            <IconStyle id="464">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="465">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="468">
+            <IconStyle id="469">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="470">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="473">
+            <IconStyle id="474">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="475">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="478">
+            <IconStyle id="479">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="480">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="483">
+            <IconStyle id="484">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="485">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="488">
+            <IconStyle id="489">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="490">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="493">
+            <IconStyle id="494">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="495">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="498">
+            <IconStyle id="499">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="500">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="503">
+            <IconStyle id="504">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="505">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="508">
+            <IconStyle id="509">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="510">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="513">
+            <IconStyle id="514">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="515">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="518">
+            <IconStyle id="519">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="520">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="523">
+            <IconStyle id="524">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="525">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="528">
+            <IconStyle id="529">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="530">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="533">
+            <IconStyle id="534">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="535">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="538">
+            <IconStyle id="539">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="540">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="543">
+            <IconStyle id="544">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="545">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="548">
+            <IconStyle id="549">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="550">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="553">
+            <IconStyle id="554">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="555">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="558">
+            <IconStyle id="559">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="560">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="563">
+            <IconStyle id="564">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="565">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue2.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="568">
+            <IconStyle id="569">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="570">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="573">
+            <IconStyle id="574">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="575">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="578">
+            <IconStyle id="579">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="580">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="583">
+            <IconStyle id="584">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="585">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="588">
+            <IconStyle id="589">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="590">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="593">
+            <IconStyle id="594">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="595">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="598">
+            <IconStyle id="599">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="600">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="603">
+            <IconStyle id="604">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="605">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="608">
+            <IconStyle id="609">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="610">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="613">
+            <IconStyle id="614">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="615">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="618">
+            <IconStyle id="619">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="620">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="623">
+            <IconStyle id="624">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="625">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="628">
+            <IconStyle id="629">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="630">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="633">
+            <IconStyle id="634">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="635">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="638">
+            <IconStyle id="639">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="640">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="643">
+            <IconStyle id="644">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="645">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red4.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="648">
+            <IconStyle id="649">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="650">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="653">
+            <IconStyle id="654">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="655">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="658">
+            <IconStyle id="659">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="660">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red4.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="663">
+            <IconStyle id="664">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="665">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="668">
+            <IconStyle id="669">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="670">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="673">
+            <IconStyle id="674">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="675">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="678">
+            <IconStyle id="679">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="680">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="683">
+            <IconStyle id="684">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="685">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="688">
+            <IconStyle id="689">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="690">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="693">
+            <IconStyle id="694">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="695">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="698">
+            <IconStyle id="699">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="700">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="703">
+            <IconStyle id="704">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="705">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="708">
+            <IconStyle id="709">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="710">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="713">
+            <IconStyle id="714">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="715">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="718">
+            <IconStyle id="719">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="720">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="723">
+            <IconStyle id="724">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="725">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="728">
+            <IconStyle id="729">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="730">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue3.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="733">
+            <IconStyle id="734">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="735">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="738">
+            <IconStyle id="739">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="740">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="743">
+            <IconStyle id="744">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="745">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue4.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="748">
+            <IconStyle id="749">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="750">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="753">
+            <IconStyle id="754">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="755">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="758">
+            <IconStyle id="759">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="760">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="763">
+            <IconStyle id="764">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="765">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="768">
+            <IconStyle id="769">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="770">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="773">
+            <IconStyle id="774">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="775">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue2.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="778">
+            <IconStyle id="779">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="780">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="783">
+            <IconStyle id="784">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="785">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="788">
+            <IconStyle id="789">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="790">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="793">
+            <IconStyle id="794">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="795">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="798">
+            <IconStyle id="799">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="800">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="803">
+            <IconStyle id="804">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="805">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="808">
+            <IconStyle id="809">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="810">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="813">
+            <IconStyle id="814">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="815">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="818">
+            <IconStyle id="819">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="820">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="823">
+            <IconStyle id="824">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="825">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="828">
+            <IconStyle id="829">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="830">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="833">
+            <IconStyle id="834">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="835">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="838">
+            <IconStyle id="839">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="840">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="843">
+            <IconStyle id="844">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="845">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="848">
+            <IconStyle id="849">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="850">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="853">
+            <IconStyle id="854">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="855">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="858">
+            <IconStyle id="859">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="860">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="863">
+            <IconStyle id="864">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="865">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="868">
+            <IconStyle id="869">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="870">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="873">
+            <IconStyle id="874">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="875">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="878">
+            <IconStyle id="879">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="880">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="883">
+            <IconStyle id="884">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="885">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="888">
+            <IconStyle id="889">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="890">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="893">
+            <IconStyle id="894">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="895">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="898">
+            <IconStyle id="899">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="900">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="903">
+            <IconStyle id="904">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="905">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="908">
+            <IconStyle id="909">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="910">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="913">
+            <IconStyle id="914">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="915">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="918">
+            <IconStyle id="919">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="920">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="923">
+            <IconStyle id="924">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="925">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="928">
+            <IconStyle id="929">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="930">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="933">
+            <IconStyle id="934">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="935">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="938">
+            <IconStyle id="939">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="940">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="943">
+            <IconStyle id="944">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="945">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="948">
+            <IconStyle id="949">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="950">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="953">
+            <IconStyle id="954">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="955">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="958">
+            <IconStyle id="959">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="960">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="963">
+            <IconStyle id="964">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="965">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="968">
+            <IconStyle id="969">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="970">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="973">
+            <IconStyle id="974">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="975">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/red1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="978">
+            <IconStyle id="979">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="980">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="983">
+            <IconStyle id="984">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="985">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/green1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="988">
+            <IconStyle id="989">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="990">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue1.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="993">
+            <IconStyle id="994">
+                <colorMode>normal</colorMode>
+                <scale>1</scale>
+                <heading>0</heading>
+                <Icon id="995">
+                    <href>http://mkkeffeler.azurewebsites.net/icons/blue5.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Placemark id="7">
+            <name>Travel Time: 375 Point: -73.982551,40.758384</name>
+            <styleUrl>#8</styleUrl>
+            <Point id="6">
+                <coordinates>-73.982551,40.758384,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="12">
+            <name>Travel Time: 593 Point: -73.982551,40.761014</name>
+            <styleUrl>#13</styleUrl>
+            <Point id="11">
+                <coordinates>-73.982551,40.761014,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="17">
+            <name>Travel Time: 446 Point: -73.982551,40.759606</name>
+            <styleUrl>#18</styleUrl>
+            <Point id="16">
+                <coordinates>-73.982551,40.759606,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="22">
+            <name>Travel Time: 596 Point: -73.982551,40.760815</name>
+            <styleUrl>#23</styleUrl>
+            <Point id="21">
+                <coordinates>-73.982551,40.760815,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="27">
+            <name>Travel Time: 587 Point: -73.982551,40.759396</name>
+            <styleUrl>#28</styleUrl>
+            <Point id="26">
+                <coordinates>-73.982551,40.759396,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="32">
+            <name>Travel Time: 373 Point: -73.982551,40.758312</name>
+            <styleUrl>#33</styleUrl>
+            <Point id="31">
+                <coordinates>-73.982551,40.758312,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="37">
+            <name>Travel Time: 331 Point: -73.98234,40.755638</name>
+            <styleUrl>#38</styleUrl>
+            <Point id="36">
+                <coordinates>-73.98234,40.755638,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="42">
+            <name>Travel Time: 362 Point: -73.982225,40.75817</name>
+            <styleUrl>#43</styleUrl>
+            <Point id="41">
+                <coordinates>-73.982225,40.75817,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="47">
+            <name>Travel Time: 503 Point: -73.982093,40.761072</name>
+            <styleUrl>#48</styleUrl>
+            <Point id="46">
+                <coordinates>-73.982093,40.761072,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="52">
+            <name>Travel Time: 731 Point: -73.980003,40.761057</name>
+            <styleUrl>#53</styleUrl>
+            <Point id="51">
+                <coordinates>-73.980003,40.761057,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="57">
+            <name>Travel Time: 400 Point: -73.980769,40.758031</name>
+            <styleUrl>#58</styleUrl>
+            <Point id="56">
+                <coordinates>-73.980769,40.758031,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="62">
+            <name>Travel Time: 413 Point: -73.980284,40.759948</name>
+            <styleUrl>#63</styleUrl>
+            <Point id="61">
+                <coordinates>-73.980284,40.759948,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="67">
+            <name>Travel Time: 505 Point: -73.979766,40.761995</name>
+            <styleUrl>#68</styleUrl>
+            <Point id="66">
+                <coordinates>-73.979766,40.761995,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="72">
+            <name>Travel Time: 575 Point: -73.977003,40.761537</name>
+            <styleUrl>#73</styleUrl>
+            <Point id="71">
+                <coordinates>-73.977003,40.761537,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="77">
+            <name>Travel Time: 529 Point: -73.977654,40.7603</name>
+            <styleUrl>#78</styleUrl>
+            <Point id="76">
+                <coordinates>-73.977654,40.7603,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="82">
+            <name>Travel Time: 465 Point: -73.97785,40.759927</name>
+            <styleUrl>#83</styleUrl>
+            <Point id="81">
+                <coordinates>-73.97785,40.759927,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="87">
+            <name>Travel Time: 516 Point: -73.977424,40.760737</name>
+            <styleUrl>#88</styleUrl>
+            <Point id="86">
+                <coordinates>-73.977424,40.760737,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="92">
+            <name>Travel Time: 431 Point: -73.974991,40.759932</name>
+            <styleUrl>#93</styleUrl>
+            <Point id="91">
+                <coordinates>-73.974991,40.759932,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="97">
+            <name>Travel Time: 559 Point: -73.973693,40.761467</name>
+            <styleUrl>#98</styleUrl>
+            <Point id="96">
+                <coordinates>-73.973693,40.761467,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="102">
+            <name>Travel Time: 683 Point: -73.974539,40.760467</name>
+            <styleUrl>#103</styleUrl>
+            <Point id="101">
+                <coordinates>-73.974539,40.760467,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="107">
+            <name>Travel Time: 481 Point: -73.976593,40.758038</name>
+            <styleUrl>#108</styleUrl>
+            <Point id="106">
+                <coordinates>-73.976593,40.758038,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="112">
+            <name>Travel Time: 372 Point: -73.974834,40.75713</name>
+            <styleUrl>#113</styleUrl>
+            <Point id="111">
+                <coordinates>-73.974834,40.75713,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="117">
+            <name>Travel Time: 429 Point: -73.972091,40.759311</name>
+            <styleUrl>#118</styleUrl>
+            <Point id="116">
+                <coordinates>-73.972091,40.759311,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="122">
+            <name>Travel Time: 515 Point: -73.97028,40.760751</name>
+            <styleUrl>#123</styleUrl>
+            <Point id="121">
+                <coordinates>-73.97028,40.760751,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="127">
+            <name>Travel Time: 752 Point: -73.967987,40.758824</name>
+            <styleUrl>#128</styleUrl>
+            <Point id="126">
+                <coordinates>-73.967987,40.758824,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="132">
+            <name>Travel Time: 517 Point: -73.972778,40.756248</name>
+            <styleUrl>#133</styleUrl>
+            <Point id="131">
+                <coordinates>-73.972778,40.756248,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="137">
+            <name>Travel Time: 447 Point: -73.971553,40.754754</name>
+            <styleUrl>#138</styleUrl>
+            <Point id="136">
+                <coordinates>-73.971553,40.754754,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="142">
+            <name>Travel Time: 484 Point: -73.970186,40.755221</name>
+            <styleUrl>#143</styleUrl>
+            <Point id="141">
+                <coordinates>-73.970186,40.755221,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="147">
+            <name>Travel Time: 522 Point: -73.969296,40.753343</name>
+            <styleUrl>#148</styleUrl>
+            <Point id="146">
+                <coordinates>-73.969296,40.753343,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="152">
+            <name>Travel Time: 529 Point: -73.968909,40.75136</name>
+            <styleUrl>#153</styleUrl>
+            <Point id="151">
+                <coordinates>-73.968909,40.75136,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="157">
+            <name>Travel Time: 544 Point: -73.969611,40.751341</name>
+            <styleUrl>#158</styleUrl>
+            <Point id="156">
+                <coordinates>-73.969611,40.751341,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="162">
+            <name>Travel Time: 563 Point: -73.970601,40.751314</name>
+            <styleUrl>#163</styleUrl>
+            <Point id="161">
+                <coordinates>-73.970601,40.751314,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="167">
+            <name>Travel Time: 422 Point: -73.971867,40.75128</name>
+            <styleUrl>#168</styleUrl>
+            <Point id="166">
+                <coordinates>-73.971867,40.75128,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="172">
+            <name>Travel Time: 548 Point: -73.969844,40.751335</name>
+            <styleUrl>#173</styleUrl>
+            <Point id="171">
+                <coordinates>-73.969844,40.751335,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="177">
+            <name>Travel Time: 517 Point: -73.970897,40.751306</name>
+            <styleUrl>#178</styleUrl>
+            <Point id="176">
+                <coordinates>-73.970897,40.751306,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="182">
+            <name>Travel Time: 395 Point: -73.994127,40.752402</name>
+            <styleUrl>#183</styleUrl>
+            <Point id="181">
+                <coordinates>-73.994127,40.752402,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="187">
+            <name>Travel Time: 568 Point: -73.997233,40.752779</name>
+            <styleUrl>#188</styleUrl>
+            <Point id="186">
+                <coordinates>-73.997233,40.752779,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="192">
+            <name>Travel Time: 727 Point: -73.995522,40.752571</name>
+            <styleUrl>#193</styleUrl>
+            <Point id="191">
+                <coordinates>-73.995522,40.752571,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="197">
+            <name>Travel Time: 338 Point: -73.991562,40.75209</name>
+            <styleUrl>#198</styleUrl>
+            <Point id="196">
+                <coordinates>-73.991562,40.75209,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="202">
+            <name>Travel Time: 738 Point: -73.995924,40.75262</name>
+            <styleUrl>#203</styleUrl>
+            <Point id="201">
+                <coordinates>-73.995924,40.75262,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="207">
+            <name>Travel Time: 342 Point: -73.9917,40.752107</name>
+            <styleUrl>#208</styleUrl>
+            <Point id="206">
+                <coordinates>-73.9917,40.752107,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="212">
+            <name>Travel Time: 303 Point: -73.988492,40.751881</name>
+            <styleUrl>#213</styleUrl>
+            <Point id="211">
+                <coordinates>-73.988492,40.751881,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="217">
+            <name>Travel Time: 369 Point: -73.992436,40.752469</name>
+            <styleUrl>#218</styleUrl>
+            <Point id="216">
+                <coordinates>-73.992436,40.752469,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="222">
+            <name>Travel Time: 439 Point: -73.995988,40.752999</name>
+            <styleUrl>#223</styleUrl>
+            <Point id="221">
+                <coordinates>-73.995988,40.752999,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="227">
+            <name>Travel Time: 615 Point: -73.997877,40.753281</name>
+            <styleUrl>#228</styleUrl>
+            <Point id="226">
+                <coordinates>-73.997877,40.753281,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="232">
+            <name>Travel Time: 417 Point: -73.995064,40.752861</name>
+            <styleUrl>#233</styleUrl>
+            <Point id="231">
+                <coordinates>-73.995064,40.752861,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="237">
+            <name>Travel Time: 610 Point: -73.99758,40.753237</name>
+            <styleUrl>#238</styleUrl>
+            <Point id="236">
+                <coordinates>-73.99758,40.753237,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="242">
+            <name>Travel Time: 301 Point: -73.988448,40.752039</name>
+            <styleUrl>#243</styleUrl>
+            <Point id="241">
+                <coordinates>-73.988448,40.752039,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="247">
+            <name>Travel Time: 374 Point: -73.992428,40.752745</name>
+            <styleUrl>#248</styleUrl>
+            <Point id="246">
+                <coordinates>-73.992428,40.752745,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="252">
+            <name>Travel Time: 440 Point: -73.995802,40.753343</name>
+            <styleUrl>#253</styleUrl>
+            <Point id="251">
+                <coordinates>-73.995802,40.753343,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="257">
+            <name>Travel Time: 480 Point: -73.997636,40.753668</name>
+            <styleUrl>#258</styleUrl>
+            <Point id="256">
+                <coordinates>-73.997636,40.753668,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="262">
+            <name>Travel Time: 618 Point: -73.997124,40.755067</name>
+            <styleUrl>#263</styleUrl>
+            <Point id="261">
+                <coordinates>-73.997124,40.755067,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="267">
+            <name>Travel Time: 456 Point: -73.994406,40.754307</name>
+            <styleUrl>#268</styleUrl>
+            <Point id="266">
+                <coordinates>-73.994406,40.754307,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="272">
+            <name>Travel Time: 425 Point: -73.995603,40.754641</name>
+            <styleUrl>#273</styleUrl>
+            <Point id="271">
+                <coordinates>-73.995603,40.754641,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="277">
+            <name>Travel Time: 550 Point: -73.997937,40.755293</name>
+            <styleUrl>#278</styleUrl>
+            <Point id="276">
+                <coordinates>-73.997937,40.755293,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="282">
+            <name>Travel Time: 544 Point: -73.996581,40.754915</name>
+            <styleUrl>#283</styleUrl>
+            <Point id="281">
+                <coordinates>-73.996581,40.754915,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="287">
+            <name>Travel Time: 425 Point: -73.9955,40.754613</name>
+            <styleUrl>#288</styleUrl>
+            <Point id="286">
+                <coordinates>-73.9955,40.754613,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="292">
+            <name>Travel Time: 187 Point: -73.988162,40.752735</name>
+            <styleUrl>#293</styleUrl>
+            <Point id="291">
+                <coordinates>-73.988162,40.752735,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="297">
+            <name>Travel Time: 580 Point: -73.997591,40.755659</name>
+            <styleUrl>#298</styleUrl>
+            <Point id="296">
+                <coordinates>-73.997591,40.755659,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="302">
+            <name>Travel Time: 512 Point: -73.995571,40.755033</name>
+            <styleUrl>#303</styleUrl>
+            <Point id="301">
+                <coordinates>-73.995571,40.755033,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="307">
+            <name>Travel Time: 466 Point: -73.994638,40.75657</name>
+            <styleUrl>#308</styleUrl>
+            <Point id="306">
+                <coordinates>-73.994638,40.75657,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="312">
+            <name>Travel Time: 604 Point: -73.995583,40.757006</name>
+            <styleUrl>#313</styleUrl>
+            <Point id="311">
+                <coordinates>-73.995583,40.757006,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="317">
+            <name>Travel Time: 438 Point: -73.993419,40.756008</name>
+            <styleUrl>#318</styleUrl>
+            <Point id="316">
+                <coordinates>-73.993419,40.756008,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="322">
+            <name>Travel Time: 598 Point: -73.995025,40.756749</name>
+            <styleUrl>#323</styleUrl>
+            <Point id="321">
+                <coordinates>-73.995025,40.756749,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="327">
+            <name>Travel Time: 407 Point: -73.993064,40.755844</name>
+            <styleUrl>#328</styleUrl>
+            <Point id="326">
+                <coordinates>-73.993064,40.755844,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="332">
+            <name>Travel Time: 604 Point: -73.99553,40.756982</name>
+            <styleUrl>#333</styleUrl>
+            <Point id="331">
+                <coordinates>-73.99553,40.756982,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="337">
+            <name>Travel Time: 238 Point: -73.987627,40.753525</name>
+            <styleUrl>#338</styleUrl>
+            <Point id="336">
+                <coordinates>-73.987627,40.753525,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="342">
+            <name>Travel Time: 423 Point: -73.993297,40.756352</name>
+            <styleUrl>#343</styleUrl>
+            <Point id="341">
+                <coordinates>-73.993297,40.756352,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="347">
+            <name>Travel Time: 1356 Point: -73.99532,40.757361</name>
+            <styleUrl>#348</styleUrl>
+            <Point id="346">
+                <coordinates>-73.99532,40.757361,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="352">
+            <name>Travel Time: 246 Point: -73.987384,40.753404</name>
+            <styleUrl>#353</styleUrl>
+            <Point id="351">
+                <coordinates>-73.987384,40.753404,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="357">
+            <name>Travel Time: 393 Point: -73.992463,40.755936</name>
+            <styleUrl>#358</styleUrl>
+            <Point id="356">
+                <coordinates>-73.992463,40.755936,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="362">
+            <name>Travel Time: 1356 Point: -73.99523,40.757316</name>
+            <styleUrl>#363</styleUrl>
+            <Point id="361">
+                <coordinates>-73.99523,40.757316,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="367">
+            <name>Travel Time: 238 Point: -73.987508,40.753659</name>
+            <styleUrl>#368</styleUrl>
+            <Point id="366">
+                <coordinates>-73.987508,40.753659,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="372">
+            <name>Travel Time: 603 Point: -73.99305,40.756638</name>
+            <styleUrl>#373</styleUrl>
+            <Point id="371">
+                <coordinates>-73.99305,40.756638,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="377">
+            <name>Travel Time: 360 Point: -73.991353,40.755726</name>
+            <styleUrl>#378</styleUrl>
+            <Point id="376">
+                <coordinates>-73.991353,40.755726,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="382">
+            <name>Travel Time: 685 Point: -73.994848,40.757605</name>
+            <styleUrl>#383</styleUrl>
+            <Point id="381">
+                <coordinates>-73.994848,40.757605,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="387">
+            <name>Travel Time: 369 Point: -73.991621,40.75587</name>
+            <styleUrl>#388</styleUrl>
+            <Point id="386">
+                <coordinates>-73.991621,40.75587,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="392">
+            <name>Travel Time: 1369 Point: -73.994913,40.75764</name>
+            <styleUrl>#393</styleUrl>
+            <Point id="391">
+                <coordinates>-73.994913,40.75764,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="397">
+            <name>Travel Time: 329 Point: -73.987844,40.753247</name>
+            <styleUrl>#398</styleUrl>
+            <Point id="396">
+                <coordinates>-73.987844,40.753247,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="402">
+            <name>Travel Time: 367 Point: -73.990696,40.754461</name>
+            <styleUrl>#403</styleUrl>
+            <Point id="401">
+                <coordinates>-73.990696,40.754461,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="407">
+            <name>Travel Time: 496 Point: -73.993725,40.755749</name>
+            <styleUrl>#408</styleUrl>
+            <Point id="406">
+                <coordinates>-73.993725,40.755749,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="412">
+            <name>Travel Time: 499 Point: -73.99211,40.757602</name>
+            <styleUrl>#413</styleUrl>
+            <Point id="411">
+                <coordinates>-73.99211,40.757602,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="417">
+            <name>Travel Time: 695 Point: -73.990366,40.758956</name>
+            <styleUrl>#418</styleUrl>
+            <Point id="416">
+                <coordinates>-73.990366,40.758956,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="422">
+            <name>Travel Time: 392 Point: -73.988272,40.756823</name>
+            <styleUrl>#423</styleUrl>
+            <Point id="421">
+                <coordinates>-73.988272,40.756823,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="427">
+            <name>Travel Time: 507 Point: -73.989943,40.758525</name>
+            <styleUrl>#428</styleUrl>
+            <Point id="426">
+                <coordinates>-73.989943,40.758525,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="432">
+            <name>Travel Time: 551 Point: -73.988004,40.759578</name>
+            <styleUrl>#433</styleUrl>
+            <Point id="431">
+                <coordinates>-73.988004,40.759578,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="437">
+            <name>Travel Time: 492 Point: -73.98758,40.758911</name>
+            <styleUrl>#438</styleUrl>
+            <Point id="436">
+                <coordinates>-73.98758,40.758911,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="442">
+            <name>Travel Time: 501 Point: -73.985568,40.759639</name>
+            <styleUrl>#443</styleUrl>
+            <Point id="441">
+                <coordinates>-73.985568,40.759639,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="447">
+            <name>Travel Time: 477 Point: -73.983378,40.760079</name>
+            <styleUrl>#448</styleUrl>
+            <Point id="446">
+                <coordinates>-73.983378,40.760079,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="452">
+            <name>Travel Time: 394 Point: -73.984023,40.741791</name>
+            <styleUrl>#453</styleUrl>
+            <Point id="451">
+                <coordinates>-73.984023,40.741791,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="457">
+            <name>Travel Time: 446 Point: -73.984446,40.739147</name>
+            <styleUrl>#458</styleUrl>
+            <Point id="456">
+                <coordinates>-73.984446,40.739147,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="462">
+            <name>Travel Time: 557 Point: -73.984702,40.737542</name>
+            <styleUrl>#463</styleUrl>
+            <Point id="461">
+                <coordinates>-73.984702,40.737542,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="467">
+            <name>Travel Time: 474 Point: -73.984509,40.73875</name>
+            <styleUrl>#468</styleUrl>
+            <Point id="466">
+                <coordinates>-73.984509,40.73875,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="472">
+            <name>Travel Time: 562 Point: -73.984644,40.737908</name>
+            <styleUrl>#473</styleUrl>
+            <Point id="471">
+                <coordinates>-73.984644,40.737908,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="477">
+            <name>Travel Time: 446 Point: -73.98444,40.739184</name>
+            <styleUrl>#478</styleUrl>
+            <Point id="476">
+                <coordinates>-73.98444,40.739184,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="482">
+            <name>Travel Time: 219 Point: -73.983498,40.746405</name>
+            <styleUrl>#483</styleUrl>
+            <Point id="481">
+                <coordinates>-73.983498,40.746405,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="487">
+            <name>Travel Time: 439 Point: -73.984746,40.740354</name>
+            <styleUrl>#488</styleUrl>
+            <Point id="486">
+                <coordinates>-73.984746,40.740354,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="492">
+            <name>Travel Time: 460 Point: -73.985085,40.738709</name>
+            <styleUrl>#493</styleUrl>
+            <Point id="491">
+                <coordinates>-73.985085,40.738709,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="497">
+            <name>Travel Time: 585 Point: -73.98534,40.737472</name>
+            <styleUrl>#498</styleUrl>
+            <Point id="496">
+                <coordinates>-73.98534,40.737472,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="502">
+            <name>Travel Time: 435 Point: -73.984969,40.739272</name>
+            <styleUrl>#503</styleUrl>
+            <Point id="501">
+                <coordinates>-73.984969,40.739272,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="507">
+            <name>Travel Time: 581 Point: -73.985365,40.737352</name>
+            <styleUrl>#508</styleUrl>
+            <Point id="506">
+                <coordinates>-73.985365,40.737352,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="512">
+            <name>Travel Time: 214 Point: -73.983706,40.746433</name>
+            <styleUrl>#513</styleUrl>
+            <Point id="511">
+                <coordinates>-73.983706,40.746433,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="517">
+            <name>Travel Time: 410 Point: -73.98529,40.740176</name>
+            <styleUrl>#518</styleUrl>
+            <Point id="516">
+                <coordinates>-73.98529,40.740176,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="522">
+            <name>Travel Time: 553 Point: -73.985933,40.737636</name>
+            <styleUrl>#523</styleUrl>
+            <Point id="521">
+                <coordinates>-73.985933,40.737636,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="527">
+            <name>Travel Time: 460 Point: -73.98565,40.738753</name>
+            <styleUrl>#528</styleUrl>
+            <Point id="526">
+                <coordinates>-73.98565,40.738753,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="532">
+            <name>Travel Time: 555 Point: -73.985961,40.737523</name>
+            <styleUrl>#533</styleUrl>
+            <Point id="531">
+                <coordinates>-73.985961,40.737523,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="537">
+            <name>Travel Time: 462 Point: -73.985665,40.738694</name>
+            <styleUrl>#538</styleUrl>
+            <Point id="536">
+                <coordinates>-73.985665,40.738694,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="542">
+            <name>Travel Time: 230 Point: -73.983078,40.746365</name>
+            <styleUrl>#543</styleUrl>
+            <Point id="541">
+                <coordinates>-73.983078,40.746365,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="547">
+            <name>Travel Time: 386 Point: -73.983717,40.740765</name>
+            <styleUrl>#548</styleUrl>
+            <Point id="546">
+                <coordinates>-73.983717,40.740765,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="552">
+            <name>Travel Time: 539 Point: -73.984081,40.737571</name>
+            <styleUrl>#553</styleUrl>
+            <Point id="551">
+                <coordinates>-73.984081,40.737571,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="557">
+            <name>Travel Time: 495 Point: -73.983989,40.738371</name>
+            <styleUrl>#558</styleUrl>
+            <Point id="556">
+                <coordinates>-73.983989,40.738371,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="562">
+            <name>Travel Time: 457 Point: -73.98772,40.738779</name>
+            <styleUrl>#563</styleUrl>
+            <Point id="561">
+                <coordinates>-73.98772,40.738779,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="567">
+            <name>Travel Time: 525 Point: -73.988271,40.737479</name>
+            <styleUrl>#568</styleUrl>
+            <Point id="566">
+                <coordinates>-73.988271,40.737479,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="572">
+            <name>Travel Time: 416 Point: -73.991625,40.738426</name>
+            <styleUrl>#573</styleUrl>
+            <Point id="571">
+                <coordinates>-73.991625,40.738426,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="577">
+            <name>Travel Time: 485 Point: -73.993539,40.735774</name>
+            <styleUrl>#578</styleUrl>
+            <Point id="576">
+                <coordinates>-73.993539,40.735774,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="582">
+            <name>Travel Time: 596 Point: -73.997229,40.737564</name>
+            <styleUrl>#583</styleUrl>
+            <Point id="581">
+                <coordinates>-73.997229,40.737564,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="587">
+            <name>Travel Time: 555 Point: -73.994946,40.739652</name>
+            <styleUrl>#588</styleUrl>
+            <Point id="586">
+                <coordinates>-73.994946,40.739652,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="592">
+            <name>Travel Time: 531 Point: -73.993803,40.740698</name>
+            <styleUrl>#593</styleUrl>
+            <Point id="591">
+                <coordinates>-73.993803,40.740698,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="597">
+            <name>Travel Time: 440 Point: -73.993234,40.74122</name>
+            <styleUrl>#598</styleUrl>
+            <Point id="596">
+                <coordinates>-73.993234,40.74122,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="602">
+            <name>Travel Time: 573 Point: -73.994772,40.739812</name>
+            <styleUrl>#603</styleUrl>
+            <Point id="601">
+                <coordinates>-73.994772,40.739812,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="607">
+            <name>Travel Time: 441 Point: -73.993302,40.741157</name>
+            <styleUrl>#608</styleUrl>
+            <Point id="606">
+                <coordinates>-73.993302,40.741157,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="612">
+            <name>Travel Time: 338 Point: -73.986601,40.747541</name>
+            <styleUrl>#613</styleUrl>
+            <Point id="611">
+                <coordinates>-73.986601,40.747541,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="617">
+            <name>Travel Time: 276 Point: -73.988646,40.745797</name>
+            <styleUrl>#618</styleUrl>
+            <Point id="616">
+                <coordinates>-73.988646,40.745797,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="622">
+            <name>Travel Time: 458 Point: -73.993678,40.741506</name>
+            <styleUrl>#623</styleUrl>
+            <Point id="621">
+                <coordinates>-73.993678,40.741506,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="627">
+            <name>Travel Time: 485 Point: -73.99478,40.740566</name>
+            <styleUrl>#628</styleUrl>
+            <Point id="626">
+                <coordinates>-73.99478,40.740566,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="632">
+            <name>Travel Time: 593 Point: -73.996849,40.742105</name>
+            <styleUrl>#633</styleUrl>
+            <Point id="631">
+                <coordinates>-73.996849,40.742105,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="637">
+            <name>Travel Time: 444 Point: -73.994683,40.743451</name>
+            <styleUrl>#638</styleUrl>
+            <Point id="636">
+                <coordinates>-73.994683,40.743451,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="642">
+            <name>Travel Time: 537 Point: -73.996281,40.742457</name>
+            <styleUrl>#643</styleUrl>
+            <Point id="641">
+                <coordinates>-73.996281,40.742457,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="647">
+            <name>Travel Time: 548 Point: -73.995408,40.743</name>
+            <styleUrl>#648</styleUrl>
+            <Point id="646">
+                <coordinates>-73.995408,40.743,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="652">
+            <name>Travel Time: 441 Point: -73.994361,40.743651</name>
+            <styleUrl>#653</styleUrl>
+            <Point id="651">
+                <coordinates>-73.994361,40.743651,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="657">
+            <name>Travel Time: 533 Point: -73.996011,40.742626</name>
+            <styleUrl>#658</styleUrl>
+            <Point id="656">
+                <coordinates>-73.996011,40.742626,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="662">
+            <name>Travel Time: 304 Point: -73.987384,40.748198</name>
+            <styleUrl>#663</styleUrl>
+            <Point id="661">
+                <coordinates>-73.987384,40.748198,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="667">
+            <name>Travel Time: 376 Point: -73.990601,40.746337</name>
+            <styleUrl>#668</styleUrl>
+            <Point id="666">
+                <coordinates>-73.990601,40.746337,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="672">
+            <name>Travel Time: 400 Point: -73.993339,40.744752</name>
+            <styleUrl>#673</styleUrl>
+            <Point id="671">
+                <coordinates>-73.993339,40.744752,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="677">
+            <name>Travel Time: 529 Point: -73.996103,40.743153</name>
+            <styleUrl>#678</styleUrl>
+            <Point id="676">
+                <coordinates>-73.996103,40.743153,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="682">
+            <name>Travel Time: 538 Point: -73.995431,40.743542</name>
+            <styleUrl>#683</styleUrl>
+            <Point id="681">
+                <coordinates>-73.995431,40.743542,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="687">
+            <name>Travel Time: 451 Point: -73.994598,40.744024</name>
+            <styleUrl>#688</styleUrl>
+            <Point id="686">
+                <coordinates>-73.994598,40.744024,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="692">
+            <name>Travel Time: 298 Point: -73.987508,40.748329</name>
+            <styleUrl>#693</styleUrl>
+            <Point id="691">
+                <coordinates>-73.987508,40.748329,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="697">
+            <name>Travel Time: 550 Point: -73.990967,40.746469</name>
+            <styleUrl>#698</styleUrl>
+            <Point id="696">
+                <coordinates>-73.990967,40.746469,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="702">
+            <name>Travel Time: 334 Point: -73.990306,40.746825</name>
+            <styleUrl>#703</styleUrl>
+            <Point id="701">
+                <coordinates>-73.990306,40.746825,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="707">
+            <name>Travel Time: 517 Point: -73.994237,40.744711</name>
+            <styleUrl>#708</styleUrl>
+            <Point id="706">
+                <coordinates>-73.994237,40.744711,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="712">
+            <name>Travel Time: 468 Point: -73.99523,40.745818</name>
+            <styleUrl>#713</styleUrl>
+            <Point id="711">
+                <coordinates>-73.99523,40.745818,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="717">
+            <name>Travel Time: 656 Point: -73.996153,40.745441</name>
+            <styleUrl>#718</styleUrl>
+            <Point id="716">
+                <coordinates>-73.996153,40.745441,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="722">
+            <name>Travel Time: 491 Point: -73.993001,40.746728</name>
+            <styleUrl>#723</styleUrl>
+            <Point id="721">
+                <coordinates>-73.993001,40.746728,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="727">
+            <name>Travel Time: 461 Point: -73.993958,40.748316</name>
+            <styleUrl>#728</styleUrl>
+            <Point id="726">
+                <coordinates>-73.993958,40.748316,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="732">
+            <name>Travel Time: 638 Point: -73.994981,40.748076</name>
+            <styleUrl>#733</styleUrl>
+            <Point id="731">
+                <coordinates>-73.994981,40.748076,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="737">
+            <name>Travel Time: 425 Point: -73.992376,40.748688</name>
+            <styleUrl>#738</styleUrl>
+            <Point id="736">
+                <coordinates>-73.992376,40.748688,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="742">
+            <name>Travel Time: 465 Point: -73.994175,40.748265</name>
+            <styleUrl>#743</styleUrl>
+            <Point id="741">
+                <coordinates>-73.994175,40.748265,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="747">
+            <name>Travel Time: 635 Point: -73.995106,40.748047</name>
+            <styleUrl>#748</styleUrl>
+            <Point id="746">
+                <coordinates>-73.995106,40.748047,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="752">
+            <name>Travel Time: 428 Point: -73.992519,40.748654</name>
+            <styleUrl>#753</styleUrl>
+            <Point id="751">
+                <coordinates>-73.992519,40.748654,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="757">
+            <name>Travel Time: 233 Point: -73.988397,40.749791</name>
+            <styleUrl>#758</styleUrl>
+            <Point id="756">
+                <coordinates>-73.988397,40.749791,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="762">
+            <name>Travel Time: 491 Point: -73.995151,40.748402</name>
+            <styleUrl>#763</styleUrl>
+            <Point id="761">
+                <coordinates>-73.995151,40.748402,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="767">
+            <name>Travel Time: 605 Point: -73.995579,40.749943</name>
+            <styleUrl>#768</styleUrl>
+            <Point id="766">
+                <coordinates>-73.995579,40.749943,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="772">
+            <name>Travel Time: 456 Point: -73.993388,40.75012</name>
+            <styleUrl>#773</styleUrl>
+            <Point id="771">
+                <coordinates>-73.993388,40.75012,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="777">
+            <name>Travel Time: 490 Point: -73.994491,40.75003</name>
+            <styleUrl>#778</styleUrl>
+            <Point id="776">
+                <coordinates>-73.994491,40.75003,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="782">
+            <name>Travel Time: 485 Point: -73.970534,40.750187</name>
+            <styleUrl>#783</styleUrl>
+            <Point id="781">
+                <coordinates>-73.970534,40.750187,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="787">
+            <name>Travel Time: 418 Point: -73.970902,40.748429</name>
+            <styleUrl>#788</styleUrl>
+            <Point id="786">
+                <coordinates>-73.970902,40.748429,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="792">
+            <name>Travel Time: 474 Point: -73.968576,40.747917</name>
+            <styleUrl>#793</styleUrl>
+            <Point id="791">
+                <coordinates>-73.968576,40.747917,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="797">
+            <name>Travel Time: 712 Point: -73.967776,40.747741</name>
+            <styleUrl>#798</styleUrl>
+            <Point id="796">
+                <coordinates>-73.967776,40.747741,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="802">
+            <name>Travel Time: 387 Point: -73.972098,40.748693</name>
+            <styleUrl>#803</styleUrl>
+            <Point id="801">
+                <coordinates>-73.972098,40.748693,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="807">
+            <name>Travel Time: 718 Point: -73.969001,40.748011</name>
+            <styleUrl>#808</styleUrl>
+            <Point id="806">
+                <coordinates>-73.969001,40.748011,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="812">
+            <name>Travel Time: 388 Point: -73.973029,40.748898</name>
+            <styleUrl>#813</styleUrl>
+            <Point id="811">
+                <coordinates>-73.973029,40.748898,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="817">
+            <name>Travel Time: 300 Point: -73.976795,40.749558</name>
+            <styleUrl>#818</styleUrl>
+            <Point id="816">
+                <coordinates>-73.976795,40.749558,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="822">
+            <name>Travel Time: 364 Point: -73.972872,40.748579</name>
+            <styleUrl>#823</styleUrl>
+            <Point id="821">
+                <coordinates>-73.972872,40.748579,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="827">
+            <name>Travel Time: 495 Point: -73.969206,40.747665</name>
+            <styleUrl>#828</styleUrl>
+            <Point id="826">
+                <coordinates>-73.969206,40.747665,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="832">
+            <name>Travel Time: 1394 Point: -73.970003,40.746085</name>
+            <styleUrl>#833</styleUrl>
+            <Point id="831">
+                <coordinates>-73.970003,40.746085,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="837">
+            <name>Travel Time: 270 Point: -73.97792,40.749182</name>
+            <styleUrl>#838</styleUrl>
+            <Point id="836">
+                <coordinates>-73.97792,40.749182,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="842">
+            <name>Travel Time: 393 Point: -73.973878,40.747601</name>
+            <styleUrl>#843</styleUrl>
+            <Point id="841">
+                <coordinates>-73.973878,40.747601,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="847">
+            <name>Travel Time: 438 Point: -73.97144,40.746647</name>
+            <styleUrl>#848</styleUrl>
+            <Point id="846">
+                <coordinates>-73.97144,40.746647,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="852">
+            <name>Travel Time: 836 Point: -73.969804,40.746008</name>
+            <styleUrl>#853</styleUrl>
+            <Point id="851">
+                <coordinates>-73.969804,40.746008,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="857">
+            <name>Travel Time: 278 Point: -73.974823,40.747971</name>
+            <styleUrl>#858</styleUrl>
+            <Point id="856">
+                <coordinates>-73.974823,40.747971,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="862">
+            <name>Travel Time: 186 Point: -73.977258,40.748741</name>
+            <styleUrl>#863</styleUrl>
+            <Point id="861">
+                <coordinates>-73.977258,40.748741,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="867">
+            <name>Travel Time: 603 Point: -73.96827,40.744916</name>
+            <styleUrl>#868</styleUrl>
+            <Point id="866">
+                <coordinates>-73.96827,40.744916,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="872">
+            <name>Travel Time: 419 Point: -73.970638,40.745924</name>
+            <styleUrl>#873</styleUrl>
+            <Point id="871">
+                <coordinates>-73.970638,40.745924,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="877">
+            <name>Travel Time: 603 Point: -73.968283,40.744922</name>
+            <styleUrl>#878</styleUrl>
+            <Point id="876">
+                <coordinates>-73.968283,40.744922,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="882">
+            <name>Travel Time: 419 Point: -73.970649,40.745929</name>
+            <styleUrl>#883</styleUrl>
+            <Point id="881">
+                <coordinates>-73.970649,40.745929,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="887">
+            <name>Travel Time: 603 Point: -73.968296,40.744927</name>
+            <styleUrl>#888</styleUrl>
+            <Point id="886">
+                <coordinates>-73.968296,40.744927,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="892">
+            <name>Travel Time: 186 Point: -73.977363,40.748601</name>
+            <styleUrl>#893</styleUrl>
+            <Point id="891">
+                <coordinates>-73.977363,40.748601,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="897">
+            <name>Travel Time: 831 Point: -73.968549,40.744534</name>
+            <styleUrl>#898</styleUrl>
+            <Point id="896">
+                <coordinates>-73.968549,40.744534,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="902">
+            <name>Travel Time: 336 Point: -73.974028,40.747062</name>
+            <styleUrl>#903</styleUrl>
+            <Point id="901">
+                <coordinates>-73.974028,40.747062,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="907">
+            <name>Travel Time: 817 Point: -73.969802,40.745112</name>
+            <styleUrl>#908</styleUrl>
+            <Point id="906">
+                <coordinates>-73.969802,40.745112,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="912">
+            <name>Travel Time: 319 Point: -73.974645,40.747347</name>
+            <styleUrl>#913</styleUrl>
+            <Point id="911">
+                <coordinates>-73.974645,40.747347,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="917">
+            <name>Travel Time: 817 Point: -73.970091,40.745246</name>
+            <styleUrl>#918</styleUrl>
+            <Point id="916">
+                <coordinates>-73.970091,40.745246,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="922">
+            <name>Travel Time: 297 Point: -73.977066,40.74903</name>
+            <styleUrl>#923</styleUrl>
+            <Point id="921">
+                <coordinates>-73.977066,40.74903,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="927">
+            <name>Travel Time: 403 Point: -73.973226,40.747655</name>
+            <styleUrl>#928</styleUrl>
+            <Point id="926">
+                <coordinates>-73.973226,40.747655,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="932">
+            <name>Travel Time: 397 Point: -73.970911,40.746827</name>
+            <styleUrl>#933</styleUrl>
+            <Point id="931">
+                <coordinates>-73.970911,40.746827,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="937">
+            <name>Travel Time: 617 Point: -73.967848,40.74573</name>
+            <styleUrl>#938</styleUrl>
+            <Point id="936">
+                <coordinates>-73.967848,40.74573,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="942">
+            <name>Travel Time: 397 Point: -73.970569,40.746704</name>
+            <styleUrl>#943</styleUrl>
+            <Point id="941">
+                <coordinates>-73.970569,40.746704,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="947">
+            <name>Travel Time: 424 Point: -73.96742,40.745577</name>
+            <styleUrl>#948</styleUrl>
+            <Point id="946">
+                <coordinates>-73.96742,40.745577,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="952">
+            <name>Travel Time: 399 Point: -73.976237,40.745417</name>
+            <styleUrl>#953</styleUrl>
+            <Point id="951">
+                <coordinates>-73.976237,40.745417,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="957">
+            <name>Travel Time: 447 Point: -73.974542,40.74392</name>
+            <styleUrl>#958</styleUrl>
+            <Point id="956">
+                <coordinates>-73.974542,40.74392,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="962">
+            <name>Travel Time: 504 Point: -73.973499,40.742999</name>
+            <styleUrl>#963</styleUrl>
+            <Point id="961">
+                <coordinates>-73.973499,40.742999,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="967">
+            <name>Travel Time: 510 Point: -73.975582,40.741726</name>
+            <styleUrl>#968</styleUrl>
+            <Point id="966">
+                <coordinates>-73.975582,40.741726,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="972">
+            <name>Travel Time: 668 Point: -73.977956,40.740749</name>
+            <styleUrl>#973</styleUrl>
+            <Point id="971">
+                <coordinates>-73.977956,40.740749,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="977">
+            <name>Travel Time: 404 Point: -73.979048,40.743182</name>
+            <styleUrl>#978</styleUrl>
+            <Point id="976">
+                <coordinates>-73.979048,40.743182,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="982">
+            <name>Travel Time: 485 Point: -73.97815,40.741181</name>
+            <styleUrl>#983</styleUrl>
+            <Point id="981">
+                <coordinates>-73.97815,40.741181,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="987">
+            <name>Travel Time: 332 Point: -73.981212,40.743676</name>
+            <styleUrl>#988</styleUrl>
+            <Point id="986">
+                <coordinates>-73.981212,40.743676,0.0</coordinates>
+            </Point>
+        </Placemark>
+        <Placemark id="992">
+            <name>Travel Time: 476 Point: -73.980503,40.739808</name>
+            <styleUrl>#993</styleUrl>
+            <Point id="991">
+                <coordinates>-73.980503,40.739808,0.0</coordinates>
+            </Point>
+        </Placemark>
+    </Document>
+</kml>
