@@ -310,7 +310,7 @@ $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);
 $data = "\n|| NEW Query: IPAddress: $ipaddress OutputFilename: $name. Input Filename: $filename. InputFileLength: $linecount. Keys Provided: $API_KEYs1, $Filler2, $Filler3, $Filler4, $Filler5. Modes Selected: $Mode1, $Mode2, $Mode3, $Mode4. Transit Preferences Selected: $first, $second, $third, $fourth. Is Time? $istime. Is Dist? $isdist. GoalTime: $goaltime. GoalDist: $goaldist. numberofpoints: $numberofpoints.";
 fwrite($handle, $data);
 
-$string = 'python multithreaded.py "uploads_isochrone' . "\\" . "$filename" . '"' . " output_isochrone" . '\\' . "$name -off $API_KEYs1 $Filler2 $Filler3 $Filler4 $Filler5 $Mode1 $Mode2 $Mode3 $Mode4 $first $second $third $fourth $istime $goaltimedist $numberofpoints 2>&1";
+$string = 'python3 multithreaded.py "uploads_isochrone' . "\\" . "$filename" . '"' . " output_isochrone" . '\\' . "$name -off $API_KEYs1 $Filler2 $Filler3 $Filler4 $Filler5 $Mode1 $Mode2 $Mode3 $Mode4 $first $second $third $fourth $istime $goaltimedist $numberofpoints 2>&1";
 
 passthru($string);
 #echo $string;
@@ -323,7 +323,7 @@ passthru($string);
    # }
      echo"<br><br><br><br>";
 #if($_SESSION['return_var==0){
-    ?><html><body><a href="output_isochrone/<?php echo $_SESSION['name'];?>" download="<?php echo $_SESSION['name'];?>">Download The Summary File Here</a>
+    ?><html><body><a href="output_isochrone/<?php echo $_SESSION['name'];?>" download="<?php echo $_SESSION['name'];?>">Download output file here</a>
 </body><?php
 }
 

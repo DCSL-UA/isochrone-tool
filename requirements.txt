@@ -1,0 +1,8 @@
+googlemaps>=2.5.1
+area>=1.1.0
+geographiclib>=1.49
+simplekml>=1.3.0
+lxml>=3.7.3
+Polygon2>=2.0.8
+subprocess32>=3.2.7
+
