@@ -684,7 +684,7 @@ def circular(lat1, lon1, numberofpairs, btwnmarks, currentdict, Dictkey, degreei
     firstlon = lon1
     degrees = 0
 
-    while 0 <= degrees <= 90:   # Go .05 miles to the right and query
+    while degrees < 90:   # Go .05 miles to the right and query
         lat1 = incrementlat(degrees, float(btwnmarks), lat1,
                             distlat(lat1))
         lon1 = incrementlon(degrees, float(btwnmarks), lon1, 
@@ -714,7 +714,7 @@ def circular(lat1, lon1, numberofpairs, btwnmarks, currentdict, Dictkey, degreei
             lon1 = firstlon
             x = 0
 
-    while 180 <= degrees <= 270:   # Go .05 miles to the right and query
+    while 180 <= degrees < 270:   # Go .05 miles to the right and query
         lat1 = incrementlat(degrees, float(btwnmarks), lat1,
                             distlat(lat1))
         lon1 = incrementlon(degrees, float(btwnmarks), lon1,
@@ -729,7 +729,7 @@ def circular(lat1, lon1, numberofpairs, btwnmarks, currentdict, Dictkey, degreei
             lat1 = firstlat
             lon1 = firstlon
 
-    while 270 <= degrees <= 360:   # Go .05 miles to the right and query
+    while 270 <= degrees < 360:   # Go .05 miles to the right and query
         lat1 = decrementlat(degrees, float(btwnmarks), lat1,
                             distlat(lat1))
         lon1 = decrementlon(degrees, float(btwnmarks), lon1,
@@ -760,7 +760,7 @@ def circularsingle(lat1, lon1, count, btwnmarks, currentdict, Dictkey, degrees):
     firstlon = lon1
     fixeddegrees = degrees - 360 if degrees > 360 else degrees
 
-    while 0 <= fixeddegrees <= 90:   # Go .05 miles to the right and query
+    while fixeddegrees <= 90:   # Go .05 miles to the right and query
         lat1 = incrementlat(fixeddegrees, float(btwnmarks), lat1,
                             distlat(lat1))
         lon1 = incrementlon(fixeddegrees, float(btwnmarks), lon1,
@@ -782,7 +782,7 @@ def circularsingle(lat1, lon1, count, btwnmarks, currentdict, Dictkey, degrees):
         if x == count:
             return currentdict[degrees]
 
-    while 180 <= fixeddegrees <= 270:   # Go .05 miles to the right and query
+    while 180 <= fixeddegrees < 270:   # Go .05 miles to the right and query
         lat1 = incrementlat(fixeddegrees, float(btwnmarks), lat1,
                             distlat(lat1))
         lon1 = incrementlon(fixeddegrees, float(btwnmarks), lon1,
@@ -793,7 +793,7 @@ def circularsingle(lat1, lon1, count, btwnmarks, currentdict, Dictkey, degrees):
         if x == count:
             return currentdict[degrees]
 
-    while 270 <= fixeddegrees <= 360:   # Go .05 miles to the right and query
+    while 270 <= fixeddegrees < 360:   # Go .05 miles to the right and query
         lat1 = decrementlat(fixeddegrees, float(btwnmarks), lat1,
                             distlat(lat1))
         lon1 = decrementlon(fixeddegrees, float(btwnmarks), lon1,
@@ -1037,9 +1037,11 @@ def getclosest(origin, thelist, goaltimeplus, goaltimeminus):
                     prevpoint = point
                     prevdistance = distance
                     prevtime = time
-        return "0","0","0" if prevpoint == "" else origin,0,0
+        if prevpoint == "":
+            return "0", "0", "0"
+        else:
+            return origin, 0, 0
     else:
-        "RETURNING A BLUE or GREEN"
         return prevpoint,prevtime,prevdistance
 
 """"""
